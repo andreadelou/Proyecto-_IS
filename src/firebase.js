@@ -29,7 +29,7 @@ const auth = getAuth(app);  // Auth init
  */
 export const loginWithEmailAndPassword = async (email, password) => {
     try {
-        await signInWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth, email, password);    // Call firebase
         return true;
     } catch (error) {
         return false;
@@ -45,7 +45,7 @@ export const loginWithEmailAndPassword = async (email, password) => {
  */
 export const registerWithEmailAndPassword = async (name, email, password) => {
     try {
-        const res = await createUserWithEmailAndPassword(auth, email, password);
+        await createUserWithEmailAndPassword(auth, email, password);    // Call firebase
         return true;
     } catch (error) {
         return false;

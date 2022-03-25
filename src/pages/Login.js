@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Flex,
@@ -9,13 +9,50 @@ import {
   InputLeftElement,
   Link,
   VStack,
+  useToast
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import blob from "../assets/blob01.png";
+import { loginWithEmailAndPassword } from '../firebase.js';
 
-// import colors from "../utils/colors";
 
 function Login() {
+
+  // useState hooks
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  // Use the toast
+  const toast = useToast();
+
+  /**
+   * Login the user on the application
+   */
+  const login = async () => {
+    const success = await loginWithEmailAndPassword(email, password); // Wait for the success response
+    // Show alert depending on the situation
+    if (success) {
+      toast({
+        title: 'Has ingresado exitosamente.',
+        status: 'success',
+        position: 'top',
+        duration: 9000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: 'Credenciales Incorrectas.',
+        description: "Revisa que todos los campos estén correctos.",
+        status: 'error',
+        position: 'top',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+
+  }
+
   return (
     <>
       <header className="header">
@@ -39,17 +76,19 @@ function Login() {
         <VStack spacing={"24px"} width="30%" alignItems={"start"}>
           <InputGroup>
             <InputLeftElement pointerEvents={"none"} children={<EmailIcon />} />
-            <Input placeholder="Correo" />
+            <Input placeholder="Correo" type={"email"} onChange={($event) => { setEmail($event.target.value) }} />
           </InputGroup>
           <InputGroup>
             <InputLeftElement pointerEvents={"none"} children={<LockIcon />} />
-            <Input placeholder="Contraseña" type={"password"} />
+            <Input onChange={($event) => { setPassword($event.target.value) }} placeholder="Contraseña" type={"password"} />
           </InputGroup>
           <Link color={"primary"}>¿Olvidaste tu contraseña?</Link>
           <Button
             display={"inline-block"}
             backgroundColor="primary"
             textColor="textLight"
+            disabled={!email || !password}
+            onClick={login}
           >
             Entrar
           </Button>

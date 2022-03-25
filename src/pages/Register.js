@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Button,
     Flex,
@@ -8,15 +8,55 @@ import {
     InputGroup,
     InputLeftElement,
     Link,
+    useToast,
     VStack,
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { FaUserCircle } from "react-icons/fa"
 import blob from "../assets/blob01.png";
+import { registerWithEmailAndPassword } from '../firebase.js';
 
-// import colors from "../utils/colors";
+
 
 function Register() {
+
+    // useState hooks
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [password1, setPassword1] = useState();
+
+    // Use the toast
+    const toast = useToast();
+
+    /**
+     * Register the user into the application
+     */
+    const register = async () => {
+
+        const success = await registerWithEmailAndPassword(name, email, password);
+        // Show alert depending on the situation
+        if (success) {
+            toast({
+                title: 'Se ha creado tu cuenta.',
+                status: 'success',
+                position: 'top',
+                duration: 9000,
+                isClosable: true,
+            });
+        } else {
+            toast({
+                title: 'Hubo un error al crear tu cuenta.',
+                description: "Revisa que todos los campos estén correctos.",
+                status: 'error',
+                position: 'top',
+                duration: 9000,
+                isClosable: true,
+            });
+        }
+
+    }
+
     return (
         <>
             <header className="header">
@@ -40,25 +80,27 @@ function Register() {
                 <VStack spacing={"24px"} width="30%" alignItems={"start"}>
                     <InputGroup>
                         <InputLeftElement pointerEvents={"none"} children={<FaUserCircle />} />
-                        <Input placeholder="Nombres" />
-                    </InputGroup>
-                    <InputGroup>
-                        <InputLeftElement pointerEvents={"none"} children={<FaUserCircle />} />
-                        <Input placeholder="Apellidos" />
+                        <Input placeholder="Nombre" onChange={($event) => { setName($event.target.value) }} />
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement pointerEvents={"none"} children={<EmailIcon />} />
-                        <Input placeholder="Correo" type={"email"} />
+                        <Input onChange={($event) => { setEmail($event.target.value) }} placeholder="Correo" type={"email"} />
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement pointerEvents={"none"} children={<LockIcon />} />
-                        <Input placeholder="Contraseña" type={"password"} />
+                        <Input placeholder="Contraseña" onChange={($event) => { setPassword($event.target.value) }} type={"password"} />
+                    </InputGroup>
+                    <InputGroup>
+                        <InputLeftElement pointerEvents={"none"} children={<LockIcon />} />
+                        <Input placeholder="Contraseña" onChange={($event) => { setPassword1($event.target.value) }} type={"password"} />
                     </InputGroup>
 
                     <Button
                         display={"inline-block"}
                         backgroundColor="primary"
                         textColor="textLight"
+                        onClick={register}
+                        disabled={password1 !== password || !password || !password1 || !name || !email}
                     >
                         Crear Cuenta
                     </Button>
