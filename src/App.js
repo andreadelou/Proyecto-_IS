@@ -1,5 +1,6 @@
 import Login from './pages/Login';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import Register from './pages/Register';
 function App() {
   const theme = extendTheme({
     colors: {
@@ -12,7 +13,7 @@ function App() {
   });
   return (
     <ChakraProvider theme={theme}>
-      <Login />
+      <Register />
     </ChakraProvider>
   );
 }
