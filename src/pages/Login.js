@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Flex,
@@ -13,7 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import blob from "../assets/blob01.png";
-import { loginWithEmailAndPassword, auth } from '../firebase.js';
+import { loginWithEmailAndPassword, auth, logout } from '../firebase.js';
+import { useAuthState } from "react-firebase-hooks/auth";
 
 
 
@@ -22,6 +23,8 @@ function Login() {
   // useState hooks
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  // Auth State
+  const [user, loading, error] = useAuthState(auth);
 
 
   // Use the toast
@@ -57,6 +60,7 @@ function Login() {
   return (
     <>
       <header className="header">
+        <p>Usuario: {user ? Object.values(user).toString() : ""}</p>
         <VStack spacing={"38px"} alignItems={"start"}>
           <Heading as={"h1"} fontWeight={"light"}>
             Que bueno verte de nuevo

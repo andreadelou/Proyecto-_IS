@@ -1,6 +1,14 @@
-import Login from './pages/Login';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
-import Register from './pages/Register';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom"; import Register from './pages/Register';
+import Login from './pages/Login';
+import Home from './pages/Home';
+
+
 function App() {
   const theme = extendTheme({
     colors: {
@@ -13,7 +21,14 @@ function App() {
   });
   return (
     <ChakraProvider theme={theme}>
-      <Register />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/home" element={<Home />} />
+        </Routes>
+      </Router>
+
     </ChakraProvider>
   );
 }
