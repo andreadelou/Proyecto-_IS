@@ -9,12 +9,15 @@ import {
   InputLeftElement,
   Link,
   VStack,
-  useToast
+  useToast,
+  HStack,
+  Spinner
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import blob from "../assets/blob01.png";
 import { loginWithEmailAndPassword, auth, logout } from '../firebase.js';
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -26,9 +29,18 @@ function Login() {
   // Auth State
   const [user, loading, error] = useAuthState(auth);
 
+  const navigate = useNavigate(); // navigate
+
 
   // Use the toast
   const toast = useToast();
+
+  // Check for page changes
+  useEffect(() => {
+    if (loading) return;
+    if (user) return navigate("/home");
+  }, [user, loading]);
+
 
   /**
    * Login the user on the application
@@ -60,7 +72,6 @@ function Login() {
   return (
     <>
       <header className="header">
-        <p>Usuario: {user ? Object.values(user).toString() : ""}</p>
         <VStack spacing={"38px"} alignItems={"start"}>
           <Heading as={"h1"} fontWeight={"light"}>
             Que bueno verte de nuevo
@@ -88,15 +99,24 @@ function Login() {
             <Input onChange={($event) => { setPassword($event.target.value) }} placeholder="Contraseña" type={"password"} />
           </InputGroup>
           <Link color={"primary"}>¿Olvidaste tu contraseña?</Link>
-          <Button
-            display={"inline-block"}
-            backgroundColor="primary"
-            textColor="textLight"
-            disabled={!email || !password}
-            onClick={login}
-          >
-            Entrar
-          </Button>
+          <HStack spacing={"24px"}>
+
+            <Button
+              display={"inline-block"}
+              backgroundColor="primary"
+              textColor="textLight"
+              disabled={loading || !email || !password}
+              onClick={login}
+            >
+              Entrar
+            </Button>
+
+            {
+              loading ? <Spinner size='md' color={"textDark"} /> : ''
+            }
+
+
+          </HStack>
         </VStack>
       </div>
     </>

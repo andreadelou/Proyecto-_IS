@@ -3,19 +3,23 @@ import {
     Button,
     Flex,
     Heading,
+    HStack,
     Image,
     Input,
     InputGroup,
     InputLeftElement,
     Link,
+    Spinner,
     useToast,
     VStack,
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { FaUserCircle } from "react-icons/fa"
-import { registerWithEmailAndPassword } from '../firebase.js';
+import { registerWithEmailAndPassword, auth } from '../firebase.js';
 
 import blob from "../assets/blob01.png";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -26,6 +30,17 @@ function Register() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [password1, setPassword1] = useState();
+
+    // Auth State
+    const [user, loading, error] = useAuthState(auth);
+
+    const navigate = useNavigate(); // navigate
+
+    useEffect(() => {
+        if (loading) return;
+        if (user) return navigate("/home");
+    }, [user, loading]);
+
 
     // Use the toast
     const toast = useToast();
@@ -95,15 +110,22 @@ function Register() {
                         <Input placeholder="Contraseña" onChange={($event) => { setPassword1($event.target.value) }} type={"password"} />
                     </InputGroup>
 
-                    <Button
-                        display={"inline-block"}
-                        backgroundColor="primary"
-                        textColor="textLight"
-                        onClick={register}
-                        disabled={password1 !== password || !password || !password1 || !name || !email}
-                    >
-                        Crear Cuenta
-                    </Button>
+                    <HStack spacing={24}>
+                        <Button
+                            display={"inline-block"}
+                            backgroundColor="primary"
+                            textColor="textLight"
+                            onClick={register}
+                            disabled={loading || password1 !== password || !password || !password1 || !name || !email}
+                        >
+                            Crear Cuenta
+                        </Button>
+                        {
+                            loading ? <Spinner size='md' color={"textDark"} /> : ''
+                        }
+
+                    </HStack>
+
                 </VStack>
             </div>
         </>
