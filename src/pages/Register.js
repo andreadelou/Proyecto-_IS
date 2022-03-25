@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Button,
     Flex,
@@ -13,8 +13,9 @@ import {
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { FaUserCircle } from "react-icons/fa"
-import blob from "../assets/blob01.png";
 import { registerWithEmailAndPassword } from '../firebase.js';
+
+import blob from "../assets/blob01.png";
 
 
 
@@ -28,7 +29,6 @@ function Register() {
 
     // Use the toast
     const toast = useToast();
-
     /**
      * Register the user into the application
      */

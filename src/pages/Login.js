@@ -13,15 +13,16 @@ import {
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import blob from "../assets/blob01.png";
-import { loginWithEmailAndPassword } from '../firebase.js';
+import { loginWithEmailAndPassword, auth } from '../firebase.js';
+
 
 
 function Login() {
 
   // useState hooks
-  const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
 
   // Use the toast
   const toast = useToast();
