@@ -1,0 +1,29 @@
+body{
+    display: flex;
+    background-color: #F2F6FF;
+}
+.uno{
+    position:fixed;
+    bottom:0px;
+    right: 0px;
+}
+.dos{
+    position: fixed;
+    top: -50px;
+    right: -500px;
+    transform: rotate(210deg);
+    width:1400px;
+}
+
+h2{
+    font-size: 4em;
+    margin-left: 0.5em;
+}
+
+p{
+    position:relative;
+    font-size: 2em;
+    left: -160px;
+    top: 100px;
+
+}

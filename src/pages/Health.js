@@ -1,9 +1,19 @@
 import React from 'react'
+import '../CSS/Health.css';
 
-function Goals() {
+//importando imagen
+import imgfondo from '../img/Group5.png';
+
+function Health() {
     return (
-        <div>Goals</div>
+        <div className = "todo">
+            <body>
+            <img className = "uno" src = {imgfondo} alt='uno' />
+            <img className = "dos" src = {imgfondo} alt='dos' />
+            <h2>Salud</h2>
+            <p>Estadísticas de tus metas</p>
+            </body>
+        </div>
     )
 }
-
-export default Goals
+export default Health
