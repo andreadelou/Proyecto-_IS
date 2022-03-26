@@ -14,12 +14,13 @@ import {
     VStack,
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
-import { FaUserCircle } from "react-icons/fa"
+import { FaCalendar, FaUserCircle } from "react-icons/fa"
 import { registerWithEmailAndPassword, auth } from '../firebase.js';
 
 import blob from "../assets/blob01.png";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import DatePicker from "react-date-picker";
 
 
 
@@ -96,6 +97,10 @@ function Register() {
                     <InputGroup>
                         <InputLeftElement pointerEvents={"none"} children={<FaUserCircle />} />
                         <Input variant={'input'} placeholder="Nombre" onChange={($event) => { setName($event.target.value) }} />
+                    </InputGroup>
+                    <InputGroup>
+                        <InputLeftElement pointerEvents={"none"} children={<FaCalendar />} />
+                        <Input variant={'input'} placeholder="Cumpleaños" type={'date'} />
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement pointerEvents={"none"} children={<EmailIcon />} />
