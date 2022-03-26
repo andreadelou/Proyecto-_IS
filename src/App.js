@@ -28,7 +28,6 @@ function App() {
           <Route exact path="/home" element={<Home />} />
         </Routes>
       </Router>
-
     </ChakraProvider>
   );
 }

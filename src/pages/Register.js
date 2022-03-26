@@ -107,7 +107,7 @@ function Register() {
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement pointerEvents={"none"} children={<LockIcon />} />
-                        <Input placeholder="Contraseña" onChange={($event) => { setPassword1($event.target.value) }} type={"password"} />
+                        <Input placeholder="Repite tu Contraseña" onChange={($event) => { setPassword1($event.target.value) }} type={"password"} />
                     </InputGroup>
 
                     <HStack spacing={24}>
