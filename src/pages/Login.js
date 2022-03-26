@@ -73,10 +73,10 @@ function Login() {
     <>
       <header className="header">
         <VStack spacing={"38px"} alignItems={"start"}>
-          <Heading as={"h1"} fontWeight={"light"}>
+          <Heading as={"h1"} fontSize={"70px"} fontWeight={"300"}>
             Que bueno verte de nuevo
           </Heading>
-          <Heading as={"h2"} size={"m"}>
+          <Heading as={"h2"} fontSize={'25px'} >
             Ingresa tus credenciales
           </Heading>
         </VStack>

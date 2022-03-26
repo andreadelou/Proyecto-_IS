@@ -18,6 +18,10 @@ function App() {
       textDark: "#1F1338",
       textLight: "#fff"
     },
+    fonts: {
+      heading: "Source Sans Pro, sans-serif",
+      body: "Source Sans Pro, sans-serif"
+    }
   });
   return (
     <ChakraProvider theme={theme}>

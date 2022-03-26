@@ -29,9 +29,11 @@ export const auth = getAuth(app);  // Auth init
  */
 export const loginWithEmailAndPassword = async (email, password) => {
     try {
-        await signInWithEmailAndPassword(auth, email, password);    // Call firebase
+        const res = await signInWithEmailAndPassword(auth, email, password);    // Call firebase
+        console.log(res);
         return true;
     } catch (error) {
+        console.log(error);
         return false;
     }
 }
