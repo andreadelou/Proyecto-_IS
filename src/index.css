@@ -11,3 +11,11 @@ body {
 .header {
   margin-bottom: 40px;
 }
+.react-datepicker__month-container {
+  z-index: 1000000 !important;
+}
+
+.react-datepicker__tab-loop {
+  visibility: none;
+  height: 10px;
+}

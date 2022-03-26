@@ -18,6 +18,8 @@ import blob from "../assets/blob01.png";
 import { loginWithEmailAndPassword, auth, logout } from '../firebase.js';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import 'react-datepicker/dist/react-datepicker.css'
+import Header from "../components/Header";
 
 
 
@@ -72,14 +74,7 @@ function Login() {
   return (
     <>
       <header className="header">
-        <VStack spacing={"38px"} alignItems={"start"}>
-          <Heading as={"h1"} fontSize={"70px"} fontWeight={"300"}>
-            Que bueno verte de nuevo
-          </Heading>
-          <Heading as={"h2"} fontSize={'25px'} >
-            Ingresa tus credenciales
-          </Heading>
-        </VStack>
+        <Header title="Que bueno verte de nuevo" subtitle="Ingresa tus credenciales"></Header>
         <Image
           position={"absolute"}
           right="0"

@@ -20,7 +20,8 @@ import { registerWithEmailAndPassword, auth } from '../firebase.js';
 import blob from "../assets/blob01.png";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import DatePicker from "react-date-picker";
+import DatePicker from "react-datepicker";
+import Header from "../components/Header.js";
 
 
 
@@ -31,6 +32,8 @@ function Register() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [password1, setPassword1] = useState();
+    const [birthday, setBirthday] = useState('');
+
 
     // Auth State
     const [user, loading, error] = useAuthState(auth);
@@ -76,42 +79,46 @@ function Register() {
     return (
         <>
             <header className="header">
-                <VStack spacing={"38px"} alignItems={"start"}>
-                    <Heading as={"h1"} fontSize={"70px"} fontWeight={"300"}>
-                        Hola, crea tu cuenta
-                    </Heading>
-                    <Heading as={"h2"} fontSize={'25px'} >
-                        Estas a un paso de cambiar tu vida
-                    </Heading>
-                </VStack>
+                <Header title="Hola, crea tu cuenta" subtitle="Estas a un paso de cambiar tu vida" />
                 <Image
                     position={"absolute"}
                     right="0"
                     top="0"
+                    zIndex={-1}
                     className="header__image"
                     src={blob}
+
                 />
             </header>
             <div className="form">
                 <VStack spacing={"24px"} width="30%" alignItems={"start"}>
                     <InputGroup>
-                        <InputLeftElement pointerEvents={"none"} children={<FaUserCircle />} />
+                        <InputLeftElement zIndex={1} pointerEvents={"none"} children={<FaUserCircle />} />
                         <Input variant={'input'} placeholder="Nombre" onChange={($event) => { setName($event.target.value) }} />
                     </InputGroup>
-                    <InputGroup>
-                        <InputLeftElement pointerEvents={"none"} children={<FaCalendar />} />
-                        <Input variant={'input'} placeholder="Cumpleaños" type={'date'} />
-                    </InputGroup>
-                    <InputGroup>
-                        <InputLeftElement pointerEvents={"none"} children={<EmailIcon />} />
+                    <DatePicker
+                        popperPlacement={"right"}
+                        customInput={
+                            <InputGroup>
+                                <InputLeftElement pointerEvents={"none"} children={<FaCalendar />} />
+                                <Input variant={'input'} placeholder="Cumpleaños" readOnly={true}
+                                    value={birthday ? birthday.toLocaleDateString('en-US') : ''} />
+                            </InputGroup>
+                        }
+                        selected={birthday}
+                        onChange={(date) => {
+                            setBirthday(date)
+                        }} />
+                    <InputGroup >
+                        <InputLeftElement zIndex={1} pointerEvents={"none"} children={<EmailIcon />} />
                         <Input variant={'input'} onChange={($event) => { setEmail($event.target.value) }} placeholder="Correo" type={"email"} />
                     </InputGroup>
-                    <InputGroup>
-                        <InputLeftElement pointerEvents={"none"} children={<LockIcon />} />
+                    <InputGroup >
+                        <InputLeftElement zIndex={1} pointerEvents={"none"} children={<LockIcon />} />
                         <Input variant={'input'} placeholder="Contraseña" onChange={($event) => { setPassword($event.target.value) }} type={"password"} />
                     </InputGroup>
-                    <InputGroup>
-                        <InputLeftElement pointerEvents={"none"} children={<LockIcon />} />
+                    <InputGroup >
+                        <InputLeftElement zIndex={1} pointerEvents={"none"} children={<LockIcon />} />
                         <Input variant={'input'} placeholder="Repite tu Contraseña" onChange={($event) => { setPassword1($event.target.value) }} type={"password"} />
                     </InputGroup>
 
