@@ -83,7 +83,7 @@ function Login() {
         <Image
           position={"absolute"}
           right="0"
-          top="-10"
+          top="0"
           className="header__image"
           src={blob}
         />
@@ -92,11 +92,11 @@ function Login() {
         <VStack spacing={"24px"} width="30%" alignItems={"start"}>
           <InputGroup>
             <InputLeftElement pointerEvents={"none"} children={<EmailIcon />} />
-            <Input placeholder="Correo" type={"email"} onChange={($event) => { setEmail($event.target.value) }} />
+            <Input variant={'input'} placeholder="Correo" type={"email"} onChange={($event) => { setEmail($event.target.value) }} />
           </InputGroup>
           <InputGroup>
             <InputLeftElement pointerEvents={"none"} children={<LockIcon />} />
-            <Input onChange={($event) => { setPassword($event.target.value) }} placeholder="Contraseña" type={"password"} />
+            <Input variant={'input'} onChange={($event) => { setPassword($event.target.value) }} placeholder="Contraseña" type={"password"} />
           </InputGroup>
           <Link color={"primary"}>¿Olvidaste tu contraseña?</Link>
           <HStack spacing={"24px"}>

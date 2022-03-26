@@ -4,10 +4,10 @@
 }
 
 body {
-  background-color: #f2f6ff;
+  background-color: #f2f6ff !important;
   padding: 4rem;
 }
 
 .header {
-  margin-bottom: 100px;
+  margin-bottom: 40px;
 }

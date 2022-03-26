@@ -10,6 +10,20 @@ import Home from './pages/Home';
 
 
 function App() {
+  const Input = {
+    variants: {
+      input: {
+        field: {
+          border: "2px solid",
+          borderColor: "primary",
+          color: "black",
+          _focus: {
+            boxShadow: "none"
+          }
+        },
+      },
+    },
+  }
   const theme = extendTheme({
     colors: {
       primary: "#6C8CBF",
@@ -21,6 +35,9 @@ function App() {
     fonts: {
       heading: "Source Sans Pro, sans-serif",
       body: "Source Sans Pro, sans-serif"
+    },
+    components: {
+      Input
     }
   });
   return (

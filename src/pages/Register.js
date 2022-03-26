@@ -76,17 +76,17 @@ function Register() {
         <>
             <header className="header">
                 <VStack spacing={"38px"} alignItems={"start"}>
-                    <Heading as={"h1"} fontWeight={"light"}>
+                    <Heading as={"h1"} fontSize={"70px"} fontWeight={"300"}>
                         Hola, crea tu cuenta
                     </Heading>
-                    <Heading as={"h2"} size={"m"}>
+                    <Heading as={"h2"} fontSize={'25px'} >
                         Estas a un paso de cambiar tu vida
                     </Heading>
                 </VStack>
                 <Image
                     position={"absolute"}
                     right="0"
-                    top="-10"
+                    top="0"
                     className="header__image"
                     src={blob}
                 />
@@ -95,19 +95,19 @@ function Register() {
                 <VStack spacing={"24px"} width="30%" alignItems={"start"}>
                     <InputGroup>
                         <InputLeftElement pointerEvents={"none"} children={<FaUserCircle />} />
-                        <Input placeholder="Nombre" onChange={($event) => { setName($event.target.value) }} />
+                        <Input variant={'input'} placeholder="Nombre" onChange={($event) => { setName($event.target.value) }} />
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement pointerEvents={"none"} children={<EmailIcon />} />
-                        <Input onChange={($event) => { setEmail($event.target.value) }} placeholder="Correo" type={"email"} />
+                        <Input variant={'input'} onChange={($event) => { setEmail($event.target.value) }} placeholder="Correo" type={"email"} />
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement pointerEvents={"none"} children={<LockIcon />} />
-                        <Input placeholder="Contraseña" onChange={($event) => { setPassword($event.target.value) }} type={"password"} />
+                        <Input variant={'input'} placeholder="Contraseña" onChange={($event) => { setPassword($event.target.value) }} type={"password"} />
                     </InputGroup>
                     <InputGroup>
                         <InputLeftElement pointerEvents={"none"} children={<LockIcon />} />
-                        <Input placeholder="Repite tu Contraseña" onChange={($event) => { setPassword1($event.target.value) }} type={"password"} />
+                        <Input variant={'input'} placeholder="Repite tu Contraseña" onChange={($event) => { setPassword1($event.target.value) }} type={"password"} />
                     </InputGroup>
 
                     <HStack spacing={24}>
