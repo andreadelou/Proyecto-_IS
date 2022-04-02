@@ -1,6 +1,3 @@
-body {
-  display: flex;
-}
 .azul1 {
   width: 500px;
   height: 32px;
@@ -172,6 +169,7 @@ h2 {
 .metas-container {
   display: flex;
   flex-direction: column;
+  width: 50vw;
 }
 
 .metas-container:not(:last-child) {
