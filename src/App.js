@@ -1,7 +1,4 @@
-<<<<<<< Updated upstream
 import './App.css';
-import Register from './pages/Register'
-=======
 import './CSS/App.css';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import {
@@ -9,23 +6,16 @@ import {
   Routes,
   Route,
   Link
-} from "react-router-dom"; import Register from './pages/Register';
+} from "react-router-dom";
 import Login from './pages/Login';
+import Register from './pages/Register'
 import Home from './pages/Home';
 import Health from './pages/Health';
 //import Goals from './pages/Goals';
 
 
->>>>>>> Stashed changes
 function App() {
   return (
-<<<<<<< Updated upstream
-    <Register />
-  );
-}
-
-export default App;
-=======
     <ChakraProvider theme={theme}>
       <Router>
         <Routes>
@@ -33,7 +23,7 @@ export default App;
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/health" element={<Health />} />
-          
+
         </Routes>
       </Router>
     </ChakraProvider>
@@ -41,4 +31,3 @@ export default App;
 }
 //<Route exact path="/goals" element={<Goals />} />
 export default App;
->>>>>>> Stashed changes
