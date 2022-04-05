@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import TodoForm from "../components/TodoForm.js";
 import TodoList from "../components/TodoList.js";
-import "../CSS/Goals.css";
+import "../Goals.css";
 
 function Goals() {
-    const[todos,setTodos]=useState([]);
+    const [todos, setTodos] = useState([]);
 
-    function addTodo(todo){
-        setTodos([todo,...todos]);
+    function addTodo(todo) {
+        setTodos([todo, ...todos]);
     }
 
 
