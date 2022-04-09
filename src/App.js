@@ -9,6 +9,7 @@ import {
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Health from './pages/Health';
+import Calendario from './pages/Calendar';
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/health" element={<Health />} />
+          <Route exact path="/calendar" element={<Calendario />} />
         </Routes>
       </Router>
     </ChakraProvider>
