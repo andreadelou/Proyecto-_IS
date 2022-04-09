@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-#need to install
+##need to install
 To use the calendar section
 ### `npm install react-calendar`
 
