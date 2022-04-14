@@ -1,4 +1,5 @@
 import './CSS/App.css';
+
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import {
   BrowserRouter as Router,
@@ -9,6 +10,8 @@ import {
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Health from './pages/Health';
+import Goals from './pages/Goals';
+
 
 
 function App() {
@@ -48,12 +51,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
+          <Route exact path="/goals" element={<Goals />} />
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/health" element={<Health />} />
-        </Routes>
-      </Router>
-    </ChakraProvider>
+        </Routes >
+      </Router >
+    </ChakraProvider >
   );
 }
 
 export default App;
+
