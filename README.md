@@ -2,6 +2,13 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Need to install
+To use the calendar section
+### `npm install react-calendar`
+
+This will help you visualize the calendar
+
+
 ## Available Scripts
 
 In the project directory, you can run:
