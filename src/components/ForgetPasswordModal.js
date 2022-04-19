@@ -1,19 +1,33 @@
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react'
-import React from 'react'
+import { EmailIcon } from '@chakra-ui/icons'
+import { Button, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { sendResetPasswordEmail } from '../firebase';
 
 function ForgetPasswordModal({
     onOpen,
     onClose,
-    isOpen
+    isOpen,
+    onSuccess
 }) {
+    const [email, setEmail] = useState('');
+    const sendEmail = async () => {
+        const success = await sendResetPasswordEmail(email);
+        if (success) {
+            onSuccess();
+            onClose();
+        }
+    }
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>Modal Title</ModalHeader>
+                <ModalHeader>¿Olvidaste tu contraseña?</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    32432
+                    <InputGroup>
+                        <InputLeftElement pointerEvents={"none"} children={<EmailIcon />} />
+                        <Input variant={'input'} onChange={($event) => { setEmail($event.target.value) }} placeholder="Correo" type={"emails"} />
+                    </InputGroup>
                 </ModalBody>
 
                 <ModalFooter>
@@ -22,7 +36,7 @@ function ForgetPasswordModal({
                     </Button>
                     <Button backgroundColor="primary" textColor="textLight" _hover={{
                         backgroundColor: "primary"
-                    }}>Enviar Correo</Button>
+                    }} disabled={email.length <= 0} onClick={sendEmail}>Enviar Correo</Button>
                 </ModalFooter>
             </ModalContent>
         </Modal>

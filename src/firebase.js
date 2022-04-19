@@ -60,10 +60,12 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
  * Sends a reset password email to the users
  */
 export const sendResetPasswordEmail = async (email) => {
+    console.log('sending to', email)
     try {
-        await sendPasswordResetEmail(email);
+        await sendPasswordResetEmail(auth, email);
         return true
     } catch (error) {
+        console.log(error);
         return false
     }
 }

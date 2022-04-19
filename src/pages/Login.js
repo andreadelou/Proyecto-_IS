@@ -75,6 +75,18 @@ function Login() {
 
   }
 
+
+
+  const onSuccessReset = () => {
+    toast({
+      title: 'Se te ha enviado un correo para resetear tu contraseña.',
+      status: 'success',
+      position: 'top',
+      duration: 9000,
+      isClosable: true,
+    });
+  }
+
   return (
     <>
       <header className="header">
@@ -89,7 +101,7 @@ function Login() {
         />
       </header>
       <div className="form">
-        <ForgetPasswordModal onOpen={onOpen} isOpen={isOpen} onClose={onClose} />
+        <ForgetPasswordModal onOpen={onOpen} isOpen={isOpen} onClose={onClose} onSuccess={onSuccessReset} />
         <VStack spacing={"24px"} width="30%" alignItems={"start"}>
           <InputGroup>
             <InputLeftElement pointerEvents={"none"} children={<EmailIcon />} />
