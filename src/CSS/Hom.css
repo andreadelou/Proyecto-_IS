@@ -1,0 +1,25 @@
+.titulote{
+    font-size: 40px;
+}
+
+.azul1 {
+    width: 500px;
+    height: 32px;
+    background: #6c8cbf;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+
+.botoncitos{
+    outline: #6c8cbf;
+    background-color: #6c8cbf;
+}
+.botoncitos:hover{
+    outline: #8199be;
+    background-color: #8199be;
+}
