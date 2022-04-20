@@ -1,5 +1,6 @@
 import { Heading, VStack } from '@chakra-ui/react'
 import React from 'react'
+import "../CSS/navbar.css";
 
 function Header({ title, subtitle }) {
     return (
@@ -16,6 +17,14 @@ function Header({ title, subtitle }) {
                     {subtitle}
                 </Heading>
             </VStack>
+            <nav>
+                <ul className='nav_links'>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Metas</a></li>
+                    <li><a href="#">Salud</a></li>
+                    <li><a href="#">Calendario</a></li>
+                </ul>
+            </nav>
         </div>
     )
 }
