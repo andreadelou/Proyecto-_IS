@@ -44,6 +44,11 @@ function Login() {
   // Check for page changes
   useEffect(() => {
     if (loading) return;
+    // const signOut = async () => {
+    //   await logout();
+
+    // }
+    // signOut();
     if (user) return navigate("/home");
   }, [user, loading]);
 
@@ -62,6 +67,7 @@ function Login() {
         duration: 9000,
         isClosable: true,
       });
+
     } else {
       toast({
         title: 'Credenciales Incorrectas.',

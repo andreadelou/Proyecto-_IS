@@ -60,7 +60,6 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
  * Sends a reset password email to the users
  */
 export const sendResetPasswordEmail = async (email) => {
-    console.log('sending to', email)
     try {
         await sendPasswordResetEmail(auth, email);
         return true
@@ -75,6 +74,11 @@ export const sendResetPasswordEmail = async (email) => {
 /**
  * Exit the application
  */
-export const logout = () => {
-    signOut(auth);
+export const logout = async () => {
+    try {
+        await signOut(auth);
+        return true;
+    } catch (error) {
+        return false
+    }
 }
