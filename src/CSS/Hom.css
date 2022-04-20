@@ -15,11 +15,11 @@
     left: 0px;
   }
 
-.botoncitos{
+.botones{
     outline: #6c8cbf;
     background-color: #6c8cbf;
 }
-.botoncitos:hover{
-    outline: #8199be;
-    background-color: #8199be;
+.botones:hover{
+    outline: #90a0b7;
+    background-color: #90a0b7;
 }
