@@ -17,7 +17,7 @@ function Home() {
     if (!user) return navigate("/");
   }, [user, loading]);
   return (
-    <>
+    <div className="home">
       <header className="header">
         <Header title="Home" subtitle="Revisa tu progreso"></Header>
         <Image
@@ -49,7 +49,7 @@ function Home() {
       </VStack>
 
       {/* <Button onClick={logout}>Logout</Button> */}
-    </>
+    </div>
   );
 }
 

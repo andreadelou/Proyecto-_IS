@@ -32,6 +32,7 @@ function App() {
   const theme = extendTheme({
     colors: {
       primary: "#6C8CBF",
+      primaryLight: "#7793c2",
       secondary: "#FEF1B9",
       background: "#F2F6FF",
       textDark: "#1F1338",

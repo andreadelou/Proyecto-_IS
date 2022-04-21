@@ -77,7 +77,7 @@ function Register() {
     }
 
     return (
-        <>
+        <div className="register">
             <header className="header">
                 <Header title="Hola, crea tu cuenta" subtitle="Estas a un paso de cambiar tu vida" />
                 <Image
@@ -140,7 +140,7 @@ function Register() {
 
                 </VStack>
             </div>
-        </>
+        </div>
     );
 }
 
