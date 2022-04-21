@@ -1,31 +1,28 @@
 import React from "react";
-import "../CSS/Todo.css"
+import "../CSS/Todo.css";
 
-function Todo({ todo, toggleComplete, removeTodo }) {
+function Todo({ todo, toggleComplete, removeTodo, onTodoChange }) {
+  function handleCheckBoxClick() {
+    toggleComplete(todo.id);
+  }
 
-    function handleCheckBoxClick() {
-        toggleComplete(todo.id);
-    }
-
-    function handleREmoveClick() {
-        removeTodo(todo.id);
-    }
-
-    return (
-        <div className="todo">
-            <input type="checkbox" onClick={handleCheckBoxClick} />
-            <li
-                style={
-                    {
-                        color: "black",
-                        textDecoration: todo.completed ? "line-through" : null
-                    }
-                }
-            >
-                {todo.task}
-            </li>
-        </div>
-    );
+  return (
+    <div className="todo">
+      <input type="checkbox"
+        onClick={handleCheckBoxClick}
+        onChange={() => { toggleComplete(!todo.completed) }}
+        defaultChecked={todo.completed}
+      />
+      <input
+        type="text"
+        className="todo__input"
+        name="todo-input"
+        placeholder="Escribe la sub tarea"
+        defaultValue={todo.value}
+        onChange={(e) => { onTodoChange(e.target.value) }}
+      />
+    </div>
+  );
 }
 
 export default Todo;
