@@ -4,7 +4,7 @@ import "../CSS/TodoForm.css";
 
 import AddButton from "./AddButton";
 
-function TodoForm({ title, onAdd, completed }) {
+function TodoForm({ title, onAdd, completed, onToggleCompleted }) {
   const [todo, setTodo] = useState({
     id: "",
     task: "",
@@ -16,6 +16,7 @@ function TodoForm({ title, onAdd, completed }) {
       <input
         type="checkbox"
         defaultChecked={completed}
+        onChange={onToggleCompleted}
         name="goal-checkbox"
         className="todo-form__check"
       />

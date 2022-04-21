@@ -9,6 +9,7 @@ import {
   addTodoToGoal,
   getAllGoals,
   saveGoal,
+  updateGoal,
   updateGoalTodo,
 } from "../services/goals.service";
 import GoalModal from "../components/GoalModal";
@@ -65,6 +66,17 @@ function Goals() {
     setGoals(getAllGoals());
   };
 
+  /**
+   * Updates a goal as completed
+   * @param {*} goal
+   * @param {*} goalId
+   */
+  const updateGoalCompleted = (goal, goalId) => {
+    goal.completed = !goal.completed;
+    updateGoal(goalId, goal);
+    setGoals(getAllGoals());
+  };
+
   return (
     <>
       <div className="goals">
@@ -95,6 +107,9 @@ function Goals() {
                 <TodoForm
                   addTodo={addTodo}
                   completed={goal.completed}
+                  onToggleCompleted={() => {
+                    updateGoalCompleted(goal, goal.id);
+                  }}
                   onAdd={() => {
                     addTodo(goal.id);
                   }}

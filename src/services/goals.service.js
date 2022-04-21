@@ -64,6 +64,21 @@ export const updateGoalTodo = (goalId, todoIndex, updatedTodo) => {
 }
 
 /**
+ * Updates a Goal
+ * @param {*} goalId 
+ * @param {*} goal 
+ */
+export const updateGoal = (goalId, updatedGoal) => {
+    goals = goals.map((goal) => {
+        if (goal.id === goalId) {
+            goal = updatedGoal;
+        }
+        return goal;
+    });
+    saveGoalsInLocal();
+}
+
+/**
  * Create a new goal
  * @param {*} title 
  * @param {*} category 
