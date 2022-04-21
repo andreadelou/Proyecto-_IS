@@ -1,0 +1,11 @@
+.add-button {
+  width: 40px;
+  height: 40px;
+  background-color: #6c8cbf;
+  border-radius: 100%;
+  transition: background-color 0.2s;
+}
+
+.add-button:hover {
+  background-color: #7793c2;
+}
