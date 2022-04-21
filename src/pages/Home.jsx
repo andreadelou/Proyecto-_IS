@@ -19,7 +19,7 @@ function Home() {
   return (
     <>
       <header className="header">
-        <Header title="Home" subtitle="Revisa tu progreso"></Header>
+        <Header title="Home" subtitle="Revisa tu progreso" Bandera={true}></Header>
         <Image
           position={"absolute"}
           right="0"
