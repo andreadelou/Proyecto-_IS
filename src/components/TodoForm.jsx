@@ -1,7 +1,7 @@
 //import { usePinInputDescendant } from "@chakra-ui/react";
 import React, { useState } from "react";
 import "../CSS/TodoForm.css";
-import { v4 as uuid } from "uuid";
+
 import AddButton from "./AddButton";
 
 function TodoForm({ title, onAdd, completed }) {
@@ -15,7 +15,7 @@ function TodoForm({ title, onAdd, completed }) {
     <div className="todo-form">
       <input
         type="checkbox"
-        checked={completed}
+        defaultChecked={completed}
         name="goal-checkbox"
         className="todo-form__check"
       />

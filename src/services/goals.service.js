@@ -1,30 +1,23 @@
+import { v4 as uuid, v4 } from "uuid";
 
+const LOCAL_STORAGE_KEY = "goals";
 
-let goals = [{
-    id: 1,
-    completed: true,
-    title: 'Meta de ejemplo',
-    todos: [
-
-    ]
-}];
-
+let goals = JSON.parse(localStorage.getItem('goals')) ?? [];
 /**
  * Get all goals from the user
  */
 export const getAllGoals = () => {
-    return goals
+    return goals;
 }
-
 
 
 /**
- * Creates a goal
- * @param {*} goal 
+ * Save Goals in local storage
  */
-export const createGoal = (goal) => {
-
+export const saveGoalsInLocal = () => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(goals))
 }
+
 
 /**
  * Add a todo to a specific goal
@@ -42,8 +35,8 @@ export const addTodoToGoal = (id) => {
             }
         }
         return goal;
-
-    })
+    });
+    saveGoalsInLocal();
 };
 
 /**
@@ -66,7 +59,8 @@ export const updateGoalTodo = (goalId, todoIndex, updatedTodo) => {
             }
         }
         return goal;
-    })
+    });
+    saveGoalsInLocal();
 }
 
 /**
@@ -76,12 +70,13 @@ export const updateGoalTodo = (goalId, todoIndex, updatedTodo) => {
  */
 export const saveGoal = (title, category) => {
     goals.push({
-        id: Math.random(),
+        id: v4(),
         completed: false,
         title,
         category,
         todos: [
 
         ]
-    })
+    });
+    saveGoalsInLocal();
 }

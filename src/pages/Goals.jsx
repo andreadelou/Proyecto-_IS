@@ -13,8 +13,6 @@ import {
 } from "../services/goals.service";
 import GoalModal from "../components/GoalModal";
 
-const LOCAL_STORAGE_KEY = "react-todo-list-todos";
-
 function Goals() {
   const [goals, setGoals] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -105,6 +103,7 @@ function Goals() {
                 <TodoList
                   todos={goal.todos}
                   toggleComplete={(todoIndex, todo) => {
+                    console.log("toggle completed");
                     updateTodoCompleted(goal.id, todoIndex, todo);
                   }}
                   onTodoChange={(todoIndex, todo, value) => {

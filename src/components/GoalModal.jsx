@@ -61,6 +61,8 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
             }}
             onClick={() => {
               onClose();
+              setGoalTitle(null);
+              setGoalCategory(null);
               onSave(goalTitle, goalCategory);
             }}
             disabled={!goalTitle || !goalCategory}
