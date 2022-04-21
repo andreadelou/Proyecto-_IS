@@ -46,7 +46,6 @@ function Login() {
     if (loading) return;
     // const signOut = async () => {
     //   await logout();
-
     // }
     // signOut();
     if (user) return navigate("/home");

@@ -24,6 +24,10 @@
   color: white;
 }
 
+.header > img {
+  z-index: -10;
+}
+
 .App-link {
   color: #61dafb;
 }

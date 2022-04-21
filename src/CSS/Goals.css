@@ -1,1 +1,5 @@
-
+.goals__container {
+  width: 50vw;
+  /* background-color: orange; */
+  height: 1000px;
+}

@@ -1,0 +1,11 @@
+.todo {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  border-bottom: 2px solid #a1b5d8;
+  padding: 5px 0px;
+}
+
+.todo:not(:last-child) {
+  margin-bottom: 20px;
+}
