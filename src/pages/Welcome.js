@@ -9,6 +9,8 @@ import meditar from "../assets/meditacion.png";
 import trotar from "../assets/trotar.png";
 import blob from "../assets/blob01.png";
 import Header from "../components/Header";
+import rana from "../assets/rana.png";
+import planta from "../assets/planta.png";
 import "../CSS/welcome.css"
 import {
     Flex,
@@ -37,9 +39,6 @@ function Welcome() {
         <div className='pagina'>
         <header>
         <Header title="Bienvenidx" ></Header>
-        <span className='subtitulos'>Escoge tus metas para comenzar</span>
-        <p></p>
-        <span className='subtitulos'>Elige como minimo dos</span>
         <Image
           position={"absolute"}
           right="0"
@@ -47,12 +46,26 @@ function Welcome() {
           className="header__image"
           src={blob}
         /></header>
+        <span className='subtitulos'>Escoge tus metas para comenzar</span>
+        <p></p>
+        <span className='subtitulos'>Elige como minimo dos</span>
+        
 
         <button className='botonesnow' ><img src={trotar} height ="40" width="60" />Ejercicio </button>
         <button className='botonesnow' ><img src={meditar} height ="40" width="60" />Meditar </button>
         <button className='botonesnow' ><img src={leer} height ="40" width="60" />Leer </button>
         <button className='botonesnow' ><img src={medicina} height ="40" width="60" />Medicina </button>
+
+      <p></p>
+
+        <span className='subtitulos'>Escoge tu nueva mascota</span>
+        <button className='botonesnow' ><img src={rana} height ="40" width="60" /> </button>
+        <button className='botonesnow' ><img src={planta} height ="40" width="60" /> </button>
             
+      
+
+
+
         </div>
     )
 }
