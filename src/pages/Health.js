@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import "../CSS/Health.css";
 
 //importando imagen
-import blob1 from "../assets/blob01.png";
 import blob2 from "../assets/blob02.png";
 
 function Health() {

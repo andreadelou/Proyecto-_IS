@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import "../CSS/Goals.css";
+import Header from '../components/Header.js';
 import TodoForm from "../components/TodoForm.js";
 import TodoList from "../components/TodoList.js";
-import "../Goals.css";
+import blob2 from "../assets/blob02.png";
 
 const LOCAL_STORAGE_KEY = "react-todo-list-todos";
 
@@ -46,17 +48,19 @@ function Goals() {
     }
 
     return (
-        <div className="Goals">
+        <div className="goals">
 
-            <header className="Goals-header">
-                <p>Metas</p>
-                <TodoForm addTodo={addTodo} />
-                <TodoList
-                    todos={todos}
-                    toggleComplete={toggleComplete}
-                    removeTodo={removeTodo}
-                />
+            <header className="header">
+                <Header title="Metas" subtitle="Hoy es un buen día para plantearte una nueva meta"></Header>
+                <img className="uno" src={blob2} alt="uno" />
+                <img className="dos" src={blob2} alt="dos" />
             </header>
+            <TodoForm addTodo={addTodo} />
+            <TodoList
+                todos={todos}
+                toggleComplete={toggleComplete}
+                removeTodo={removeTodo}
+            />
         </div>
 
     )

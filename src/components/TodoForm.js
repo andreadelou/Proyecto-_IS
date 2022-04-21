@@ -1,6 +1,7 @@
 //import { usePinInputDescendant } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { v4 as uuid } from 'uuid';
+import AddButton from "./AddButton";
 
 function TodoForm({ addTodo }) {
     const [todo, setTodo] = useState({
@@ -25,6 +26,7 @@ function TodoForm({ addTodo }) {
 
     return (
         <form onSubmit={handleSubmit}>
+            <AddButton />
             <input
                 name="task"
                 type="text"
