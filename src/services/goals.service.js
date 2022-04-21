@@ -2,6 +2,7 @@
 
 let goals = [{
     id: 1,
+    completed: true,
     title: 'Meta de ejemplo',
     todos: [
 
@@ -65,5 +66,22 @@ export const updateGoalTodo = (goalId, todoIndex, updatedTodo) => {
             }
         }
         return goal;
+    })
+}
+
+/**
+ * Create a new goal
+ * @param {*} title 
+ * @param {*} category 
+ */
+export const saveGoal = (title, category) => {
+    goals.push({
+        id: Math.random(),
+        completed: false,
+        title,
+        category,
+        todos: [
+
+        ]
     })
 }
