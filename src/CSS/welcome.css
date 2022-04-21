@@ -1,0 +1,20 @@
+.titulote{
+    font-size: 40px;
+}
+
+.botonesnow:hover{
+    outline: #90a0b7;
+    background-color: #90a0b7;
+}
+.subtitulos{
+    font-size: 30px;
+}
+.botonesnow{
+    outline: #6c8cbf;
+    background-color: #6c8cbf;
+    display: inline-flex;
+    height: 100px;
+    width: 120px;
+    align-items: center;
+    border-radius: 10px;
+}
