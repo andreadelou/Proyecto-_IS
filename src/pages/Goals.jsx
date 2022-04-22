@@ -86,6 +86,7 @@ function Goals() {
           <Header
             title="Metas"
             subtitle="Hoy es un buen día para plantearte una nueva meta"
+            Bandera={true}
           ></Header>
           <img className="uno" src={blob2} alt="uno" />
           <img className="dos" src={blob2} alt="dos" />

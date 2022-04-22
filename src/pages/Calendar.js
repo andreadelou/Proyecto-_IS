@@ -12,7 +12,7 @@ function Calendario() {
   return (
     <div className='calendar'>
       <header className="header">
-        <Header title="Calendario" subtitle="Organiza tu tiempo"></Header>
+        <Header title="Calendario" subtitle="Organiza tu tiempo" Bandera={true}></Header>
         <Image
           position={"absolute"}
           right="0"
