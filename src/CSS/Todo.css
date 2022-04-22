@@ -1,0 +1,19 @@
+.todo {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.todo:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.todo__input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  border-bottom: 2px solid #a1b5d8;
+  padding: 5px 0px;
+  width: 100%;
+}

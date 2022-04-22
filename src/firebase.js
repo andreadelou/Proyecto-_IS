@@ -1,9 +1,11 @@
+import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";   // Initialize firebase app
 import {
     getAuth,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
-    signOut
+    signOut,
+    sendPasswordResetEmail,
 } from 'firebase/auth'; // Module imports for firebase
 
 // Configuration for firebase
@@ -55,8 +57,28 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
 }
 
 /**
+ * Sends a reset password email to the users
+ */
+export const sendResetPasswordEmail = async (email) => {
+    try {
+        await sendPasswordResetEmail(auth, email);
+        return true
+    } catch (error) {
+        console.log(error);
+        return false
+    }
+}
+
+
+
+/**
  * Exit the application
  */
-export const logout = () => {
-    signOut(auth);
+export const logout = async () => {
+    try {
+        await signOut(auth);
+        return true;
+    } catch (error) {
+        return false
+    }
 }
