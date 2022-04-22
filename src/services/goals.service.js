@@ -17,6 +17,14 @@ export const getAllGoals = () => {
 export const saveGoalsInLocal = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(goals))
 }
+/*Eliminar una goal*/
+export const deleteGoal = (goalId) => {
+    goals = goals.map((goal) => {
+        if (goal.id === goalId) {
+            localStorage.removeItem(LOCAL_STORAGE_KEY, JSON.stringify(goals))
+        }
+    });
+}
 
 
 /**
