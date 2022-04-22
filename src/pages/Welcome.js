@@ -38,33 +38,39 @@ function Welcome() {
     return (
         <div className='pagina'>
         <header>
-        <Header title="Bienvenidx" ></Header>
-        <Image
-          position={"absolute"}
-          right="0"
-          top="0"
-          className="header__image"
-          src={blob}
-        /></header>
-        <span className='subtitulos'>Escoge tus metas para comenzar</span>
+        <Header title="Personaliza" ></Header>
+        
+        </header>
+        
+       
+        <span className='subtitulos'>Configura tus metas<br></br></span>
+        <p> </p>
+        <span className='subtitulos'>Selecciona al menos dos</span>
         <p></p>
-        <span className='subtitulos'>Elige como minimo dos</span>
         
 
         <button className='botonesnow' ><img src={trotar} height ="40" width="60" />Ejercicio </button>
         <button className='botonesnow' ><img src={meditar} height ="40" width="60" />Meditar </button>
+        <p></p>
         <button className='botonesnow' ><img src={leer} height ="40" width="60" />Leer </button>
         <button className='botonesnow' ><img src={medicina} height ="40" width="60" />Medicina </button>
 
       <p></p>
 
         <span className='subtitulos'>Escoge tu nueva mascota</span>
+        <p></p>
         <button className='botonesnow' ><img src={rana} height ="40" width="60" /> </button>
         <button className='botonesnow' ><img src={planta} height ="40" width="60" /> </button>
-            
+        <p></p>
       
-
-
+      <button className='botones'> Comenzar</button>
+      <Image
+          position={"absolute"}
+          right="0"
+          top="0"
+          className="header__image"
+          src={blob}
+        />
 
         </div>
     )
