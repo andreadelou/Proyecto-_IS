@@ -1,4 +1,5 @@
 import './CSS/App.css';
+
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import {
   BrowserRouter as Router,
@@ -30,6 +31,7 @@ function App() {
   const theme = extendTheme({
     colors: {
       primary: "#6C8CBF",
+      primaryLight: "#7793c2",
       secondary: "#FEF1B9",
       background: "#F2F6FF",
       textDark: "#1F1338",
@@ -49,6 +51,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
+          <Route exact path="/goals" element={<Goals />} />
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/health" element={<Health />} />
           <Route exact path="/welcome" element={<Welcome />} />
@@ -59,3 +62,4 @@ function App() {
 }
 
 export default App;
+
