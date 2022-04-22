@@ -32,7 +32,7 @@ function Header({ title, subtitle, Bandera=false }) {
                         <li><a href="home">Home</a></li>
                         <li><a href="goals">Metas</a></li>
                         <li><a href="health">Salud</a></li>
-                        <li><a href="#">Calendario</a></li>
+                        <li><a href="calendar">Calendario</a></li>
                         <li><a onClick={LogOut}>Log Out</a></li>
                     </ul>
                 </nav> 
