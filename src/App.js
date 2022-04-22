@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Health from './pages/Health';
 import Welcome from './pages/Welcome';
+import Goals from './pages/Goals'
 
 
 function App() {
