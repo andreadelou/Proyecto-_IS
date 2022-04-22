@@ -12,7 +12,9 @@ import {
   useToast,
   HStack,
   Spinner,
-  useDisclosure
+  useDisclosure,
+  FormLabel,
+  Checkbox
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import blob from "../assets/blob01.png";
@@ -32,10 +34,12 @@ function Login() {
   const [password, setPassword] = useState();
   // Auth State
   const [user, loading, error] = useAuthState(auth);
+  // User remind
+  const [remindUser, setRemindUser] = useState(false);
+  const [finishedCheckRemindUser, setFinishChekRemindUser] = useState(false);
 
   const navigate = useNavigate(); // navigate
   const { isOpen, onOpen, onClose } = useDisclosure();  // Modal settings
-
 
 
   // Use the toast
@@ -49,6 +53,11 @@ function Login() {
     // }
     // signOut();
     if (user) return navigate("/home");
+    if (localStorage.getItem('email')) {
+      setEmail(localStorage.getItem('email'))
+      setRemindUser(true);
+    }
+    setFinishChekRemindUser(true);
   }, [user, loading]);
 
 
@@ -81,7 +90,6 @@ function Login() {
   }
 
 
-
   const onSuccessReset = () => {
     toast({
       title: 'Se te ha enviado un correo para resetear tu contraseña.',
@@ -110,12 +118,23 @@ function Login() {
         <VStack spacing={"24px"} width="30%" alignItems={"start"}>
           <InputGroup>
             <InputLeftElement pointerEvents={"none"} children={<EmailIcon />} />
-            <Input variant={'input'} placeholder="Correo" type={"email"} onChange={($event) => { setEmail($event.target.value) }} />
+            <Input variant={'input'} defaultValue={email} placeholder="Correo" type={"email"} onChange={($event) => { setEmail($event.target.value) }} />
           </InputGroup>
           <InputGroup>
             <InputLeftElement pointerEvents={"none"} children={<LockIcon />} />
             <Input variant={'input'} onChange={($event) => { setPassword($event.target.value) }} placeholder="Contraseña" type={"password"} />
           </InputGroup>
+          {finishedCheckRemindUser ?
+            <InputGroup>
+              <Checkbox defaultChecked={remindUser} onChange={(e) => {
+                if (!(e.target.checked)) {
+                  localStorage.removeItem('email');
+                }
+                setRemindUser(e.target.checked)
+              }}>Recordar mi correo</Checkbox>
+            </InputGroup>
+
+            : ''}
           <Link color={"primary"} onClick={onOpen}>¿Olvidaste tu contraseña?</Link>
           <HStack spacing={"24px"}>
             <Button
@@ -123,7 +142,13 @@ function Login() {
               backgroundColor="primary"
               textColor="textLight"
               disabled={loading || !email || !password}
-              onClick={login}
+              onClick={() => {
+                if (remindUser) {
+                  localStorage.setItem('email', email);
+                }
+                login();
+
+              }}
             >
               Entrar
             </Button>
