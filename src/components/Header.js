@@ -1,7 +1,16 @@
 import { Heading, VStack } from '@chakra-ui/react'
 import React from 'react'
+import "../CSS/navbar.css";
+import { logout } from '../firebase';
 
-function Header({ title, subtitle }) {
+
+
+function Header({ title, subtitle, Bandera=false }) {
+
+    async function LogOut(){
+        await logout()
+    }
+
     return (
         <div style={{
             display: "flex",
@@ -16,7 +25,20 @@ function Header({ title, subtitle }) {
                     {subtitle}
                 </Heading>
             </VStack>
-            <nav>Hola</nav>
+            {
+                Bandera ? 
+                <nav>
+                    <ul className='nav_links'>
+                        <li><a href="home">Home</a></li>
+                        <li><a href="goals">Metas</a></li>
+                        <li><a href="health">Salud</a></li>
+                        <li><a href="calendar">Calendario</a></li>
+                        <li><a onClick={LogOut}>Log Out</a></li>
+                    </ul>
+                </nav> 
+                : ''
+            }
+            
         </div>
     )
 }

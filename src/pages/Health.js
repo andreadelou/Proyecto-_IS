@@ -9,7 +9,7 @@ function Health() {
   return (
     <div className="health">
       <header className="header">
-        <Header title="Salud" subtitle="Estadísticas de tus metas"></Header>
+        <Header title="Salud" subtitle="Estadísticas de tus metas" Bandera={true}></Header>
         <img className="uno" src={blob2} alt="uno" />
         <img className="dos" src={blob2} alt="dos" />
       </header>
