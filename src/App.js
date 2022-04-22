@@ -13,6 +13,7 @@ import Health from './pages/Health';
 import Calendario from './pages/Calendar';
 import Goals from './pages/Goals';
 import Welcome from './pages/Welcome';
+import Goals from './pages/Goals'
 
 
 
