@@ -10,8 +10,10 @@ import {
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Health from './pages/Health';
+import Calendario from './pages/Calendar';
 import Goals from './pages/Goals';
 import Welcome from './pages/Welcome';
+
 
 
 function App() {
@@ -55,6 +57,7 @@ function App() {
           <Route exact path="/goals" element={<Goals />} />
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/health" element={<Health />} />
+          <Route exact path="/calendar" element={<Calendario />} />
           <Route exact path="/welcome" element={<Welcome />} />
         </Routes>
       </Router>
