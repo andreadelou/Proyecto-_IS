@@ -6,6 +6,7 @@ import TodoList from "../components/TodoList.jsx";
 import blob2 from "../assets/blob02.png";
 import { Button, useDisclosure } from "@chakra-ui/react";
 import {
+  addPoints,
   addTodoToGoal,
   getAllGoals,
   saveGoal,
@@ -74,6 +75,7 @@ function Goals() {
   const updateGoalCompleted = (goal, goalId) => {
     goal.completed = !goal.completed;
     updateGoal(goalId, goal);
+    addPoints(10);
     setGoals(getAllGoals());
   };
 
@@ -102,31 +104,33 @@ function Goals() {
           </Button>
           {/* Div para cada meta */}
           <div className="goals__goal">
-            {goals.map((goal) => (
-              <div key={goal.id}>
-                <TodoForm
-                  addTodo={addTodo}
-                  completed={goal.completed}
-                  onToggleCompleted={() => {
-                    updateGoalCompleted(goal, goal.id);
-                  }}
-                  onAdd={() => {
-                    addTodo(goal.id);
-                  }}
-                  title={goal.title}
-                />
-                <TodoList
-                  todos={goal.todos}
-                  toggleComplete={(todoIndex, todo) => {
-                    console.log("toggle completed");
-                    updateTodoCompleted(goal.id, todoIndex, todo);
-                  }}
-                  onTodoChange={(todoIndex, todo, value) => {
-                    updateTodo(goal.id, todoIndex, todo, value);
-                  }}
-                />
-              </div>
-            ))}
+            {goals
+              .filter((goal) => !goal.completed)
+              .map((goal) => (
+                <div key={goal.id}>
+                  <TodoForm
+                    addTodo={addTodo}
+                    completed={goal.completed}
+                    onToggleCompleted={() => {
+                      updateGoalCompleted(goal, goal.id);
+                    }}
+                    onAdd={() => {
+                      addTodo(goal.id);
+                    }}
+                    title={goal.title}
+                  />
+                  <TodoList
+                    todos={goal.todos}
+                    toggleComplete={(todoIndex, todo) => {
+                      console.log("toggle completed");
+                      updateTodoCompleted(goal.id, todoIndex, todo);
+                    }}
+                    onTodoChange={(todoIndex, todo, value) => {
+                      updateTodo(goal.id, todoIndex, todo, value);
+                    }}
+                  />
+                </div>
+              ))}
           </div>
         </div>
       </div>

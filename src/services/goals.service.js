@@ -18,6 +18,23 @@ export const saveGoalsInLocal = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(goals))
 }
 
+/**
+ * Add points
+ */
+export const addPoints = (quantiy) => {
+    let currentPoints = Number(localStorage.getItem('points')) ?? 0;
+    localStorage.setItem('points', currentPoints + quantiy)
+}
+
+
+/**
+ * Get the points
+ * @returns {Number}
+ */
+export const getPoints = () => {
+    return Number(localStorage.getItem('points')) ?? 0;
+}
+
 
 /**
  * Add a todo to a specific goal
