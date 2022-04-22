@@ -1,41 +1,44 @@
-.titulote{
-    font-size: 40px;
+.welcome {
+  padding: 4rem;
+}
+.titulote {
+  font-size: 40px;
 }
 
-.botonesnow:hover{
-    outline: #90a0b7;
-    background-color: #90a0b7;
+.botonesnow:hover {
+  outline: #90a0b7;
+  background-color: #90a0b7;
 }
-.subtitulos{
-    font-size: 30px;
+.subtitulos {
+  font-size: 30px;
 }
-.botonesnow{
-    outline: #6c8cbf;
-    font-size: 20px;
-    background-color: #6c8cbf;
-    display: inline-flex;
-    height: 100px;
-    width: 150px;
-    margin: 20px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
+.botonesnow {
+  outline: #6c8cbf;
+  font-size: 20px;
+  background-color: #6c8cbf;
+  display: inline-flex;
+  height: 100px;
+  width: 150px;
+  margin: 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 }
-.botones{
-    outline: #6c8cbf;
-    font-size: 20px;
-    background-color: #6c8cbf;
-    display: inline-flex;
-    height: 50px;
-    width: 100px;
-    margin: 20px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
+.botones {
+  outline: #6c8cbf;
+  font-size: 20px;
+  background-color: #6c8cbf;
+  display: inline-flex;
+  height: 50px;
+  width: 100px;
+  margin: 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 }
-.botones:hover{
-    outline: #90a0b7;
-    background-color: #90a0b7;
+.botones:hover {
+  outline: #90a0b7;
+  background-color: #90a0b7;
 }
 
 /* .pagina{
