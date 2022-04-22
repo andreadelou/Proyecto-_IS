@@ -44,6 +44,10 @@ function Login() {
   // Check for page changes
   useEffect(() => {
     if (loading) return;
+    // const signOut = async () => {
+    //   await logout();
+    // }
+    // signOut();
     if (user) return navigate("/home");
   }, [user, loading]);
 
@@ -62,6 +66,7 @@ function Login() {
         duration: 9000,
         isClosable: true,
       });
+
     } else {
       toast({
         title: 'Credenciales Incorrectas.',
@@ -88,7 +93,7 @@ function Login() {
   }
 
   return (
-    <>
+    <div className="login">
       <header className="header">
 
         <Header title="Que bueno verte de nuevo" subtitle="Ingresa tus credenciales"></Header>
@@ -131,7 +136,7 @@ function Login() {
 
         </VStack>
       </div>
-    </>
+    </div>
   );
 }
 
