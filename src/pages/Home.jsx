@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { auth, logout } from "../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -6,20 +6,23 @@ import { Button, HStack, Image, VStack } from "@chakra-ui/react";
 import "../CSS/Home.css";
 import Header from "../components/Header.js";
 import blob from "../assets/blob01.png";
+import { getPoints } from "../services/goals.service.js";
 
 function Home() {
   const navigate = useNavigate(); // navigate
 
   // Auth State
   const [user, loading, error] = useAuthState(auth);
+  const [points, setPoints] = useState();
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
+    setPoints(getPoints());
   }, [user, loading]);
   return (
     <div className="home">
       <header className="header">
-        <Header title="Home" subtitle="Revisa tu progreso"></Header>
+        <Header title="Home" subtitle="Revisa tu progreso" Bandera={true}></Header>
         <Image
           position={"absolute"}
           right="0"
@@ -31,7 +34,7 @@ function Home() {
 
       <VStack align={"flex-start"} gap={"20px"}>
         <div className="points">
-          <h1 className="text--bold">140</h1>
+          <h1 className="text--bold">{points}</h1>
           <p className="points__text">puntos</p>
         </div>
         <div className="next-activity">

@@ -26,6 +26,23 @@ export const deleteGoal = (goalId) => {
     });
 }
 
+/**
+ * Add points
+ */
+export const addPoints = (quantiy) => {
+    let currentPoints = Number(localStorage.getItem('points')) ?? 0;
+    localStorage.setItem('points', currentPoints + quantiy)
+}
+
+
+/**
+ * Get the points
+ * @returns {Number}
+ */
+export const getPoints = () => {
+    return Number(localStorage.getItem('points')) ?? 0;
+}
+
 
 /**
  * Add a todo to a specific goal
