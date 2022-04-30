@@ -14,6 +14,8 @@ import GoalModal from "../components/GoalModal";
 //importando imagen
 import blob2 from "../assets/blob02.png";
 
+import ProgressBar from "../components/Progress";
+
 function Health() {
 
   //jala el total de metas y cuantas han sido completadas para sacar el porcentaje
@@ -63,6 +65,7 @@ function Health() {
 
   return (
     <div className="health">
+      
       <header className="header">
         <Header title="Salud" subtitle="Estadísticas de tus metas por categoria"></Header>
         <img className="uno" src={blob2} alt="uno" />
@@ -75,38 +78,29 @@ function Health() {
             <h3 className="">Ejercicio</h3>
             <p className="">{porcentajeE}</p>
           </div>
-          <div className="progress">
-            <div className="progress__content"></div>
-          </div>
+          <ProgressBar className="bar" value={C_Ejercicio} max ={100}/>
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Meditar</h3>
             <p className="">{porcentajeM}</p>
           </div>
-          <div className="progress">
-            <div className="progress__content"></div>
-          </div>
+          <ProgressBar className="bar" value={C_Meditar} max ={100}/>
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Salud</h3>
             <p className="">{porcentajeS}
-            
             </p>
           </div>
-          <div className="progress">
-            <div className="progress__content"></div>
-          </div>
+          <ProgressBar className="bar" value={C_Salud} max ={100}/>
         </div>
         <div className="metas-container__stat">
             <div className="metas-container__stat-header">
               <h3 className="">Salud Mental</h3>
               <p className="">{porcentajeSM}</p>
             </div>
-            <div className="progress">
-              <div className="progress__content"></div>
-            </div>
+            <ProgressBar className="bar" value={C_SaludM} max ={100}/>
           </div>
       </div>
     </div>
