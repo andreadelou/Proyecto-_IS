@@ -76,21 +76,21 @@ function Health() {
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Ejercicio</h3>
-            <p className="">{porcentajeE}</p>
+            <p className="porcentaje">{porcentajeE}</p>
           </div>
           <ProgressBar className="bar" value={C_Ejercicio} max ={100}/>
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Meditar</h3>
-            <p className="">{porcentajeM}</p>
+            <p className="porcentaje">{porcentajeM}</p>
           </div>
           <ProgressBar className="bar" value={C_Meditar} max ={100}/>
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Salud</h3>
-            <p className="">{porcentajeS}
+            <p className="porcentaje">{porcentajeS}
             </p>
           </div>
           <ProgressBar className="bar" value={C_Salud} max ={100}/>
@@ -98,7 +98,7 @@ function Health() {
         <div className="metas-container__stat">
             <div className="metas-container__stat-header">
               <h3 className="">Salud Mental</h3>
-              <p className="">{porcentajeSM}</p>
+              <p className="porcentaje">{porcentajeSM}</p>
             </div>
             <ProgressBar className="bar" value={C_SaludM} max ={100}/>
           </div>

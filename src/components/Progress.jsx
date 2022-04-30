@@ -49,7 +49,7 @@ ProgressBar.propTypes = {
 ProgressBar.defaultProps = {
     max: 100,
     color: "lightBlue",
-    width: "500px",
+    width: "680px",
 }
 
 export default ProgressBar;

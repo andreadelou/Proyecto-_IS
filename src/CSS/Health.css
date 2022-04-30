@@ -183,7 +183,6 @@ h2 {
 
 .metas-container__stat-header {
   display: flex;
-  justify-content: space-between;
 }
 
 .metas-container__stat:not(:last-child) {
@@ -192,4 +191,12 @@ h2 {
 
 .metas-container__stat-header {
   margin-bottom: 20px;
+}
+
+.bar{
+  position: relative;
+}
+.porcentaje{
+  position: absolute;
+  left: 700px;
 }
