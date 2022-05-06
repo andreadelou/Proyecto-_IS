@@ -55,7 +55,7 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
           <FormControl>
             <input marginBottom={1} />
             <DatePicker
-                          popperPlacement={"down"}
+                          popperPlacement={"right"}
                           customInput={
                               <InputGroup >
                                   
