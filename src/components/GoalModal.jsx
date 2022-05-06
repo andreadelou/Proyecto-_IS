@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 
 function GoalModal({ isOpen, onClose, onOpen, onSave }) {
-  const [reminder, setreminder] = useState('');
+  const [reminder, setreminder] = useState(null);
   const [goalTitle, setGoalTitle] = useState(null);
   const [goalCategory, setGoalCategory] = useState(null);
   return (
@@ -87,9 +87,10 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
               onClose();
               setGoalTitle(null);
               setGoalCategory(null);
-              onSave(goalTitle, goalCategory);
+              setreminder(null);
+              onSave(goalTitle, goalCategory, reminder);
             }}
-            disabled={!goalTitle || !goalCategory}
+            disabled={!goalTitle || !goalCategory || !reminder}
           >
             Guardar
           </Button>
