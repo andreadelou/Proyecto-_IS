@@ -6,6 +6,8 @@ import {
   Select,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import { FaCalendar, FaUserCircle } from "react-icons/fa"
 import {
   Button,
   Modal,
@@ -18,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 
 function GoalModal({ isOpen, onClose, onOpen, onSave }) {
+  const [reminder, setreminder] = useState('');
   const [goalTitle, setGoalTitle] = useState(null);
   const [goalCategory, setGoalCategory] = useState(null);
   return (
@@ -49,6 +52,27 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
               <option value="mental-health">Salud Mental</option>
             </Select>
           </FormControl>
+          <FormControl>
+            <input marginBottom={1} />
+            <DatePicker
+                          popperPlacement={"down"}
+                          customInput={
+                              <InputGroup >
+                                  
+                                  <InputLeftElement pointerEvents={"none"} children={<FaCalendar />} />
+                                  <Input variant={'input'} placeholder="Recordatorio" readOnly={true}
+                                      value={reminder ? reminder.toLocaleDateString('en-US') : ''} />
+                                  
+                              </InputGroup>
+                          }
+                          selected={reminder}
+                          onChange={(date) => {
+                              setreminder(date)
+                          }} 
+              />
+              
+          </FormControl>
+          
         </ModalBody>
 
         <ModalFooter>
