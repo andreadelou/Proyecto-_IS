@@ -15,14 +15,19 @@ import {
   fetchAllGoals,
 } from "../services/goals.service";
 import GoalModal from "../components/GoalModal";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { loginWithEmailAndPassword, auth, logout } from "../firebase.js";
 
 function Goals() {
   const [goals, setGoals] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [user, loading, error] = useAuthState(auth);
 
   useEffect(() => {
-    fetchGoals();
-  }, []);
+    if (auth.currentUser) {
+      fetchGoals();
+    }
+  }, [user]);
   const fetchGoals = async () => {
     const goals = await fetchAllGoals();
     setGoals(goals);
