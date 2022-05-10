@@ -1,5 +1,7 @@
 import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";   // Initialize firebase app
+import { getFirestore } from "firebase/firestore"
+
 import {
     getAuth,
     signInWithEmailAndPassword,
@@ -7,6 +9,7 @@ import {
     signOut,
     sendPasswordResetEmail,
 } from 'firebase/auth'; // Module imports for firebase
+
 
 // Configuration for firebase
 const firebaseConfig = {
@@ -21,6 +24,9 @@ const firebaseConfig = {
 
 
 const app = initializeApp(firebaseConfig); // Initialize app
+export const db = getFirestore(app);    // Export firestore connection
+
+
 export const auth = getAuth(app);  // Auth init
 
 /**
@@ -75,10 +81,14 @@ export const sendResetPasswordEmail = async (email) => {
  * Exit the application
  */
 export const logout = async () => {
+
     try {
         await signOut(auth);
         return true;
     } catch (error) {
         return false
     }
+
 }
+
+

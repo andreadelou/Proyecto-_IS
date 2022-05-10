@@ -1,4 +1,6 @@
 import { v4 as uuid, v4 } from "uuid";
+import { db } from '../firebase'
+import { collection, addDoc, Timestamp, getDocs, updateDoc, doc } from 'firebase/firestore'
 
 const LOCAL_STORAGE_KEY = "goals";
 
@@ -7,6 +9,7 @@ let goals = JSON.parse(localStorage.getItem('goals')) ?? [];
  * Get all goals from the user
  */
 export const getAllGoals = () => {
+    // await insertGoal();
     return goals;
 }
 
@@ -44,25 +47,6 @@ export const getPoints = () => {
 }
 
 
-/**
- * Add a todo to a specific goal
- * @param {*} id 
- */
-export const addTodoToGoal = (id) => {
-    goals = goals.map(goal => {
-        if (goal.id === id) {
-            if (goal.todos.length > 0 && goal.todos[goal.todos.length - 1].value === "") {
-                return goal;
-            }
-            return {
-                ...goal,
-                todos: [...goal.todos, { value: '', completed: false }]
-            }
-        }
-        return goal;
-    });
-    saveGoalsInLocal();
-};
 
 /**
  * Update a todo
@@ -70,22 +54,9 @@ export const addTodoToGoal = (id) => {
  * @param {*} todoIndex 
  * @param {*} updatedTodo 
  */
-export const updateGoalTodo = (goalId, todoIndex, updatedTodo) => {
-    goals = goals.map((goal) => {
-        if (goal.id === goalId) {
-            return {
-                ...goal,
-                todos: goal.todos.map((todo, index) => {
-                    if (index === todoIndex) {
-                        todo = updatedTodo;
-                    }
-                    return todo;
-                })
-            }
-        }
-        return goal;
-    });
-    saveGoalsInLocal();
+export const updateGoalTodo = async (goal, todoIndex, updatedTodo) => {
+    goal.todos[todoIndex] = updatedTodo;
+    await updateGoal(goal.id, goal);
 }
 
 /**
@@ -93,14 +64,16 @@ export const updateGoalTodo = (goalId, todoIndex, updatedTodo) => {
  * @param {*} goalId 
  * @param {*} goal 
  */
-export const updateGoal = (goalId, updatedGoal) => {
-    goals = goals.map((goal) => {
-        if (goal.id === goalId) {
-            goal = updatedGoal;
-        }
-        return goal;
-    });
-    saveGoalsInLocal();
+export const updateGoal = async (goalId, updatedGoal) => {
+    // goals = goals.map((goal) => {
+    //     if (goal.id === goalId) {
+    //         goal = updatedGoal;
+    //     }
+    //     return goal;
+    // });
+    // saveGoalsInLocal();
+    const docRef = doc(db, 'goals', goalId);    // Get the document reference from firebase
+    await updateDoc(docRef, updatedGoal);   // Update the document
 }
 
 /**
@@ -119,4 +92,33 @@ export const saveGoal = (title, category) => {
         ]
     });
     saveGoalsInLocal();
+}
+
+/**
+ * Insert a goal in firestore.
+ */
+export const insertGoal = async (title, category) => {
+    await addDoc(collection(db, 'goals'), {
+        title,
+        category,
+        completed: false,
+        todos: [
+
+        ]
+    });
+}
+
+/**
+ * Fetch all goals on the database
+ * @returns {[]}
+ */
+export const fetchAllGoals = async () => {
+    const goalsCol = collection(db, 'goals');
+    const goalsSnapshot = await getDocs(goalsCol);
+    return goalsSnapshot.docs.map(d => {
+        return {
+            id: d.id,
+            ...d.data(),
+        }
+    }) ?? [];
 }
