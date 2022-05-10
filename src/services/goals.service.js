@@ -1,6 +1,6 @@
 import { v4 as uuid, v4 } from "uuid";
-import { db } from '../firebase'
-import { collection, addDoc, Timestamp, getDocs, updateDoc, doc } from 'firebase/firestore'
+import { auth, db } from '../firebase'
+import { collection, addDoc, Timestamp, getDocs, updateDoc, doc, query, where } from 'firebase/firestore'
 
 const LOCAL_STORAGE_KEY = "goals";
 
@@ -98,10 +98,13 @@ export const saveGoal = (title, category) => {
  * Insert a goal in firestore.
  */
 export const insertGoal = async (title, category) => {
+    const uid = auth.currentUser.uid;
     await addDoc(collection(db, 'goals'), {
         title,
         category,
         completed: false,
+        uid,
+        createdAt: (new Date()).toISOString(),
         todos: [
 
         ]
@@ -113,8 +116,11 @@ export const insertGoal = async (title, category) => {
  * @returns {[]}
  */
 export const fetchAllGoals = async () => {
+    const uid = auth.currentUser.uid;
+
     const goalsCol = collection(db, 'goals');
-    const goalsSnapshot = await getDocs(goalsCol);
+    const q = query(goalsCol, where("uid", "==", uid))
+    const goalsSnapshot = await getDocs(q);
     return goalsSnapshot.docs.map(d => {
         return {
             id: d.id,
