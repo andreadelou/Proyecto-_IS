@@ -83,6 +83,7 @@ function Goals() {
    */
   const createNewGoal = async (title, category) => {
     await insertGoal(title, category);
+    fetchGoals();
   };
 
   /**
