@@ -77,7 +77,7 @@ function Health() {
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
-            <h3 className="">Meditar</h3>
+            <h3 className="">Aprendizaje</h3>
             <p className="">{porcentajeM}</p>
           </div>
           <div className="progress">

@@ -7,11 +7,12 @@ import blob2 from "../assets/blob02.png";
 import { Button, useDisclosure } from "@chakra-ui/react";
 import {
   addPoints,
-  addTodoToGoal,
-  getAllGoals,
-  saveGoal,
+  // addTodoToGoal,
+  insertGoal,
+  // saveGoal,
   updateGoal,
   updateGoalTodo,
+  fetchAllGoals,
 } from "../services/goals.service";
 import GoalModal from "../components/GoalModal";
 
@@ -20,16 +21,31 @@ function Goals() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    setGoals(getAllGoals());
+    fetchGoals();
   }, []);
+  const fetchGoals = async () => {
+    const goals = await fetchAllGoals();
+    setGoals(goals);
+  };
 
   /**
    * Add a todo
    * @param {*} goalId
    */
-  const addTodo = (goalId) => {
-    addTodoToGoal(goalId);
-    setGoals(getAllGoals());
+  const addTodo = async (goalId) => {
+    let updatedGoal = {};
+    const newGoals = goals.map((goal) => {
+      if (goal.id === goalId) {
+        goal.todos.push({
+          value: "",
+          completed: false,
+        });
+        updatedGoal = goal;
+      }
+      return goal;
+    });
+    setGoals(newGoals);
+    updateGoal(goalId, updatedGoal);
   };
 
   /**
@@ -39,10 +55,10 @@ function Goals() {
    * @param {*} todo
    * @param {*} value
    */
-  const updateTodo = (goalId, index, todo, value) => {
+  const updateTodo = (goal, index, todo, value) => {
     todo.value = value;
-    updateGoalTodo(goalId, index, todo);
-    setGoals(getAllGoals());
+    updateGoalTodo(goal, index, todo);
+    fetchGoals();
   };
 
   /**
@@ -51,10 +67,10 @@ function Goals() {
    * @param {*} index
    * @param {*} todo
    */
-  const updateTodoCompleted = (goalId, index, todo) => {
+  const updateTodoCompleted = (goal, index, todo) => {
     todo.completed = !todo.completed;
-    updateGoalTodo(goalId, index, todo);
-    setGoals(getAllGoals());
+    updateGoalTodo(goal, index, todo);
+    fetchGoals();
   };
 
   /**
@@ -62,9 +78,9 @@ function Goals() {
    * @param {*} title
    * @param {*} category
    */
-  const createNewGoal = (title, category) => {
-    saveGoal(title, category);
-    setGoals(getAllGoals());
+  const createNewGoal = async (title, category) => {
+    await insertGoal(title, category);
+    fetchGoals();
   };
 
   /**
@@ -72,11 +88,11 @@ function Goals() {
    * @param {*} goal
    * @param {*} goalId
    */
-  const updateGoalCompleted = (goal, goalId) => {
+  const updateGoalCompleted = async (goal, goalId) => {
     goal.completed = !goal.completed;
-    updateGoal(goalId, goal);
+    await updateGoal(goalId, goal); // Updates the goal
     addPoints(10);
-    setGoals(getAllGoals());
+    fetchGoals();
   };
 
   return (
@@ -123,11 +139,10 @@ function Goals() {
                   <TodoList
                     todos={goal.todos}
                     toggleComplete={(todoIndex, todo) => {
-                      console.log("toggle completed");
-                      updateTodoCompleted(goal.id, todoIndex, todo);
+                      updateTodoCompleted(goal, todoIndex, todo);
                     }}
                     onTodoChange={(todoIndex, todo, value) => {
-                      updateTodo(goal.id, todoIndex, todo, value);
+                      updateTodo(goal, todoIndex, todo, value);
                     }}
                   />
                 </div>
