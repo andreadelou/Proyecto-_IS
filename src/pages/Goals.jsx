@@ -63,7 +63,6 @@ function Goals() {
   const updateTodo = (goal, index, todo, value) => {
     todo.value = value;
     updateGoalTodo(goal, index, todo);
-    fetchGoals();
   };
 
   /**
@@ -75,7 +74,6 @@ function Goals() {
   const updateTodoCompleted = (goal, index, todo) => {
     todo.completed = !todo.completed;
     updateGoalTodo(goal, index, todo);
-    fetchGoals();
   };
 
   /**
@@ -85,7 +83,6 @@ function Goals() {
    */
   const createNewGoal = async (title, category) => {
     await insertGoal(title, category);
-    fetchGoals();
   };
 
   /**
@@ -97,7 +94,6 @@ function Goals() {
     goal.completed = !goal.completed;
     await updateGoal(goalId, goal); // Updates the goal
     addPoints(10);
-    fetchGoals();
   };
 
   return (
