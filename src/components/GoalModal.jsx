@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import { FaCalendar, FaUserCircle } from "react-icons/fa"
+import { FaCalendar, FaUserCircle } from "react-icons/fa";
 import {
   Button,
   Modal,
@@ -41,6 +41,7 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
           </FormControl>
           <FormControl>
             <Select
+              marginBottom={2}
               placeholder="Selecciona una categoría"
               onChange={($event) => {
                 setGoalCategory($event.target.value);
@@ -53,24 +54,28 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
             </Select>
           </FormControl>
           <FormControl>
-            <input marginBottom={1} />
             <DatePicker
-                          popperPlacement={"right"}
-                          customInput={
-                              <InputGroup >
-                                  <InputLeftElement pointerEvents={"none"} children={<FaCalendar />} />
-                                  <Input variant={'input'} placeholder="Recordatorio" readOnly={true}
-                                      value={reminder ? reminder.toLocaleDateString('en-US') : ''} />
-                              </InputGroup>
-                          }
-                          selected={reminder}
-                          onChange={(date) => {
-                              setreminder(date)
-                          }} 
-              />
-              
+              popperPlacement={"right"}
+              customInput={
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents={"none"}
+                    children={<FaCalendar />}
+                  />
+                  <Input
+                    // variant={"input"}
+                    placeholder="Recordatorio"
+                    readOnly={true}
+                    value={reminder ? reminder.toLocaleDateString("en-US") : ""}
+                  />
+                </InputGroup>
+              }
+              selected={reminder}
+              onChange={(date) => {
+                setreminder(date);
+              }}
+            />
           </FormControl>
-          
         </ModalBody>
 
         <ModalFooter>
