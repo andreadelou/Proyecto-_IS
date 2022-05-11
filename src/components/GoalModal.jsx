@@ -58,11 +58,9 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
                           popperPlacement={"right"}
                           customInput={
                               <InputGroup >
-                                  
                                   <InputLeftElement pointerEvents={"none"} children={<FaCalendar />} />
                                   <Input variant={'input'} placeholder="Recordatorio" readOnly={true}
                                       value={reminder ? reminder.toLocaleDateString('en-US') : ''} />
-                                  
                               </InputGroup>
                           }
                           selected={reminder}
