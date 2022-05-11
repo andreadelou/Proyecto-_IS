@@ -156,8 +156,8 @@ function Goals() {
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
-        onSave={(title, category) => {
-          createNewGoal(title, category);
+        onSave={(title, category, reminder) => {
+          createNewGoal(title, category,reminder);
         }}
       />
     </>

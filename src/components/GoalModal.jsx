@@ -6,6 +6,8 @@ import {
   Select,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import { FaCalendar, FaUserCircle } from "react-icons/fa"
 import {
   Button,
   Modal,
@@ -18,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 
 function GoalModal({ isOpen, onClose, onOpen, onSave }) {
+  const [reminder, setreminder] = useState(null);
   const [goalTitle, setGoalTitle] = useState(null);
   const [goalCategory, setGoalCategory] = useState(null);
   return (
@@ -49,6 +52,25 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
               <option value="mental-health">Salud Mental</option>
             </Select>
           </FormControl>
+          <FormControl>
+            <input marginBottom={1} />
+            <DatePicker
+                          popperPlacement={"right"}
+                          customInput={
+                              <InputGroup >
+                                  <InputLeftElement pointerEvents={"none"} children={<FaCalendar />} />
+                                  <Input variant={'input'} placeholder="Recordatorio" readOnly={true}
+                                      value={reminder ? reminder.toLocaleDateString('en-US') : ''} />
+                              </InputGroup>
+                          }
+                          selected={reminder}
+                          onChange={(date) => {
+                              setreminder(date)
+                          }} 
+              />
+              
+          </FormControl>
+          
         </ModalBody>
 
         <ModalFooter>
@@ -63,9 +85,10 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
               onClose();
               setGoalTitle(null);
               setGoalCategory(null);
-              onSave(goalTitle, goalCategory);
+              setreminder(null);
+              onSave(goalTitle, goalCategory, reminder);
             }}
-            disabled={!goalTitle || !goalCategory}
+            disabled={!goalTitle || !goalCategory || !reminder}
           >
             Guardar
           </Button>
