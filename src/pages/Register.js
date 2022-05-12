@@ -22,6 +22,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import Header from "../components/Header.js";
+import { createUserInCollection } from "../services/users.service.js";
 
 
 
@@ -53,9 +54,10 @@ function Register() {
      */
     const register = async () => {
 
-        const success = await registerWithEmailAndPassword(name, email, password);
+        const userCreated = await registerWithEmailAndPassword(name, email, password);
         // Show alert depending on the situation
-        if (success) {
+        if (userCreated) {
+            await createUserInCollection(userCreated);
             toast({
                 title: 'Se ha creado tu cuenta.',
                 status: 'success',
