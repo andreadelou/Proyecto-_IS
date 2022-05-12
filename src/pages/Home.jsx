@@ -16,8 +16,6 @@ import happyplant from "../assets/happyplant.png";
 import mehplant from "../assets/mehplant.png";
 import sadplant from "../assets/sadplant.png";
 
-
-
 function Home() {
   const navigate = useNavigate(); // navigate
 
@@ -32,7 +30,11 @@ function Home() {
   return (
     <div className="home">
       <header className="header">
-        <Header title="Home" subtitle="Revisa tu progreso" Bandera={true}></Header>
+        <Header
+          title="Home"
+          subtitle="Revisa tu progreso"
+          Bandera={true}
+        ></Header>
         <Image
           position={"absolute"}
           right="0"
@@ -41,35 +43,42 @@ function Home() {
           src={blob}
         />
       </header>
-      <HStack justifContent={"space-between"} gap={"40"} alignItems={"flex-start"}>
-    
-      
-      <VStack align={"flex-start"} gap={"20px"}>
-        <div className="points">
-          <h1 className="text--bold">{points}</h1>
-          <p className="points__text">puntos</p>
-        </div>
-         
-        <div className="next-activity">
-          <HStack justifyContent={"space-between"} gap={"20"}>
-            <VStack alignItems={"self-start"}>
-              <h2 className="next_activity__text">Proxima tarea:</h2>
-              <h2 className="next_activity__text">Meditar</h2>
-            </VStack>
-            <HStack alignItems={"baseline"} className="next-activity__time">
-              <h2 className="text--bold">3</h2>
-              <h2 className="text">días</h2>
+      <HStack
+        justifyContent={"space-between"}
+        gap={"40"}
+        alignItems={"flex-start"}
+      >
+        <VStack align={"flex-start"} gap={"20px"}>
+          <div className="points">
+            <h1 className="text--bold">{points}</h1>
+            <p className="points__text">puntos</p>
+          </div>
+
+          <div className="next-activity">
+            <HStack justifyContent={"space-between"} gap={"20"}>
+              <VStack alignItems={"self-start"}>
+                <h2 className="next_activity__text">Proxima tarea:</h2>
+                <h2 className="next_activity__text">Meditar</h2>
+              </VStack>
+              <HStack alignItems={"baseline"} className="next-activity__time">
+                <h2 className="text--bold">3</h2>
+                <h2 className="text">días</h2>
+              </HStack>
             </HStack>
-          </HStack>
-        </div>
-      </VStack>
-      {/* ONDA DE LA MASCOTA  */}
-         
+          </div>
+        </VStack>
+        {/* ONDA DE LA MASCOTA  */}
+
         <div className="mascota">
           {/* <h1>
             Mascota
           </h1> */}
-          <Image src={happyfrog} alt="Rana feliz" width="200px" height="200px"/>
+          <Image
+            src={happyfrog}
+            alt="Rana feliz"
+            width="200px"
+            height="200px"
+          />
         </div>
         {/* FIN DE ONDA DE LA MASCOTA */}
       </HStack>
