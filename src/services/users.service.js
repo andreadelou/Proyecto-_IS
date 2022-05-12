@@ -29,3 +29,13 @@ export const getUserInfo = async (user) => {
         getUserInfo(user);  // Call the function again
     }
 }
+
+/**
+ * Updates the user info
+ * @param {string} uid 
+ * @param {*} data 
+ */
+export const updateUserInfo = async (uid, data) => {
+    const docRef = doc(db, 'users', uid);    // Get the document reference from firebase
+    await updateDoc(docRef, data);   // Update the document
+}

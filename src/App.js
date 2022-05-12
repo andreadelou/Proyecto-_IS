@@ -17,7 +17,7 @@ import Goals from './pages/Goals';
 import Welcome from './pages/Welcome';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getUserInfo } from './services/users.service';
 
 
@@ -56,10 +56,12 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, loading, error] = useAuthState(auth);
+  const [userData, setUserData] = useState();
 
   useEffect(() => {
     const getUserData = async () => {
       const data = await getUserInfo(user); // Get the current user information
+      setUserData(data);
       if (data && !data.configured) {
         navigate('/welcome');  // Redirect the user 
       }
@@ -69,8 +71,6 @@ function App() {
     }
     if (user) {
       getUserData();
-    } else {
-      navigate('/');  // Redirect the user to the main page if it has not logged in
     }
   }, [user]);
 

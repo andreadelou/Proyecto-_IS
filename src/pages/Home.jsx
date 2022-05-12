@@ -15,6 +15,7 @@ import sadfrog from "../assets/sadfrog.png";
 import happyplant from "../assets/happyplant.png";
 import mehplant from "../assets/mehplant.png";
 import sadplant from "../assets/sadplant.png";
+import { getUserInfo } from "../services/users.service.js";
 
 function Home() {
   const navigate = useNavigate(); // navigate
@@ -22,11 +23,32 @@ function Home() {
   // Auth State
   const [user, loading, error] = useAuthState(auth);
   const [points, setPoints] = useState();
+  const [pet, setPet] = useState();
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
+    const getUserData = async () => {
+      const data = await getUserInfo(user); // Get the current user information
+      setPet(data.pet);
+    };
+    if (user) {
+      getUserData();
+    }
     setPoints(getPoints());
   }, [user, loading]);
+  /**
+   * Renders a pet
+   */
+  const renderPet = () => {
+    if (pet !== "frog" && pet !== "plant") return; // Do not render if pet is not present
+    const petArray =
+      pet === "frog"
+        ? [happyfrog, mehfrog, sadfrog]
+        : [happyplant, mehplant, sadplant];
+    return (
+      <Image src={petArray[0]} alt="Rana feliz" width="200px" height="200px" />
+    );
+  };
   return (
     <div className="home">
       <header className="header">
@@ -43,11 +65,7 @@ function Home() {
           src={blob}
         />
       </header>
-      <HStack
-        justifyContent={"space-between"}
-        gap={"40"}
-        alignItems={"flex-start"}
-      >
+      <HStack gap={"40"} alignItems={"flex-start"}>
         <VStack align={"flex-start"} gap={"20px"}>
           <div className="points">
             <h1 className="text--bold">{points}</h1>
@@ -73,12 +91,7 @@ function Home() {
           {/* <h1>
             Mascota
           </h1> */}
-          <Image
-            src={happyfrog}
-            alt="Rana feliz"
-            width="200px"
-            height="200px"
-          />
+          {renderPet()}
         </div>
         {/* FIN DE ONDA DE LA MASCOTA */}
       </HStack>
