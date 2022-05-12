@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Need to install
 To use the calendar section
-### `npm install react-calendar`
+### `npm install react-calendar` `npm install react-bootstrap bootstrap`
 
 This will help you visualize the calendar
 
