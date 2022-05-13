@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import "../CSS/TodoForm.css";
 
 import AddButton from "./AddButton";
+import EditButton from "./EditButton";
 
-function TodoForm({ title, onAdd, completed, onToggleCompleted }) {
+function TodoForm({ title, onAdd, completed, onToggleCompleted, onEdit }) {
   const [todo, setTodo] = useState({
     id: "",
     task: "",
@@ -29,6 +30,7 @@ function TodoForm({ title, onAdd, completed, onToggleCompleted }) {
         {title}
       </h1>
       <AddButton onAdd={onAdd} />
+      <EditButton onEdit={onEdit} />
     </div>
   );
 }
