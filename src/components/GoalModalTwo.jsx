@@ -18,8 +18,9 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
+import { getAllGoals } from "../services/goals.service";
 
-function GoalModal({ isOpen, onClose, onOpen, onSave }) {
+function GoalModalTwo({ isOpen, onClose, onOpen, onSave }) {
   const [reminder, setreminder] = useState(null);
   const [goalTitle, setGoalTitle] = useState(null);
   const [goalCategory, setGoalCategory] = useState(null);
@@ -27,7 +28,7 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Nueva Meta</ModalHeader>
+        <ModalHeader>Edtar Meta</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <FormControl>
@@ -54,7 +55,7 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
             onClick={() => {
               onClose();
               setGoalTitle(null);
-              onSave(goalTitle);
+              console.log(getAllGoals());
             }}
             disabled={!goalTitle}
           >
@@ -66,4 +67,4 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
   );
 }
 
-export default GoalModal;
+export default GoalModalTwo;
