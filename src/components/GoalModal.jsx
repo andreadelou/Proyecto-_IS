@@ -41,6 +41,7 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
           </FormControl>
           <FormControl marginBottom={2}>
             <Select
+              marginBottom={2}
               placeholder="Selecciona una categoría"
               onChange={($event) => {
                 setGoalCategory($event.target.value);

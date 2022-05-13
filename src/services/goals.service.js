@@ -97,11 +97,12 @@ export const saveGoal = (title, category) => {
 /**
  * Insert a goal in firestore.
  */
-export const insertGoal = async (title, category) => {
+export const insertGoal = async (title, category,reminder) => {
     const uid = auth.currentUser.uid;
     await addDoc(collection(db, 'goals'), {
         title,
         category,
+        reminder,
         completed: false,
         uid,
         createdAt: (new Date()).toISOString(),

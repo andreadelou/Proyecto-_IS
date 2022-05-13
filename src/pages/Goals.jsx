@@ -89,8 +89,8 @@ function Goals() {
    * @param {*} title
    * @param {*} category
    */
-  const createNewGoal = async (title, category) => {
-    await insertGoal(title, category);
+  const createNewGoal = async (title, category, reminder) => {
+    await insertGoal(title, category, reminder);
     fetchGoals();
   };
 
