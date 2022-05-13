@@ -39,7 +39,7 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
               }}
             />
           </FormControl>
-          <FormControl>
+          <FormControl marginBottom={2}>
             <Select
               marginBottom={2}
               placeholder="Selecciona una categoría"
@@ -63,7 +63,6 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
                     children={<FaCalendar />}
                   />
                   <Input
-                    // variant={"input"}
                     placeholder="Recordatorio"
                     readOnly={true}
                     value={reminder ? reminder.toLocaleDateString("en-US") : ""}
