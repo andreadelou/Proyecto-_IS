@@ -59,6 +59,7 @@ function Goals() {
 
   const addEdit = async (goal, goalId) => {
     await updateGoal(goalId, goal); // Updates the goal
+    await fetchGoals();
   };
 
   /**
