@@ -63,13 +63,13 @@ function Welcome() {
       let title = '';
       switch (goal) {
         case 'health':
-          title = 'Salud';
+          title = 'Tomar mis medicinas';
           break;
         case 'mental-health':
-          title = 'Salud Mental'
+          title = 'Meditar'
           break;
         case 'exercise':
-          title = 'Ejercicio'
+          title = 'Hacer Ejercicio'
           break;
         case 'learn':
           title = 'Estudiar';
@@ -77,6 +77,7 @@ function Welcome() {
         default:
           break;
       }
+
       await insertGoal(title, goal);
       setLoading(false);
       navigate('/home');
