@@ -13,6 +13,7 @@ import {
   updateGoal,
   updateGoalTodo,
   fetchAllGoals,
+  fetchAllGoalsAndGroupByCategory,
 } from "../services/goals.service";
 import GoalModal from "../components/GoalModal";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -29,8 +30,11 @@ function Goals() {
     }
   }, [user]);
   const fetchGoals = async () => {
-    const goals = await fetchAllGoals();
-    setGoals(goals);
+    await fetchGoalsByCategory();
+  };
+  const fetchGoalsByCategory = async () => {
+    const goals = await fetchAllGoalsAndGroupByCategory();
+    setGoals(Object.entries(goals));
   };
 
   /**
@@ -123,32 +127,35 @@ function Goals() {
           </Button>
           {/* Div para cada meta */}
           <div className="goals__goal">
-            {goals
-              .filter((goal) => !goal.completed)
-              .map((goal) => (
-                <div key={goal.id}>
-                  <TodoForm
-                    addTodo={addTodo}
-                    completed={goal.completed}
-                    onToggleCompleted={() => {
-                      updateGoalCompleted(goal, goal.id);
-                    }}
-                    onAdd={() => {
-                      addTodo(goal.id);
-                    }}
-                    title={goal.title}
-                  />
-                  <TodoList
-                    todos={goal.todos}
-                    toggleComplete={(todoIndex, todo) => {
-                      updateTodoCompleted(goal, todoIndex, todo);
-                    }}
-                    onTodoChange={(todoIndex, todo, value) => {
-                      updateTodo(goal, todoIndex, todo, value);
-                    }}
-                  />
-                </div>
-              ))}
+            {goals.map((entries) => (
+              <div key={entries[0]}>
+                <h2>{entries[0]}</h2>
+                {entries[1].map((goal) => (
+                  <div key={goal.id}>
+                    <TodoForm
+                      addTodo={addTodo}
+                      completed={goal.completed}
+                      onToggleCompleted={() => {
+                        updateGoalCompleted(goal, goal.id);
+                      }}
+                      onAdd={() => {
+                        addTodo(goal.id);
+                      }}
+                      title={goal.title}
+                    />
+                    <TodoList
+                      todos={goal.todos}
+                      toggleComplete={(todoIndex, todo) => {
+                        updateTodoCompleted(goal, todoIndex, todo);
+                      }}
+                      onTodoChange={(todoIndex, todo, value) => {
+                        updateTodo(goal, todoIndex, todo, value);
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -157,7 +164,7 @@ function Goals() {
         onOpen={onOpen}
         onClose={onClose}
         onSave={(title, category, reminder) => {
-          createNewGoal(title, category,reminder);
+          createNewGoal(title, category, reminder);
         }}
       />
     </>
