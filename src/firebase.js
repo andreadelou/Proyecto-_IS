@@ -55,9 +55,10 @@ export const loginWithEmailAndPassword = async (email, password) => {
  */
 export const registerWithEmailAndPassword = async (name, email, password) => {
     try {
-        await createUserWithEmailAndPassword(auth, email, password);    // Call firebase
-        return true;
+        const u = await createUserWithEmailAndPassword(auth, email, password);    // Call firebase
+        return u.user;
     } catch (error) {
+        console.log(error);
         return false;
     }
 }

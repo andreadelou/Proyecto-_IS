@@ -3,8 +3,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Need to install
-To use the calendar section
-### `npm install react-calendar`
+To use the calendar section and cards to see reminders
+### `npm install react-calendar` `npm install @material-ui/core`
+
+To visualize the progress bar aimation in health
+### `npm install prop-types` `npm install styled-components`
 
 This will help you visualize the calendar
 
