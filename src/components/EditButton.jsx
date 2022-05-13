@@ -26,10 +26,12 @@ function EditButton({ onEdit }) {
   return (
     <><button className="edit-button" onClick={onOpen}>
       <EditIcon />
-    </button><GoalModalTwo
+    </button>
+    <GoalModalTwo
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose} 
+        onSave={onEdit}
         />
         
         

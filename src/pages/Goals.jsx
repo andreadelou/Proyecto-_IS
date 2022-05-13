@@ -53,8 +53,8 @@ function Goals() {
     updateGoal(goalId, updatedGoal);
   };
 
-  const addEdit = async (goalId) => {
-    //
+  const addEdit = async (goal, goalId) => {
+      await updateGoal(goalId, goal); // Updates the goal
   };
 
   /**
@@ -140,8 +140,10 @@ function Goals() {
                     onAdd={() => {
                       addTodo(goal.id);
                     }}
-                    onEdit={() => {
-                      addEdit(goal.id);
+                    //editar meta
+                    onEdit={(newTitle) => {
+                      addEdit({title: newTitle}, goal.id);
+                      //console.log(newTitle);
                     }}
                     title={goal.title}
                   />

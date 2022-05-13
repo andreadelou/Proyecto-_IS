@@ -18,7 +18,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import { getAllGoals } from "../services/goals.service";
+import { getAllGoals, updateGoal } from "../services/goals.service";
 
 function GoalModalTwo({ isOpen, onClose, onOpen, onSave }) {
   const [reminder, setreminder] = useState(null);
@@ -55,7 +55,9 @@ function GoalModalTwo({ isOpen, onClose, onOpen, onSave }) {
             onClick={() => {
               onClose();
               setGoalTitle(null);
-              console.log(getAllGoals());
+              /*console.log(getAllGoals());
+              updateGoal("4IKlDxrit783GIPQDJJ9",{title: "otronombre"});*/
+              onSave(goalTitle);
             }}
             disabled={!goalTitle}
           >
