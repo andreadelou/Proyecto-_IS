@@ -19,9 +19,6 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 
-import {goal} from Goals
-import Goals from "../pages/Goals";
-
 function GoalModal({ isOpen, onClose, onOpen, onSave }) {
   const [reminder, setreminder] = useState(null);
   const [goalTitle, setGoalTitle] = useState(null);
@@ -37,43 +34,12 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
             <Input
               marginBottom={2}
               placeholder="Título de tu meta"
-              value = "hola"
               onChange={($event) => {
                 setGoalTitle($event.target.value);
               }}
             />
           </FormControl>
-          <FormControl>
-            <Select
-              placeholder="Selecciona una categoría"
-              onChange={($event) => {
-                setGoalCategory($event.target.value);
-              }}
-            >
-              <option value="health">Salud</option>
-              <option value="exercise">Ejercicio</option>
-              <option value="learn">Meditar</option>
-              <option value="mental-health">Salud Mental</option>
-            </Select>
-          </FormControl>
-          <FormControl>
-            <input marginBottom={1} />
-            <DatePicker
-                          popperPlacement={"right"}
-                          customInput={
-                              <InputGroup >
-                                  <InputLeftElement pointerEvents={"none"} children={<FaCalendar />} />
-                                  <Input variant={'input'} placeholder="Recordatorio" readOnly={true}
-                                      value={reminder ? reminder.toLocaleDateString('en-US') : ''} />
-                              </InputGroup>
-                          }
-                          selected={reminder}
-                          onChange={(date) => {
-                              setreminder(date)
-                          }} 
-              />
-              
-          </FormControl>
+          
           
         </ModalBody>
 
@@ -88,11 +54,9 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
             onClick={() => {
               onClose();
               setGoalTitle(null);
-              setGoalCategory(null);
-              setreminder(null);
-              onSave(goalTitle, goalCategory, reminder);
+              onSave(goalTitle);
             }}
-            disabled={!goalTitle || !goalCategory || !reminder}
+            disabled={!goalTitle}
           >
             Guardar
           </Button>
