@@ -128,3 +128,25 @@ export const fetchAllGoals = async () => {
         }
     }) ?? [];
 }
+
+export const fetchAllGoalsAndGroupByCategory = async () => {
+    const uid = auth.currentUser.uid;
+    const goalsCol = collection(db, 'goals');
+    const q = query(goalsCol, where("uid", "==", uid))
+    const goalsSnapshot = await getDocs(q);
+    const goals = {};
+    for (const goal of goalsSnapshot.docs.filter(goal => !goal.data().completed).map(goal => {
+        return {
+            id: goal.id,
+            ...goal.data()
+        }
+    })) {
+        if (!goals[goal.category]) {
+            goals[goal.category] = [goal];
+        } else {
+            goals[goal.category].push(goal);
+        }
+    }
+
+    return goals;   // Return the grouped goals
+}
