@@ -22,7 +22,6 @@ export const createUserInCollection = async (user) => {
  */
 export const getUserInfo = async (user) => {
     const u = await getDoc(doc(db, 'users', user.uid))
-
     if (u.exists()) {
         return u.data();
     } else {
