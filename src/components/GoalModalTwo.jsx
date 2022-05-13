@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import { FaCalendar, FaUserCircle } from "react-icons/fa"
+import { FaCalendar, FaUserCircle } from "react-icons/fa";
 import {
   Button,
   Modal,
@@ -28,7 +28,7 @@ function GoalModalTwo({ isOpen, onClose, onOpen, onSave }) {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Edtar Meta</ModalHeader>
+        <ModalHeader>Editar Meta</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <FormControl>
@@ -40,8 +40,6 @@ function GoalModalTwo({ isOpen, onClose, onOpen, onSave }) {
               }}
             />
           </FormControl>
-          
-          
         </ModalBody>
 
         <ModalFooter>
