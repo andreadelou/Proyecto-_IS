@@ -43,16 +43,20 @@ function Goals() {
    */
   const addTodo = async (goalId) => {
     let updatedGoal = {};
-    const newGoals = goals.map((goal) => {
-      if (goal.id === goalId) {
-        goal.todos.push({
-          value: "",
-          completed: false,
-        });
-        updatedGoal = goal;
-      }
-      return goal;
+    const newGoals = goals.map((entries) => {
+      entries[1].map((goal) => {
+        if (goal.id === goalId) {
+          goal.todos.push({
+            value: "",
+            completed: false,
+          });
+          updatedGoal = goal;
+        }
+        return goal;
+      });
+      return entries;
     });
+    console.log(newGoals);
     setGoals(newGoals);
     updateGoal(goalId, updatedGoal);
   };
