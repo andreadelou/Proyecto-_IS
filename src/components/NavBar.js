@@ -21,7 +21,7 @@ function Header({ title, subtitle }) {
                 <ul className='nav_links'>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Metas</a></li>
-                    <li><a href="#">Salud</a></li>
+                    <li><a href="#">Bienestar</a></li>
                     <li><a href="#">Calendario</a></li>
                 </ul>
             </nav>
