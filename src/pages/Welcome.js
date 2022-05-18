@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { auth, logout } from '../firebase.js';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -25,16 +25,65 @@ import {
   HStack,
   Spinner
 } from "@chakra-ui/react";
+import { FaCheckCircle } from "react-icons/fa";
+import { updateUserInfo } from '../services/users.service.js';
+import { insertGoal } from '../services/goals.service.js';
 
 function Welcome() {
-  const navigate = useNavigate(); // navigate
 
-  // Auth State
-  const [user, loading, error] = useAuthState(auth);
-  useEffect(() => {
-    if (loading) return;
-    if (!user) return navigate("/");
-  }, [user, loading]);
+  const [pet, setPet] = useState(''); // State for pet picker
+  const [goals, setGoals] = useState([]); // State for goals picker
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  /**
+   * Add or remove a goal from the array
+   * @param {string} goal 
+   */
+  const toggleGoal = (goal) => {
+    if (goals.includes(goal)) {
+      // remove the goal from the array
+      setGoals(goals.filter(goalF => goalF !== goal));
+    } else {
+      // add the goal from the array
+      setGoals([...goals, goal]);
+    }
+  }
+
+  /**
+   * Save the user configuration
+   */
+  const saveConfiguration = async () => {
+    setLoading(true);
+    if (loading) {
+      return;
+    }
+    await updateUserInfo(auth.currentUser.uid, { configured: true, pet });
+    for (const goal of goals) {
+      let title = '';
+      switch (goal) {
+        case 'health':
+          title = 'Tomar mis medicinas';
+          break;
+        case 'mental-health':
+          title = 'Meditar'
+          break;
+        case 'exercise':
+          title = 'Hacer Ejercicio'
+          break;
+        case 'learn':
+          title = 'Estudiar';
+          break;
+        default:
+          break;
+      }
+
+      await insertGoal(title, goal);
+      setLoading(false);
+      navigate('/home');
+    }
+  }
+
   return (
     <div className='welcome'>
       <header>
@@ -44,27 +93,49 @@ function Welcome() {
       <span className='subtitulos'>Selecciona al menos dos</span>
       <p></p>
 
-
-      <button className='botonesnow' ><img src={trotar} height="40" width="60" />Ejercicio </button>
-      <button className='botonesnow' ><img src={meditar} height="40" width="60" />Meditar </button>
+      <button className='botonesnow' onClick={() => { toggleGoal('exercise') }}>
+        {goals.includes('exercise') ? <FaCheckCircle className='botonesnow__icon' /> : ''}
+        <img src={trotar} height="40" width="60" alt='ejercicio' />Ejercicio </button>
+      <button className='botonesnow' onClick={() => { toggleGoal('mental-health') }} >
+        {goals.includes('mental-health') ? <FaCheckCircle className='botonesnow__icon' /> : ''}
+        <img src={meditar} alt="meditar" height="40" width="60" />Meditar </button>
       <p></p>
-      <button className='botonesnow' ><img src={leer} height="40" width="60" />Leer </button>
-      <button className='botonesnow' ><img src={medicina} height="40" width="60" />Medicina </button>
+      <button className='botonesnow' onClick={() => { toggleGoal('learn') }} >
+        {goals.includes('learn') ? <FaCheckCircle className='botonesnow__icon' /> : ''}
+        <img src={leer} alt="leer" height="40" width="60" />Leer </button>
+      <button className='botonesnow' onClick={() => { toggleGoal('health') }} >
+        {goals.includes('health') ? <FaCheckCircle className='botonesnow__icon' /> : ''}
+        <img src={medicina} alt="medicina" height="40" width="60" />Medicina </button>
+
 
       <p></p>
 
       <span className='subtitulos'>Escoge tu nueva mascota</span>
       <p></p>
-      <button className='botonesnow' ><img src={rana} height="40" width="60" /> </button>
-      <button className='botonesnow' ><img src={planta} height="40" width="60" /> </button>
+      <button className='botonesnow' onClick={() => {
+        setPet('frog');
+      }} >
+        {pet === 'frog' ? <FaCheckCircle className='botonesnow__icon' /> : ''}
+        <img src={rana} height="40" width="60" />
+      </button>
+      <button className='botonesnow' onClick={() => {
+        setPet('plant');
+      }} >{pet === 'plant' ? <FaCheckCircle className='botonesnow__icon' /> : ''}
+        <img src={planta} height="40" width="60" />
+      </button>
       <p></p>
 
-      <button className='botones'> Comenzar</button>
+      <Button className='botones' display={"inline-block"}
+        backgroundColor="primary"
+        textColor="textLight"
+        onClick={saveConfiguration}
+        disabled={!pet || goals.length < 2}>Comenzar</Button>
       <Image
         position={"absolute"}
         right="0"
         top="0"
         className="header__image"
+        zIndex={-1}
         src={blob}
       />
 

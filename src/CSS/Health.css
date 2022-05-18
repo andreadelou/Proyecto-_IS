@@ -183,7 +183,6 @@ h2 {
 
 .metas-container__stat-header {
   display: flex;
-  justify-content: space-between;
 }
 
 .metas-container__stat:not(:last-child) {
@@ -194,22 +193,10 @@ h2 {
   margin-bottom: 20px;
 }
 
-.progress {
-  width: 50vw;
-  height: 32px;
-  background: #fef1b9;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-.progress__content {
-  width: 30vw;
-  height: 32px;
-  background: #6c8cbf;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+.bar{
   position: relative;
+}
+.porcentaje{
+  position: absolute;
+  left: 700px;
 }
