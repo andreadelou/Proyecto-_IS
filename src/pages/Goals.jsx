@@ -17,7 +17,7 @@ import {
 } from "../services/goals.service";
 import GoalModal from "../components/GoalModal";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { loginWithEmailAndPassword, auth, logout } from "../firebase.js";
+import { auth } from "../firebase.js";
 
 function Goals() {
   const [goals, setGoals] = useState([]);

@@ -7,6 +7,7 @@ import "../CSS/Home.css";
 import Header from "../components/Header.js";
 import blob from "../assets/blob01.png";
 import { getPoints } from "../services/goals.service.js";
+import {proximatarea} from "../services/goals.service";
 
 // masacotas          :3
 import happyfrog from "../assets/happyfrog.png";
@@ -16,6 +17,8 @@ import happyplant from "../assets/happyplant.png";
 import mehplant from "../assets/mehplant.png";
 import sadplant from "../assets/sadplant.png";
 import { getUserInfo } from "../services/users.service.js";
+
+
 
 function Home() {
   const navigate = useNavigate(); // navigate
@@ -31,11 +34,22 @@ function Home() {
       const data = await getUserInfo(user); // Get the current user information
       setPet(data.pet);
     };
+    const getultimameta = async () => {
+      const meta = await proximatarea();
+      console.log(meta)
+    };
+    
     if (user) {
       getUserData();
+      getultimameta();
     }
     setPoints(getPoints());
   }, [user, loading]);
+
+
+
+
+
   /**
    * Renders a pet
    */
@@ -76,7 +90,7 @@ function Home() {
             <HStack justifyContent={"space-between"} gap={"20"}>
               <VStack alignItems={"self-start"}>
                 <h2 className="next_activity__text">Proxima tarea:</h2>
-                <h2 className="next_activity__text">Meditar</h2>
+                <h2 className="next_activity__text">meta</h2>  {/* AQUI TENE QUE IR LA TAREAAAAAAAA  */}
               </VStack>
               <HStack alignItems={"baseline"} className="next-activity__time">
                 <h2 className="text--bold">3</h2>
