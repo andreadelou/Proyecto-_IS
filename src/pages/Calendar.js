@@ -1,23 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Header from '../components/Header';
 import "../CSS/Calendario.css";
 import blob from "../assets/blob01.png";
 import { Image } from '@chakra-ui/react';
-
-
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import CardActions from "@material-ui/core/CardActions";
-
+import { useAuthState } from "react-firebase-hooks/auth";
+import {
+  fetchAllGoals,
+  fetchAllGoalsAndGroupByCategory
+} from "../services/goals.service";
+import { loginWithEmailAndPassword, auth, logout } from "../firebase.js";
 
 
 
 function Calendario() {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date()); //date que sale abajo del calendario
+  const [user, loading, error] = useAuthState(auth);
+
+  const [goals, setMetas] = useState([]);
+
+  useEffect(() => {
+    if (auth.currentUser) {
+      fetchGoals();
+    }
+  }, [user]);
+  const fetchGoals = async () => {
+    const metas = await fetchAllGoals();
+    console.log(metas)
+    setMetas((metas));
+  };
+
+ 
 
   return (
     <div className='principal'>
@@ -44,11 +61,7 @@ function Calendario() {
       </p>
       </div>
       
-      {/* titulo
-      categoria
-      fecha
-      meta
-       */}
+      
  <div className='tareas'>
  <Card className='cartas'
       >
@@ -63,7 +76,10 @@ function Calendario() {
             }}
             color="textSecondary"
           >
-            Hacer tarea de teoria
+            {goals.map(meta=>{return <>
+              {meta.title}
+            </>})}
+            
           </Typography>
         </CardContent>
       </Card>

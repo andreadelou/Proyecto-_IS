@@ -86,7 +86,6 @@ function App() {
         <Route exact path="/calendar" element={<Calendario />} />
         <Route exact path="/welcome" element={<Welcome />} />
       </Routes>
-      =
     </ChakraProvider>
   );
 }
