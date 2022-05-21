@@ -1,0 +1,12 @@
+.titulote{
+    font-size: 40px;
+}
+
+.botones{
+    outline: #6c8cbf;
+    background-color: #6c8cbf;
+}
+.botones:hover{
+    outline: #90a0b7;
+    background-color: #90a0b7;
+}
