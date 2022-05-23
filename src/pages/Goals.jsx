@@ -161,6 +161,7 @@ function Goals() {
                 <h2>{entries[0]}</h2>
                 {entries[1].map((goal) => (
                   <div key={goal.id}>
+                    <span>{goal.progress}</span>
                     <TodoForm
                       addTodo={addTodo}
                       completed={goal.completed}
