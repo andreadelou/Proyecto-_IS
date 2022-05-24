@@ -65,13 +65,6 @@ export const updateGoalTodo = async (goal, todoIndex, updatedTodo) => {
  * @param {*} goal 
  */
 export const updateGoal = async (goalId, updatedGoal) => {
-    // goals = goals.map((goal) => {
-    //     if (goal.id === goalId) {
-    //         goal = updatedGoal;
-    //     }
-    //     return goal;
-    // });
-    // saveGoalsInLocal();
     const docRef = doc(db, 'goals', goalId);    // Get the document reference from firebase
     await updateDoc(docRef, updatedGoal);   // Update the document
 }
@@ -108,7 +101,8 @@ export const insertGoal = async (title, category, reminder = '') => {
         createdAt: (new Date()).toISOString(),
         todos: [
 
-        ]
+        ],
+        progress: 0
     });
 }
 
