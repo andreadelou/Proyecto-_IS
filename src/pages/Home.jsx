@@ -6,7 +6,7 @@ import { Button, HStack, Image, VStack } from "@chakra-ui/react";
 import "../CSS/Home.css";
 import Header from "../components/Header.js";
 import blob from "../assets/blob01.png";
-import { getPoints } from "../services/goals.service.js";
+import { fetchExpiredTasks, getPoints } from "../services/goals.service.js";
 
 // masacotas          :3
 import happyfrog from "../assets/happyfrog.png";
@@ -24,6 +24,7 @@ function Home() {
   const [user, loading, error] = useAuthState(auth);
   const [points, setPoints] = useState();
   const [pet, setPet] = useState();
+  const [petState, setPetState] = useState(0);
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
@@ -31,8 +32,24 @@ function Home() {
       const data = await getUserInfo(user); // Get the current user information
       setPet(data.pet);
     };
+    const getGoalData = async () => {
+      const data = await fetchExpiredTasks(); // Fetch the expired goals
+      if (data.length > 0) {
+        const d = new Date();
+        const currentDays = d.getTime() / 1000 / (60 * 60 * 24);
+        const goalDays = data[0].reminder.seconds / (60 * 60 * 24);
+        if (Math.floor(currentDays - goalDays) === 1) {
+          setPetState(1);
+        } else if (Math.floor(currentDays - goalDays) === 2) {
+          setPetState(2);
+        } else {
+          setPetState(0);
+        }
+      }
+    };
     if (user) {
       getUserData();
+      getGoalData();
     }
     setPoints(getPoints());
   }, [user, loading]);
@@ -46,7 +63,12 @@ function Home() {
         ? [happyfrog, mehfrog, sadfrog]
         : [happyplant, mehplant, sadplant];
     return (
-      <Image src={petArray[0]} alt="Rana feliz" width="200px" height="200px" />
+      <Image
+        src={petArray[petState]}
+        alt="Rana feliz"
+        width="200px"
+        height="200px"
+      />
     );
   };
   return (
@@ -69,7 +91,7 @@ function Home() {
         <VStack align={"flex-start"} gap={"20px"}>
           <div className="points">
             <h1 className="text--bold">{points}</h1>
-            <p className="points__text">puntos</p>
+            <p className="points__text">puntos </p>
           </div>
 
           <div className="next-activity">
