@@ -1,6 +1,6 @@
 import { v4 as uuid, v4 } from "uuid";
 import { auth, db } from '../firebase'
-import { collection, addDoc, Timestamp, getDocs, updateDoc, doc, query, where } from 'firebase/firestore'
+import { collection, addDoc, Timestamp, getDocs, updateDoc, doc, query, where, limit, orderBy } from 'firebase/firestore'
 
 const LOCAL_STORAGE_KEY = "goals";
 
@@ -122,6 +122,24 @@ export const fetchAllGoals = async () => {
             ...d.data(),
         }
     }) ?? [];
+}
+
+/**
+ * Fetch most recent goals
+ */
+export const fetchExpiredTasks = async () => {
+    const uid = auth.currentUser.uid;
+
+    const goalsCol = collection(db, 'goals');
+    const q = query(goalsCol, where("uid", "==", uid), where('completed', "==", false), orderBy('reminder', 'asc'), limit(1))
+    const goalsSnapshot = await getDocs(q);
+    return goalsSnapshot.docs.map(d => {
+        return {
+            id: d.id,
+            ...d.data(),
+        }
+    }) ?? [];
+
 }
 
 export const fetchAllGoalsAndGroupByCategory = async () => {
