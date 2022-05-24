@@ -23,6 +23,7 @@ function Goals() {
   const [goals, setGoals] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [user, loading, error] = useAuthState(auth);
+  const [goalsProgress, setGoalsProgress] = useState({});
 
   useEffect(() => {
     if (auth.currentUser) {
@@ -35,6 +36,9 @@ function Goals() {
   const fetchGoalsByCategory = async () => {
     const goals = await fetchAllGoalsAndGroupByCategory();
     setGoals(Object.entries(goals));
+    for (const goal of Object.values(goals).flat()) {
+      calcProgress(goal); // Calculate the progress for the specific giak,
+    }
   };
 
   /**
@@ -106,6 +110,10 @@ function Goals() {
     // Calculate the percentage
     const progress = (total * 100) / goal.todos.length;
     goal.progress = progress;
+    setGoalsProgress({
+      ...goalsProgress,
+      [goal.id]: goal.progress,
+    });
     return goal;
   };
 
@@ -161,9 +169,12 @@ function Goals() {
                 <h2>{entries[0]}</h2>
                 {entries[1].map((goal) => (
                   <div key={goal.id}>
-                    <span>{goal.progress}</span>
                     <TodoForm
                       addTodo={addTodo}
+                      percentage={Math.max(
+                        goal.progress,
+                        goalsProgress[goal.id]
+                      )}
                       completed={goal.completed}
                       onToggleCompleted={() => {
                         updateGoalCompleted(goal, goal.id);

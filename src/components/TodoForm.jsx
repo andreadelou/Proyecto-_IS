@@ -41,8 +41,13 @@ function TodoForm({
               {title}
             </h1>
           </div>
-          <div className="todo-form__progress">
-            <progress></progress>
+          <div className="todo-form__progress-bar">
+            <div
+              className="todo-form__progress-bar--progress"
+              style={{
+                width: `${percentage}%`,
+              }}
+            ></div>
           </div>
         </div>
         <HStack marginLeft={10}>
