@@ -16,6 +16,50 @@ import {
 import { loginWithEmailAndPassword, auth, logout } from "../firebase.js";
 
 
+function NuevasMetas(){
+  const [user, loading, error] = useAuthState(auth);
+
+  const [goals, setMetas] = useState([]);
+  const fetchGoals = async () => {
+    const metas = await fetchAllGoals();
+    console.log(metas)
+    setMetas((metas));
+  };
+  useEffect(() => {
+    if (auth.currentUser) {
+      fetchGoals();
+    }
+  }, [user]);
+ 
+  return(
+  <div>
+    <h1>Hello</h1>
+    <Card className='cartas'
+      >
+        <CardContent>
+          
+          <Typography variant="h5" component="h2">
+            Tareas
+          </Typography>
+          <Typography
+            style={{
+              marginBottom: 12,
+            }}
+            color="textSecondary"
+          >
+            {goals.map(meta=>{return <>
+              {meta.title}
+            </>})}
+            
+          </Typography>
+        </CardContent>
+      </Card>
+  </div>
+    
+  )
+}
+
+
 
 function Calendario() {
   const [date, setDate] = useState(new Date()); //date que sale abajo del calendario
@@ -33,6 +77,23 @@ function Calendario() {
     console.log(metas)
     setMetas((metas));
   };
+
+  function listaMeta(){{goals.map(meta=>{
+    var loop =''
+    var i=0;
+    while(i<meta.length){
+      loop+= `<li>${meta[i]}</li>`;
+       i++;
+  //    
+  console.log(loop)
+    }
+    
+    })}
+
+    console.log(listaMeta)
+
+
+}
 
  
 
@@ -63,29 +124,10 @@ function Calendario() {
       
       
  <div className='tareas'>
- <Card className='cartas'
-      >
-        <CardContent>
-          
-          <Typography variant="h5" component="h2">
-            Tareas
-          </Typography>
-          <Typography
-            style={{
-              marginBottom: 12,
-            }}
-            color="textSecondary"
-          >
-            {goals.map(meta=>{return <>
-              {meta.title}
-            </>})}
-            
-          </Typography>
-        </CardContent>
-      </Card>
-
+    <h1>{listaMeta()}</h1>
+    <h1>{NuevasMetas()}</h1>
  </div>
- 
+    
 
     </div>
 
