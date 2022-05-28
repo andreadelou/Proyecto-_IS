@@ -7,7 +7,7 @@
   margin-right: 50px;
 }
 .MuiPaper-root.MuiCard-root.cartas.MuiPaper-elevation1.MuiPaper-rounded{
-  margin-left: 200px;
+  margin-left: 20px;
 }
 .principal{
   padding: 4rem;
@@ -126,4 +126,12 @@ abbr[title] {
   margin-top: 30px;
   width: 15%;
   background-color: #F8F3DC;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap:20px ;
+  float: left;
 }
+
+/* .cartas{
+  display: grid;
+} */

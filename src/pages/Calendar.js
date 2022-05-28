@@ -30,33 +30,39 @@ function NuevasMetas(){
       fetchGoals();
     }
   }, [user]);
- 
-  return(
-  <div>
-    <h1>Hello</h1>
-    <Card className='cartas'
-      >
-        <CardContent>
-          
-          <Typography variant="h5" component="h2">
-            Tareas
-          </Typography>
-          <Typography
-            style={{
-              marginBottom: 12,
-            }}
-            color="textSecondary"
-          >
-            {goals.map(meta=>{return <>
-              {meta.title}
-            </>})}
+
+  
+ const metasCard= goals.map(meta=>(
+  <h1 key={meta}>{meta.title}</h1>
+    // <h1>{meta.title}</h1>
+  ));
+  console.log(metasCard);
+  console.log("sale");
+
+  var i=-1;
+
+  for(i in metasCard){
+    console.log("no me quieren")
+    // console.log("Aqui vamos a ver")
+    i++;
+    return(
+    <div>
+      <Card className='cartas'
+        >
+          <CardContent>
             
-          </Typography>
-        </CardContent>
-      </Card>
-  </div>
-    
+            <Typography variant="h5" component="h2">
+              Tareas
+            </Typography>
+            <Typography>
+            <span>{metasCard}</span>             
+            </Typography>
+          </CardContent>
+        </Card>
+    </div> 
   )
+  
+  }
 }
 
 
@@ -78,22 +84,6 @@ function Calendario() {
     setMetas((metas));
   };
 
-  function listaMeta(){{goals.map(meta=>{
-    var loop =''
-    var i=0;
-    while(i<meta.length){
-      loop+= `<li>${meta[i]}</li>`;
-       i++;
-  //    
-  console.log(loop)
-    }
-    
-    })}
-
-    console.log(listaMeta)
-
-
-}
 
  
 
@@ -124,17 +114,10 @@ function Calendario() {
       
       
  <div className='tareas'>
-    <h1>{listaMeta()}</h1>
     <h1>{NuevasMetas()}</h1>
  </div>
-    
-
     </div>
 
-       
-
-
-    
   );
 }
 
