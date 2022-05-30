@@ -20,6 +20,10 @@ function NuevasMetas(){
   const [user, loading, error] = useAuthState(auth);
 
   const [goals, setMetas] = useState([]);
+  const [categoria, setCategoria] = useState([]);
+  const [fecha, setFecha] = useState([]);
+
+  //fetch goals
   const fetchGoals = async () => {
     const metas = await fetchAllGoals();
     console.log(metas)
@@ -36,31 +40,79 @@ function NuevasMetas(){
   <h1 key={meta}>{meta.title}</h1>
     // <h1>{meta.title}</h1>
   ));
+
+
+
+//fetch categorias
+  const fetchCategoria = async () => {
+    const metas = await fetchAllGoals();
+    console.log(metas)
+    setCategoria((metas));
+  };
+  useEffect(() => {
+    if (auth.currentUser) {
+      fetchCategoria();
+    }
+  }, [user]);
+
+
+  const categoryCard= categoria.map(cate=>(
+    <h1 key={cate}>{cate.category}</h1>
+      // <h1>{meta.title}</h1>
+    ));
+
+//fetch fecha
+const fetchFecha = async () => {
+  const metas = await fetchAllGoals();
+  console.log(metas)
+  setFecha((metas));
+};
+useEffect(() => {
+  if (auth.currentUser) {
+    fetchFecha();
+  }
+}, [user]);
+
+
+const metasFecha= goals.map(fecha=>(
+<h1 key={fecha}>{fecha.title}</h1>
+  // <h1>{meta.title}</h1>
+));
+
+
+
   console.log(metasCard);
   console.log("sale");
 
   var i=-1;
 
+
+  //empieza el for
   for(i in metasCard){
     console.log("no me quieren")
-    // console.log("Aqui vamos a ver")
     i++;
-    return(
-    <div>
-      <Card className='cartas'
-        >
-          <CardContent>
-            
-            <Typography variant="h5" component="h2">
-              Tareas
-            </Typography>
-            <Typography>
-            <span>{metasCard}</span>             
-            </Typography>
-          </CardContent>
-        </Card>
-    </div> 
-  )
+
+      return(
+        <div>
+          <Card className='cartas' backgroundColor="red"
+            >
+              <CardContent>
+                
+                <Typography variant="h5" component="h2">
+                  Tareas
+                </Typography>
+                <Typography>
+                <span>{metasCard}</span>  
+                <span>{metasFecha}</span> 
+                <span>{categoryCard}</span>            
+                </Typography>
+              </CardContent>
+            </Card>
+        </div> 
+      )
+
+    
+    
   
   }
 }
