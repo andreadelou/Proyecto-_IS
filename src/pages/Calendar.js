@@ -38,7 +38,6 @@ function NuevasMetas(){
   
  const metasCard= goals.map(meta=>(
   <h1 key={meta}>{meta.title}</h1>
-    // <h1>{meta.title}</h1>
   ));
 
 
@@ -58,7 +57,6 @@ function NuevasMetas(){
 
   const categoryCard= categoria.map(cate=>(
     <h1 key={cate}>{cate.category}</h1>
-      // <h1>{meta.title}</h1>
     ));
 
 //fetch fecha
@@ -74,47 +72,53 @@ useEffect(() => {
 }, [user]);
 
 
-const metasFecha= goals.map(fecha=>(
-<h1 key={fecha}>{fecha.title}</h1>
-  // <h1>{meta.title}</h1>
-));
+// const metasFecha= fecha.map(fechaR=>(
+//   <h1 key={fechaR}>{fechaR.reminder.toString()}</h1>
+// ));
 
+const metasFecha= fecha.map((fechaR) => {
+  console.log(fechaR)
+});
 
-
-  console.log(metasCard);
+  // console.log(fechaR);
   console.log("sale");
 
   var i=-1;
 
 
   //empieza el for
-  for(i in metasCard){
-    console.log("no me quieren")
-    i++;
-
-      return(
-        <div>
-          <Card className='cartas' backgroundColor="red"
-            >
-              <CardContent>
+  // for(i in metasCard){
+    
+  //   i++;
+  //   console.log(categoryCard[i].props.children)
+  //     return(
+  //       <div>
+  //         <Card className='cartas'
+  //           >
+  //             <CardContent>
                 
-                <Typography variant="h5" component="h2">
-                  Tareas
-                </Typography>
-                <Typography>
-                <span>{metasCard}</span>  
-                <span>{metasFecha}</span> 
-                <span>{categoryCard}</span>            
-                </Typography>
-              </CardContent>
-            </Card>
-        </div> 
-      )
-
-    
-    
+  //               <Typography variant="h5" component="h2">
+  //                 Tareas
+  //               </Typography>
+  //               <Typography>
+  //               <span>{metasCard}</span>  
+  //               {/* <span>{metasFecha}</span>       */}
+  //               <span>{categoryCard}</span>           
+  //               </Typography>
+  //             </CardContent>
+  //           </Card>
+  //       </div> 
+  //     )
   
+  // }
+
+  for (let index = 0; index <= metasCard; index++) {
+    const element = metasCard[index];
+    console.log("dtucuj",element);
+    
   }
+
+
 }
 
 
@@ -132,7 +136,7 @@ function Calendario() {
   }, [user]);
   const fetchGoals = async () => {
     const metas = await fetchAllGoals();
-    console.log(metas)
+    // console.log(metas)
     setMetas((metas));
   };
 
