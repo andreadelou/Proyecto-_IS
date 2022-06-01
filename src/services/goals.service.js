@@ -1,6 +1,7 @@
 import { v4 as uuid, v4 } from "uuid";
 import { auth, db } from '../firebase'
-import { collection, addDoc, Timestamp, getDocs, updateDoc, doc, query, where } from 'firebase/firestore'
+import { collection, addDoc, Timestamp, getDocs, updateDoc, doc, query, where, orderBy,limit } from 'firebase/firestore'
+
 
 const LOCAL_STORAGE_KEY = "goals";
 
@@ -121,6 +122,20 @@ export const fetchAllGoals = async () => {
 
     const goalsCol = collection(db, 'goals');
     const q = query(goalsCol, where("uid", "==", uid))
+    const goalsSnapshot = await getDocs(q);
+    return goalsSnapshot.docs.map(d => {
+        return {
+            id: d.id,
+            ...d.data(),
+        }
+    }) ?? [];
+}
+
+/*La primera tarea */
+export const proximatarea = async () => {
+    const uid = auth.currentUser.uid;
+    const goalsCol = collection(db, 'goals');
+    const q = query(goalsCol, where("uid", "==", uid),where("completed","==",false),orderBy("reminder","desc"),limit(1))
     const goalsSnapshot = await getDocs(q);
     return goalsSnapshot.docs.map(d => {
         return {

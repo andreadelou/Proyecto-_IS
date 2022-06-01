@@ -7,6 +7,7 @@ import "../CSS/Home.css";
 import Header from "../components/Header.js";
 import blob from "../assets/blob01.png";
 import { getPoints } from "../services/goals.service.js";
+import {proximatarea} from "../services/goals.service";
 
 // masacotas          :3
 import happyfrog from "../assets/happyfrog.png";
@@ -17,6 +18,8 @@ import mehplant from "../assets/mehplant.png";
 import sadplant from "../assets/sadplant.png";
 import { getUserInfo } from "../services/users.service.js";
 
+
+
 function Home() {
   const navigate = useNavigate(); // navigate
 
@@ -24,6 +27,8 @@ function Home() {
   const [user, loading, error] = useAuthState(auth);
   const [points, setPoints] = useState();
   const [pet, setPet] = useState();
+  const [title,settitle] = useState();
+  
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
@@ -31,11 +36,31 @@ function Home() {
       const data = await getUserInfo(user); // Get the current user information
       setPet(data.pet);
     };
+    
+    const getultimameta = async () => {
+      const proximameta = await proximatarea();
+      settitle (proximameta[0].title);
+      // const [proximameta, setproximatarea] = useState();
+      // const first = state[0];
+      // const titulo = meta.title
+      console.log(proximameta)
+    };
+    
     if (user) {
       getUserData();
+      getultimameta();
     }
+    
     setPoints(getPoints());
   }, [user, loading]);
+
+  // settitle(proximatarea());
+  // }, [user, title]);
+
+
+
+
+
   /**
    * Renders a pet
    */
@@ -76,7 +101,7 @@ function Home() {
             <HStack justifyContent={"space-between"} gap={"20"}>
               <VStack alignItems={"self-start"}>
                 <h2 className="next_activity__text">Proxima tarea:</h2>
-                <h2 className="next_activity__text">Meditar</h2>
+                <h2 className="next_activity__text">{title}</h2>  {/* AQUI TENE QUE IR LA TAREAAAAAAAA  */}
               </VStack>
               <HStack alignItems={"baseline"} className="next-activity__time">
                 <h2 className="text--bold">3</h2>
