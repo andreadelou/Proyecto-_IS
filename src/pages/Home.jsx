@@ -7,7 +7,7 @@ import "../CSS/Home.css";
 import Header from "../components/Header.js";
 import blob from "../assets/blob01.png";
 import { getPoints } from "../services/goals.service.js";
-import {proximatarea} from "../services/goals.service";
+import { proximatarea } from "../services/goals.service";
 
 // masacotas          :3
 import happyfrog from "../assets/happyfrog.png";
@@ -18,111 +18,116 @@ import mehplant from "../assets/mehplant.png";
 import sadplant from "../assets/sadplant.png";
 import { getUserInfo } from "../services/users.service.js";
 
-
-
 function Home() {
-  const navigate = useNavigate(); // navigate
+    const navigate = useNavigate(); // navigate
 
-  // Auth State
-  const [user, loading, error] = useAuthState(auth);
-  const [points, setPoints] = useState();
-  const [pet, setPet] = useState();
-  const [title,settitle] = useState();
-  
-  useEffect(() => {
-    if (loading) return;
-    if (!user) return navigate("/");
-    const getUserData = async () => {
-      const data = await getUserInfo(user); // Get the current user information
-      setPet(data.pet);
+    // Auth State
+    const [user, loading, error] = useAuthState(auth);
+    const [points, setPoints] = useState();
+    const [pet, setPet] = useState();
+    const [title, settitle] = useState();
+
+    useEffect(() => {
+        if (loading) return;
+        if (!user) return navigate("/");
+        const getUserData = async () => {
+            const data = await getUserInfo(user); // Get the current user information
+            setPet(data.pet);
+        };
+
+        const getultimameta = async () => {
+            const proximameta = await proximatarea();
+            settitle(proximameta[0].title);
+            // const [proximameta, setproximatarea] = useState();
+            // const first = state[0];
+            // const titulo = meta.title
+            console.log(proximameta);
+        };
+
+        if (user) {
+            getUserData();
+            getultimameta();
+        }
+
+        setPoints(getPoints());
+    }, [user, loading]);
+
+    // settitle(proximatarea());
+    // }, [user, title]);
+
+    /**
+     * Renders a pet
+     */
+    const renderPet = () => {
+        if (pet !== "frog" && pet !== "plant") return; // Do not render if pet is not present
+        const petArray =
+            pet === "frog"
+                ? [happyfrog, mehfrog, sadfrog]
+                : [happyplant, mehplant, sadplant];
+        return (
+            <Image
+                src={petArray[0]}
+                alt="Rana feliz"
+                width="200px"
+                height="200px"
+            />
+        );
     };
-    
-    const getultimameta = async () => {
-      const proximameta = await proximatarea();
-      settitle (proximameta[0].title);
-      // const [proximameta, setproximatarea] = useState();
-      // const first = state[0];
-      // const titulo = meta.title
-      console.log(proximameta)
-    };
-    
-    if (user) {
-      getUserData();
-      getultimameta();
-    }
-    
-    setPoints(getPoints());
-  }, [user, loading]);
-
-  // settitle(proximatarea());
-  // }, [user, title]);
-
-
-
-
-
-  /**
-   * Renders a pet
-   */
-  const renderPet = () => {
-    if (pet !== "frog" && pet !== "plant") return; // Do not render if pet is not present
-    const petArray =
-      pet === "frog"
-        ? [happyfrog, mehfrog, sadfrog]
-        : [happyplant, mehplant, sadplant];
     return (
-      <Image src={petArray[0]} alt="Rana feliz" width="200px" height="200px" />
-    );
-  };
-  return (
-    <div className="home">
-      <header className="header">
-        <Header
-          title="Home"
-          subtitle="Revisa tu progreso"
-          Bandera={true}
-        ></Header>
-        <Image
-          position={"absolute"}
-          right="0"
-          top="0"
-          className="header__image"
-          src={blob}
-        />
-      </header>
-      <HStack gap={"40"} alignItems={"flex-start"}>
-        <VStack align={"flex-start"} gap={"20px"}>
-          <div className="points">
-            <h1 className="text--bold">{points}</h1>
-            <p className="points__text">puntos</p>
-          </div>
+        <div className="home">
+            <header className="header">
+                <Header
+                    title="Home"
+                    subtitle="Revisa tu progreso"
+                    Bandera={true}
+                ></Header>
+                <Image
+                    position={"absolute"}
+                    right="0"
+                    top="0"
+                    className="header__image"
+                    src={blob}
+                />
+            </header>
+            <HStack gap={"40"} alignItems={"flex-start"}>
+                <VStack align={"flex-start"} gap={"20px"}>
+                    <div className="points">
+                        <h1 className="text--bold">{points}</h1>
+                        <p className="points__text">puntos</p>
+                    </div>
 
-          <div className="next-activity">
-            <HStack justifyContent={"space-between"} gap={"20"}>
-              <VStack alignItems={"self-start"}>
-                <h2 className="next_activity__text">Proxima tarea:</h2>
-                <h2 className="next_activity__text">{title}</h2>  {/* AQUI TENE QUE IR LA TAREAAAAAAAA  */}
-              </VStack>
-              <HStack alignItems={"baseline"} className="next-activity__time">
-                <h2 className="text--bold">3</h2>
-                <h2 className="text">días</h2>
-              </HStack>
-            </HStack>
-          </div>
-        </VStack>
-        {/* ONDA DE LA MASCOTA  */}
+                    <div className="next-activity">
+                        <HStack justifyContent={"space-between"} gap={"20"}>
+                            <VStack alignItems={"self-start"}>
+                                <h2 className="next_activity__text">
+                                    Proxima tarea:
+                                </h2>
+                                <h2 className="next_activity__text">{title}</h2>{" "}
+                                {/* AQUI TENE QUE IR LA TAREAAAAAAAA  */}
+                            </VStack>
+                            <HStack
+                                alignItems={"baseline"}
+                                className="next-activity__time"
+                            >
+                                <h2 className="text--bold">3</h2>
+                                <h2 className="text">días</h2>
+                            </HStack>
+                        </HStack>
+                    </div>
+                </VStack>
+                {/* ONDA DE LA MASCOTA  */}
 
-        <div className="mascota">
-          {/* <h1>
+                <div className="mascota">
+                    {/* <h1>
             Mascota
           </h1> */}
-          {renderPet()}
+                    {renderPet()}
+                </div>
+                {/* FIN DE ONDA DE LA MASCOTA */}
+            </HStack>
+            {/* <Button onClick={logout}>Logout</Button> */}
         </div>
-        {/* FIN DE ONDA DE LA MASCOTA */}
-      </HStack>
-      {/* <Button onClick={logout}>Logout</Button> */}
-    </div>
-  );
+    );
 }
 
 export default Home;
