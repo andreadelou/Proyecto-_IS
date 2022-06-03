@@ -34,13 +34,15 @@ function Home() {
     };
     const getGoalData = async () => {
       const data = await fetchExpiredTasks(); // Fetch the expired goals
+      console.log(data);
       if (data.length > 0) {
         const d = new Date();
         const currentDays = d.getTime() / 1000 / (60 * 60 * 24);
         const goalDays = data[0].reminder.seconds / (60 * 60 * 24);
+
         if (Math.floor(currentDays - goalDays) === 1) {
           setPetState(1);
-        } else if (Math.floor(currentDays - goalDays) === 2) {
+        } else if (Math.floor(currentDays - goalDays) >= 2) {
           setPetState(2);
         } else {
           setPetState(0);
