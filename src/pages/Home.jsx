@@ -7,6 +7,7 @@ import "../CSS/Home.css";
 import Header from "../components/Header.js";
 import blob from "../assets/blob01.png";
 import { fetchExpiredTasks, getPoints } from "../services/goals.service.js";
+import { proximatarea } from "../services/goals.service";
 
 // masacotas          :3
 import happyfrog from "../assets/happyfrog.png";
@@ -20,7 +21,6 @@ import { getUserInfo } from "../services/users.service.js";
 function Home() {
   const navigate = useNavigate(); // navigate
 
-  // Auth State
   const [user, loading, error] = useAuthState(auth);
   const [points, setPoints] = useState();
   const [pet, setPet] = useState();
@@ -34,7 +34,6 @@ function Home() {
     };
     const getGoalData = async () => {
       const data = await fetchExpiredTasks(); // Fetch the expired goals
-      console.log(data);
       if (data.length > 0) {
         const d = new Date();
         const currentDays = d.getTime() / 1000 / (60 * 60 * 24);
@@ -55,6 +54,10 @@ function Home() {
     }
     setPoints(getPoints());
   }, [user, loading]);
+
+  // settitle(proximatarea());
+  // }, [user, title]);
+
   /**
    * Renders a pet
    */
@@ -65,12 +68,7 @@ function Home() {
         ? [happyfrog, mehfrog, sadfrog]
         : [happyplant, mehplant, sadplant];
     return (
-      <Image
-        src={petArray[petState]}
-        alt="Rana feliz"
-        width="200px"
-        height="200px"
-      />
+      <Image src={petArray[0]} alt="Rana feliz" width="200px" height="200px" />
     );
   };
   return (
@@ -93,14 +91,15 @@ function Home() {
         <VStack align={"flex-start"} gap={"20px"}>
           <div className="points">
             <h1 className="text--bold">{points}</h1>
-            <p className="points__text">puntos </p>
+            <p className="points__text">puntos</p>
           </div>
 
           <div className="next-activity">
             <HStack justifyContent={"space-between"} gap={"20"}>
               <VStack alignItems={"self-start"}>
                 <h2 className="next_activity__text">Proxima tarea:</h2>
-                <h2 className="next_activity__text">Meditar</h2>
+                <h2 className="next_activity__text">{title}</h2>{" "}
+                {/* AQUI TENE QUE IR LA TAREAAAAAAAA  */}
               </VStack>
               <HStack alignItems={"baseline"} className="next-activity__time">
                 <h2 className="text--bold">3</h2>
