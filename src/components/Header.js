@@ -31,7 +31,7 @@ function Header({ title, subtitle, Bandera=false }) {
                     <ul className='nav_links'>
                         <li><a href="home">Home</a></li>
                         <li><a href="goals">Metas</a></li>
-                        <li><a href="health">Bienestar</a></li>
+                        <li><a href="health">Salud</a></li>
                         <li><a href="calendar">Calendario</a></li>
                         <li><a onClick={LogOut}>Log Out</a></li>
                     </ul>
