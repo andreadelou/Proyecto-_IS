@@ -146,14 +146,14 @@ export const fetchExpiredTasks = async () => {
             ...d.data(),
         }
     }) ?? [];
-
 }
+
 
 /*La primera tarea */
 export const proximatarea = async () => {
     const uid = auth.currentUser.uid;
     const goalsCol = collection(db, 'goals');
-    const q = query(goalsCol, where("uid", "==", uid), where("completed", "==", false), orderBy("reminder", "desc"), limit(1))
+    const q = query(goalsCol, where("uid", "==", uid), where("completed", "==", false), orderBy("reminder", "asc"), limit(1))
     const goalsSnapshot = await getDocs(q);
     return goalsSnapshot.docs.map(d => {
         return {

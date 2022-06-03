@@ -20,9 +20,8 @@ import { getUserInfo } from "../services/users.service.js";
 
 function Home() {
   const navigate = useNavigate(); // navigate
-
+  const [title, setTitle] = useState();
   const [user, loading, error] = useAuthState(auth);
-  const [title, settitle] = useState();
   const [points, setPoints] = useState();
   const [pet, setPet] = useState();
   const [petState, setPetState] = useState(0);
@@ -49,15 +48,20 @@ function Home() {
         }
       }
     };
+    const getultimameta = async () => {
+      const proximameta = await proximatarea();
+      setTitle(proximameta[0].title);
+      // const [proximameta, setproximatarea] = useState();
+      // const first = state[0];
+      // const titulo = meta.title
+    };
     if (user) {
       getUserData();
       getGoalData();
+      getultimameta();
     }
     setPoints(getPoints());
   }, [user, loading]);
-
-  // settitle(proximatarea());
-  // }, [user, title]);
 
   /**
    * Renders a pet
