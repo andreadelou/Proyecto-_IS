@@ -46,7 +46,7 @@ function Health() {
     totalM = 1;
   }
   let C_Meditar = (contM * 100) / totalM;
-  let porcentajeM = C_Meditar + "%";
+  let porcentajeM = C_ + "%";
 
   //Categoria Salud Mental
   let totalSM = getAllGoals().filter(element => element.category == "mental-health").length;
