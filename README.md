@@ -5,11 +5,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Need to install
 To use the calendar section and cards to see reminders
 ### `npm install react-calendar` `npm install @material-ui/core`
+This will help you visualize the calendar
 
 To visualize the progress bar aimation in health
 ### `npm install prop-types` `npm install styled-components`
 
-This will help you visualize the calendar
+To visualize the pie graph
+### `npm install chart.js react-chartjs-2`
 
 
 ## Available Scripts

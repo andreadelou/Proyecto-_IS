@@ -16,6 +16,8 @@ import blob2 from "../assets/blob02.png";
 
 import ProgressBar from "../components/Progress";
 
+import LineChart from './LineChart'
+
 function Health() {
 
   //jala el total de metas y cuantas han sido completadas para sacar el porcentaje
@@ -64,6 +66,7 @@ function Health() {
 
       <header className="header">
         <Header title="Bienestar" subtitle="Estadísticas de tus metas" Bandera={true}></Header>
+        <LineChart></LineChart>
         <img className="uno" src={blob2} alt="uno" />
         <img className="dos" src={blob2} alt="dos" />
       </header>
