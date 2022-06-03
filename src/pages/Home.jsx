@@ -22,6 +22,7 @@ function Home() {
   const navigate = useNavigate(); // navigate
 
   const [user, loading, error] = useAuthState(auth);
+  const [title, settitle] = useState();
   const [points, setPoints] = useState();
   const [pet, setPet] = useState();
   const [petState, setPetState] = useState(0);
@@ -68,7 +69,12 @@ function Home() {
         ? [happyfrog, mehfrog, sadfrog]
         : [happyplant, mehplant, sadplant];
     return (
-      <Image src={petArray[0]} alt="Rana feliz" width="200px" height="200px" />
+      <Image
+        src={petArray[petState]}
+        alt="Rana feliz"
+        width="200px"
+        height="200px"
+      />
     );
   };
   return (
