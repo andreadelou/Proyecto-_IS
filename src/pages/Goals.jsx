@@ -138,6 +138,27 @@ function Goals() {
     addPoints(10);
   };
 
+
+  const renderSwitch = (param) => {
+    if(param == 'exercise'){
+      return <div className="colorR"></div>;
+    }
+    else if(param == 'learn')
+    {
+      return <div className="colorA"></div>;
+    }
+    else if(param == 'health')
+    {
+      return <div className="colorC"></div>;
+    }
+    else if(param == 'mental-health')
+    {
+      return <div className="colorM"></div>;
+    }
+
+  };
+
+
   return (
     <>
       <div className="goals">
@@ -166,7 +187,11 @@ function Goals() {
           <div className="goals__goal">
             {goals.map((entries) => (
               <div key={entries[0]}>
+
                 <h2>{entries[0]}</h2>
+                <div>{renderSwitch(entries[0])}</div>
+                
+
                 {entries[1].map((goal) => (
                   <div key={goal.id}>
                     <TodoForm
