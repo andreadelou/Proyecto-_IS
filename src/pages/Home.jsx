@@ -34,7 +34,6 @@ function Home() {
     };
     const getGoalData = async () => {
       const data = await fetchExpiredTasks(); // Fetch the expired goals
-      console.log(data);
       if (data.length > 0) {
         const d = new Date();
         const currentDays = d.getTime() / 1000 / (60 * 60 * 24);
