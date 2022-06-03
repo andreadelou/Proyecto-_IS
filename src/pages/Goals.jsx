@@ -23,6 +23,7 @@ function Goals() {
   const [goals, setGoals] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [user, loading, error] = useAuthState(auth);
+  const [goalsProgress, setGoalsProgress] = useState({});
 
   useEffect(() => {
     if (auth.currentUser) {
@@ -35,6 +36,9 @@ function Goals() {
   const fetchGoalsByCategory = async () => {
     const goals = await fetchAllGoalsAndGroupByCategory();
     setGoals(Object.entries(goals));
+    for (const goal of Object.values(goals).flat()) {
+      calcProgress(goal); // Calculate the progress for the specific giak,
+    }
   };
 
   /**
@@ -52,11 +56,11 @@ function Goals() {
           });
           updatedGoal = goal;
         }
+        calcProgress(goal); // Update the progress of the goal
         return goal;
       });
       return entries;
     });
-    console.log(newGoals);
     setGoals(newGoals);
     updateGoal(goalId, updatedGoal);
   };
@@ -86,7 +90,31 @@ function Goals() {
    */
   const updateTodoCompleted = (goal, index, todo) => {
     todo.completed = !todo.completed;
+    // Calculate total of completed goals
+    calcProgress(goal);
     updateGoalTodo(goal, index, todo);
+  };
+
+  /**
+   * Calculates the progress of a goal
+   * @param {*} goal
+   * @returns
+   */
+  const calcProgress = (goal) => {
+    const total = goal.todos.reduce((prev, curr) => {
+      if (curr.completed) {
+        return (prev = prev + 1);
+      }
+      return prev;
+    }, 0);
+    // Calculate the percentage
+    const progress = (total * 100) / goal.todos.length;
+    goal.progress = progress;
+    setGoalsProgress({
+      ...goalsProgress,
+      [goal.id]: goal.progress,
+    });
+    return goal;
   };
 
   /**
@@ -109,6 +137,27 @@ function Goals() {
     await updateGoal(goalId, goal); // Updates the goal
     addPoints(10);
   };
+
+
+  const renderSwitch = (param) => {
+    if(param == 'exercise'){
+      return <div className="colorR"></div>;
+    }
+    else if(param == 'learn')
+    {
+      return <div className="colorA"></div>;
+    }
+    else if(param == 'health')
+    {
+      return <div className="colorC"></div>;
+    }
+    else if(param == 'mental-health')
+    {
+      return <div className="colorM"></div>;
+    }
+
+  };
+
 
   return (
     <>
@@ -138,11 +187,19 @@ function Goals() {
           <div className="goals__goal">
             {goals.map((entries) => (
               <div key={entries[0]}>
+
                 <h2>{entries[0]}</h2>
+                <div>{renderSwitch(entries[0])}</div>
+                
+
                 {entries[1].map((goal) => (
                   <div key={goal.id}>
                     <TodoForm
                       addTodo={addTodo}
+                      percentage={Math.max(
+                        goal.progress,
+                        goalsProgress[goal.id]
+                      )}
                       completed={goal.completed}
                       onToggleCompleted={() => {
                         updateGoalCompleted(goal, goal.id);
