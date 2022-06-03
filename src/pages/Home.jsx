@@ -6,7 +6,7 @@ import { Button, HStack, Image, VStack } from "@chakra-ui/react";
 import "../CSS/Home.css";
 import Header from "../components/Header.js";
 import blob from "../assets/blob01.png";
-import { getPoints } from "../services/goals.service.js";
+import { fetchExpiredTasks, getPoints } from "../services/goals.service.js";
 import { proximatarea } from "../services/goals.service";
 
 // masacotas          :3
