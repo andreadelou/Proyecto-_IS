@@ -81,9 +81,9 @@ function NuevasMetas() {
                             Tareas
                         </Typography>
                         <Typography>
-                            <h1>
-                                {metasFecha}
+                            <h1 className="infoytiempo">
                                 {metasCard}
+                                {metasFecha}
                             </h1>
                         </Typography>
                     </CardContent>
