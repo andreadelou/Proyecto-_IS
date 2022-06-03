@@ -81,15 +81,12 @@ export const sendResetPasswordEmail = async (email) => {
 /**
  * Exit the application
  */
-export const logout = async () => {
-
+ export const logout = async () => {
     try {
         await signOut(auth);
         return true;
     } catch (error) {
         return false
     }
-
 }
-
 
