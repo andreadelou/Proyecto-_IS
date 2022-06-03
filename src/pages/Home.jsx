@@ -21,27 +21,16 @@ import { getUserInfo } from "../services/users.service.js";
 function Home() {
   const navigate = useNavigate(); // navigate
 
-  // Auth State
   const [user, loading, error] = useAuthState(auth);
   const [points, setPoints] = useState();
   const [pet, setPet] = useState();
-  const [title, settitle] = useState();
-
+  const [petState, setPetState] = useState(0);
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
     const getUserData = async () => {
       const data = await getUserInfo(user); // Get the current user information
       setPet(data.pet);
-    };
-
-    const getultimameta = async () => {
-      const proximameta = await proximatarea();
-      settitle(proximameta[0].title);
-      // const [proximameta, setproximatarea] = useState();
-      // const first = state[0];
-      // const titulo = meta.title
-      console.log(proximameta);
     };
     const getGoalData = async () => {
       const data = await fetchExpiredTasks(); // Fetch the expired goals
@@ -60,12 +49,10 @@ function Home() {
         }
       }
     };
-
     if (user) {
       getUserData();
-      getultimameta();
+      getGoalData();
     }
-
     setPoints(getPoints());
   }, [user, loading]);
 
