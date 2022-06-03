@@ -1,0 +1,43 @@
+.points {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border: 3px solid #6c8cbf;
+  border-radius: 100%;
+  padding: 20px;
+}
+
+.text--bold {
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.text {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.next-activity {
+  padding: 24px;
+  border-radius: 14px;
+  background: rgb(254, 241, 185);
+  background: linear-gradient(
+    167deg,
+    rgba(254, 241, 185, 1) 22%,
+    rgba(108, 140, 191, 1) 100%
+  );
+}
+
+.next-activity__time {
+  background: rgba(188, 223, 255, 0.5);
+  padding: 10px 20px;
+  border-radius: 14px;
+}
+
+.mascota{
+  float: right;
+}

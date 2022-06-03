@@ -1,0 +1,17 @@
+.edit-button {
+  width: 40px;
+  height: 40px;
+  background-color: #acc7f3;
+  border-radius: 100%;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.edit-button:hover {
+  background-color: #6a86b4;
+  cursor: pointer;
+  transform: translateY(-2px);
+}
+
+.edit-button:active {
+  transform: translateY(0px);
+}

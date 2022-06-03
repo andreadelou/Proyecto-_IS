@@ -1,0 +1,24 @@
+nav{
+    order:1;
+    box-sizing: border-box;
+    background-color: #FEF1B9 ;
+    z-index: 10;
+    padding: 10px 0px;
+    border-radius: 15px ;
+}
+
+li,a{
+    font-family: "Source Sans Pro" ;
+    font-weight: 600;
+    font-size: 24px;
+    color: black;
+}
+
+.nav_links{
+    list-style: none;
+}
+
+.nav_links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
