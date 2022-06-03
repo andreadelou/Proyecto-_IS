@@ -153,6 +153,16 @@ function Login() {
               Entrar
             </Button>
 
+            <Button
+              display={"inline-block"}
+              backgroundColor="primary"
+              textColor="textLight"
+              disabled={loading || !email || !password}
+              onClick={navigate("/register")}
+            >
+              Registrar
+            </Button>
+
             {
               loading ? <Spinner size='md' color={"textDark"} /> : ''
             }
