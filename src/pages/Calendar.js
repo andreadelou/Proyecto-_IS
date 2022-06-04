@@ -31,7 +31,7 @@ function NuevasMetas() {
         }
     }, [user]);
 
-    const metasCard = goals.map((meta, index) => <h1 key={index}>{meta.title}</h1>);
+    const metasCard = goals.map((meta) => <h1 key={meta}>{meta.title}</h1>);
 
     //fetch categorias
     const fetchCategoria = async () => {
@@ -52,6 +52,7 @@ function NuevasMetas() {
     //fetch fecha
     const fetchFecha = async () => {
         const metas = await fetchAllGoals();
+        console.log(metas);
         setFecha(
             metas.map((meta) =>
                 new Date(meta.reminder.seconds * 1000).toLocaleDateString()
@@ -96,10 +97,10 @@ function NuevasMetas() {
                             Tareas
                         </Typography>
                         <Typography>
-                            <span className="infoytiempo">
+                            <h1 className="infoytiempo">
                                 {metasCard}
                                 {metasFecha}
-                            </span>
+                            </h1>
                         </Typography>
                     </CardContent>
                 </Card>
