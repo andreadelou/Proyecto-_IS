@@ -124,8 +124,8 @@ abbr[title] {
 
 .MuiPaper-root.MuiCard-root.cartas.MuiPaper-elevation1.MuiPaper-rounded {
     margin-top: 30px;
-    width: 50%;
-    /* background-color: #7a6919; */
+    width: 35%;
+    background-color: #f8f3dc;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
