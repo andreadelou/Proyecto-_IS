@@ -18,6 +18,7 @@ import {
 import GoalModal from "../components/GoalModal";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase.js";
+import { addPointsToUser } from "../services/users.service";
 
 function Goals() {
   const [goals, setGoals] = useState([]);
@@ -28,14 +29,24 @@ function Goals() {
   useEffect(() => {
     if (auth.currentUser) {
       fetchGoals();
+      fetchAll();
     }
   }, [user]);
   const fetchGoals = async () => {
     await fetchGoalsByCategory();
   };
 
+
+  const fetchAll = async () => {
+    const goals = await fetchAllGoals();
+    for (const goal of goals) {
+      console.log(goal.reminder.seconds);
+    }
+  };
+
   const fetchGoalsByCategory = async () => {
     const goals = await fetchAllGoalsAndGroupByCategory();
+
     setGoals(Object.entries(goals));
     for (const goal of Object.values(goals).flat()) {
       calcProgress(goal); // Calculate the progress for the specific giak,
@@ -136,7 +147,9 @@ function Goals() {
   const updateGoalCompleted = async (goal, goalId) => {
     goal.completed = !goal.completed;
     await updateGoal(goalId, goal); // Updates the goal
-    addPoints(10);
+    if (goal.completed) {
+      addPointsToUser(10, user);
+    }
   };
 
   const renderSwitch = (param) => {
