@@ -18,7 +18,7 @@ import { auth } from "../firebase.js";
 
 import { useEffect, useState } from "react";
 
-import {Pie} from "../components/PiCharts";
+import PieChart from "../components/PiCharts";
 
 function Health() {
 
@@ -89,6 +89,7 @@ function Health() {
         </div>
       </div>
       {console.log()}
+      <PieChart></PieChart>
     </div>
 
 

@@ -3,10 +3,6 @@ import { useEffect, useState } from 'react';
 import {Chart as ChartJs, Tooltip, Title, ArcElement, Legend} from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
-import {
-  fetchAllGoals,
-  fetchAllGoalsAndGroupByCategory
-} from "../services/goals.service";
 
 ChartJs.register(
   Tooltip,Title,ArcElement,Legend
@@ -14,26 +10,31 @@ ChartJs.register(
 
 
 
-function PieChart() {
+function PieCharts() {
+    const [lista, setLista] = useState([])
+
+
 
   const data = {
     datasets: [
       {
-        data: [10,20,30],
+        data: [10,20,30,20],
         
         backgroundColor: [
-          'red',
-          'yellow',
-          'blue'
+          '#ffabab',
+          '#fff78a',
+          '#ace7ff',
+          '#a79aff',
         ]
       }
       
     ],
 
     labels:[
-      'Red',
-      'Yellow',
-      'Blue'
+     'Exercise',
+      'Learn',
+      'Health',
+      'Mental-Health'
     ]
   };
 
@@ -41,10 +42,10 @@ function PieChart() {
   return (
     <div className="App" style={{width:'30%', height:'30%'}}>
       <Pie data = {data}/>
-      {console.log(fetchAllGoalsAndGroupByCategory())}
+      
     </div>
       
   );
 }
 
-export default PieChart;
+export default PieCharts;
