@@ -10,13 +10,15 @@ import GoalModal from "../components/GoalModal";
 //importando imagen
 import blob2 from "../assets/blob02.png";
 
-import ProgressBar from "../components/ProgressBar.jsx";
+//import ProgressBar from "../components/ProgressBar.jsx";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase.js";
 
 
 import { useEffect, useState } from "react";
+
+import {Pie} from "../components/PiCharts";
 
 function Health() {
 
@@ -58,14 +60,14 @@ function Health() {
             <h3 className="">Ejercicio</h3>
             <p className="porcentaje">""</p>
           </div>
-          <ProgressBar className="bar" value={30} max={100} />
+
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Meditar</h3>
             <p className="porcentaje">""</p>
           </div>
-          <ProgressBar className="bar" value={30} max={100} />
+
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
@@ -73,14 +75,14 @@ function Health() {
             <p className="porcentaje">""
             </p>
           </div>
-          <ProgressBar className="bar" value={30} max={100} />
+
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Salud Mental</h3>
             <p className="porcentaje">""</p>
           </div>
-          <ProgressBar className="bar" value={30} max={100} />
+
         </div>
         <div className="progress">
           <div className="progress__content"></div>
