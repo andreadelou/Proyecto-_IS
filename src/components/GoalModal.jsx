@@ -49,7 +49,7 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
             >
               <option value="health">Salud</option>
               <option value="exercise">Ejercicio</option>
-              <option value="learn">Meditar</option>
+              <option value="learn">Aprendizaje</option>
               <option value="mental-health">Salud Mental</option>
             </Select>
           </FormControl>
