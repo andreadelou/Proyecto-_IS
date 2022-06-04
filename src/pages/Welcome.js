@@ -65,7 +65,7 @@ function Welcome() {
         case 'health':
           title = 'Tomar mis medicinas';
           break;
-        case 'mental-health':
+        case 'mentalhealth':
           title = 'Meditar'
           break;
         case 'exercise':
@@ -96,8 +96,8 @@ function Welcome() {
       <button className='botonesnow' onClick={() => { toggleGoal('exercise') }}>
         {goals.includes('exercise') ? <FaCheckCircle className='botonesnow__icon' /> : ''}
         <img src={trotar} height="40" width="60" alt='ejercicio' />Ejercicio </button>
-      <button className='botonesnow' onClick={() => { toggleGoal('mental-health') }} >
-        {goals.includes('mental-health') ? <FaCheckCircle className='botonesnow__icon' /> : ''}
+      <button className='botonesnow' onClick={() => { toggleGoal('mentalhealth') }} >
+        {goals.includes('mentalhealth') ? <FaCheckCircle className='botonesnow__icon' /> : ''}
         <img src={meditar} alt="meditar" height="40" width="60" />Meditar </button>
       <p></p>
       <button className='botonesnow' onClick={() => { toggleGoal('learn') }} >
