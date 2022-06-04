@@ -2,8 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import "../CSS/Health.css";
 /*import {
-  fetchAllGoals,
-  fetchAllGoalsAndGroupByCategory,
+  fetchLengthCategory
 } from "../services/goals.service";*/
 import GoalModal from "../components/GoalModal";
 
@@ -19,6 +18,7 @@ import { auth } from "../firebase.js";
 import { useEffect, useState } from "react";
 
 import PieChart from "../components/PiCharts";
+import { fetchAllGoalsAndGroupByCategory } from "../services/goals.service";
 
 function Health() {
 

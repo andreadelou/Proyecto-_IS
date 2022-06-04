@@ -4,9 +4,15 @@ import {Chart as ChartJs, Tooltip, Title, ArcElement, Legend} from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
 
+import { auth, db } from '../firebase'
+import {getFirestore, collection, addDoc, getDocs, doc, deleteDoc, getDoc, setDoc} from 'firebase/firestore';
+
+
 ChartJs.register(
   Tooltip,Title,ArcElement,Legend
 );
+
+
 
 
 
