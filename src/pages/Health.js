@@ -16,7 +16,7 @@ import blob2 from "../assets/blob02.png";
 
 import ProgressBar from "../components/Progress";
 
-import LineChart from './LineChart'
+import PieChart from './PieChart';
 
 function Health() {
 
@@ -66,7 +66,7 @@ function Health() {
 
       <header className="header">
         <Header title="Bienestar" subtitle="Estadísticas de tus metas" Bandera={true}></Header>
-        <LineChart></LineChart>
+        
         <img className="uno" src={blob2} alt="uno" />
         <img className="dos" src={blob2} alt="dos" />
       </header>
@@ -105,7 +105,10 @@ function Health() {
           <div className="progress__content"></div>
         </div>
       </div>
+      <PieChart></PieChart>
     </div>
+
+
 
 
   );
