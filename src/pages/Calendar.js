@@ -53,7 +53,11 @@ function NuevasMetas() {
     const fetchFecha = async () => {
         const metas = await fetchAllGoals();
         console.log(metas);
-        setFecha(metas);
+        setFecha(
+            metas.map((meta) =>
+                new Date(meta.reminder.seconds * 1000).toLocaleDateString()
+            )
+        );
     };
     useEffect(() => {
         if (auth.currentUser) {
@@ -61,11 +65,23 @@ function NuevasMetas() {
         }
     }, [user]);
 
-    const metasFecha = fecha.map((fechar) => (
-        <h1 key={fechar}>{fechar.reminder.seconds}</h1>
-    ));
+    const metasFecha = fecha.map((fechar) => <h1 key={fechar}>{fechar}</h1>);
 
-    console.log("sale");
+    const fechafinal = [];
+
+    var a = 0;
+
+    // for (a in metasFecha) {
+    //     let date = new Intl.DateTimeFormat("en-US", {
+    //         year: "numeric",
+    //         month: "2-digit",
+    //         day: "2-digit",
+    //     }).format(metasFecha[a]);
+    //     a++;
+    //     fechafinal.push(date);
+    // }
+
+    console.log(metasFecha[0]);
 
     var i = -1;
 
