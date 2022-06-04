@@ -31,7 +31,7 @@ function NuevasMetas() {
         }
     }, [user]);
 
-    const metasCard = goals.map((meta) => <h1 key={meta}>{meta.title}</h1>);
+    const metasCard = goals.map((meta, index) => <h1 key={index}>{meta.title}</h1>);
 
     //fetch categorias
     const fetchCategoria = async () => {
@@ -52,8 +52,7 @@ function NuevasMetas() {
     //fetch fecha
     const fetchFecha = async () => {
         const metas = await fetchAllGoals();
-        console.log(metas);
-        setFecha(metas);
+        setFecha(metas.map(meta => (new Date(meta.reminder.seconds * 1000).toLocaleDateString())));
     };
     useEffect(() => {
         if (auth.currentUser) {
@@ -61,8 +60,8 @@ function NuevasMetas() {
         }
     }, [user]);
 
-    const metasFecha = fecha.map((fechar) => (
-        <h1 key={fechar}>{fechar.reminder.seconds}</h1>
+    const metasFecha = fecha.map((fechar, index) => (
+        <h1 key={index}>{fechar}</h1>
     ));
 
     console.log("sale");
@@ -81,10 +80,10 @@ function NuevasMetas() {
                             Tareas
                         </Typography>
                         <Typography>
-                            <h1 className="infoytiempo">
+                            <span className="infoytiempo">
                                 {metasCard}
                                 {metasFecha}
-                            </h1>
+                            </span>
                         </Typography>
                     </CardContent>
                 </Card>

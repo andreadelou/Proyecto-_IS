@@ -30,6 +30,7 @@ function Home() {
     if (!user) return navigate("/");
     const getUserData = async () => {
       const data = await getUserInfo(user); // Get the current user information
+      setPoints(data.points ?? 0);
       setPet(data.pet);
     };
     const getGoalData = async () => {
@@ -60,7 +61,6 @@ function Home() {
       getGoalData();
       getultimameta();
     }
-    setPoints(getPoints());
   }, [user, loading]);
 
   /**

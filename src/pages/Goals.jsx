@@ -28,13 +28,23 @@ function Goals() {
   useEffect(() => {
     if (auth.currentUser) {
       fetchGoals();
+      fetchAll();
     }
   }, [user]);
   const fetchGoals = async () => {
     await fetchGoalsByCategory();
   };
+
+  const fetchAll = async () => {
+    const goals = await fetchAllGoals();
+    for (const goal of goals) {
+      console.log(goal.reminder.seconds);
+    }
+  };
+
   const fetchGoalsByCategory = async () => {
     const goals = await fetchAllGoalsAndGroupByCategory();
+
     setGoals(Object.entries(goals));
     for (const goal of Object.values(goals).flat()) {
       calcProgress(goal); // Calculate the progress for the specific giak,
