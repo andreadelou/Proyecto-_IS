@@ -157,8 +157,10 @@ function Login() {
               display={"inline-block"}
               backgroundColor="primary"
               textColor="textLight"
-              disabled={loading || !email || !password}
-              onClick={navigate("/register")}
+              onClick={() => {
+                navigate("/register")
+
+              }}
             >
               Registrar
             </Button>
