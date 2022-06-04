@@ -1,6 +1,6 @@
 import { v4 as uuid, v4 } from "uuid";
 import { auth, db } from '../firebase'
-import { collection, addDoc, Timestamp, getDocs, updateDoc, doc, query, where, orderBy,limit } from 'firebase/firestore'
+import { collection, addDoc, Timestamp, getDocs, updateDoc, doc, query, where, limit, orderBy } from 'firebase/firestore'
 
 
 const LOCAL_STORAGE_KEY = "goals";
@@ -66,13 +66,6 @@ export const updateGoalTodo = async (goal, todoIndex, updatedTodo) => {
  * @param {*} goal 
  */
 export const updateGoal = async (goalId, updatedGoal) => {
-    // goals = goals.map((goal) => {
-    //     if (goal.id === goalId) {
-    //         goal = updatedGoal;
-    //     }
-    //     return goal;
-    // });
-    // saveGoalsInLocal();
     const docRef = doc(db, 'goals', goalId);    // Get the document reference from firebase
     await updateDoc(docRef, updatedGoal);   // Update the document
 }
@@ -109,7 +102,8 @@ export const insertGoal = async (title, category, reminder = '') => {
         createdAt: (new Date()).toISOString(),
         todos: [
 
-        ]
+        ],
+        progress: 0
     });
 }
 
@@ -131,11 +125,27 @@ export const fetchAllGoals = async () => {
     }) ?? [];
 }
 
+/**
+ * Fetch most recent goals
+ */
+export const fetchExpiredTasks = async () => {
+    const uid = auth.currentUser.uid;
+
+    const goalsCol = collection(db, 'goals');
+    const q = query(goalsCol, where("uid", "==", uid), where('completed', "==", false), orderBy('reminder', 'asc'), limit(1))
+    const goalsSnapshot = await getDocs(q);
+    return goalsSnapshot.docs.map(d => {
+        return {
+            id: d.id,
+            ...d.data(),
+        }
+    }) ?? [];
+}
 /*La primera tarea */
 export const proximatarea = async () => {
     const uid = auth.currentUser.uid;
     const goalsCol = collection(db, 'goals');
-    const q = query(goalsCol, where("uid", "==", uid),where("completed","==",false),orderBy("reminder","desc"),limit(1))
+    const q = query(goalsCol, where("uid", "==", uid), where("completed", "==", false), orderBy("reminder", "asc"), limit(1))
     const goalsSnapshot = await getDocs(q);
     return goalsSnapshot.docs.map(d => {
         return {

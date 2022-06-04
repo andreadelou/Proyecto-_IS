@@ -3,3 +3,31 @@
   /* background-color: orange; */
   height: 1000px;
 }
+
+.colorR{
+  width: 60px; 
+  height: 9px; 
+  background: #FFABAB;
+  border-radius: 5vh;
+}
+
+.colorA{
+  width: 60px; 
+  height: 9px; 
+  background: #fff78a;
+  border-radius: 5vh;
+}
+
+.colorC{
+  width: 60px; 
+  height: 9px; 
+  background: #ACE7FF;
+  border-radius: 5vh;
+}
+
+.colorM{
+  width: 97px; 
+  height: 9px; 
+  background: #A79AFF;
+  border-radius: 5vh;
+}
