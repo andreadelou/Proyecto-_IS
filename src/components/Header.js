@@ -33,7 +33,7 @@ function Header({ title, subtitle, Bandera=false }) {
                         <li><a href="goals">Metas</a></li>
                         <li><a href="health">Bienestar</a></li>
                         <li><a href="calendar">Calendario</a></li>
-                        <li><a onClick={LogOut}>Log Out</a></li>
+                        <li><a onClick={navigate("/register")}>Log Out</a></li>
                     </ul>
                 </nav> 
                 : ''
