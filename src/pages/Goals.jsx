@@ -18,6 +18,7 @@ import {
 import GoalModal from "../components/GoalModal";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase.js";
+import { addPointsToUser } from "../services/users.service";
 
 function Goals() {
   const [goals, setGoals] = useState([]);
@@ -145,7 +146,9 @@ function Goals() {
   const updateGoalCompleted = async (goal, goalId) => {
     goal.completed = !goal.completed;
     await updateGoal(goalId, goal); // Updates the goal
-    addPoints(10);
+    if (goal.completed) {
+      addPointsToUser(10, user);
+    }
   };
 
   const renderSwitch = (param) => {
