@@ -69,8 +69,11 @@ function App() {
         navigate('/')
       }
     }
+
     if (user) {
       getUserData();
+    } else {
+      navigate('/');
     }
   }, [user]);
 
