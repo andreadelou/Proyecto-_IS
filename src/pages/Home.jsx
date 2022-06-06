@@ -116,7 +116,7 @@ function Home() {
                 </VStack>
                 <HStack alignItems={"baseline"} className="next-activity__time">
                   {reminder < 0 ? <h2 className="text">hace</h2> : ""}
-                  <h2 className="text--bold">{Math.abs(reminder ?? 0)}</h2>
+                  <h2 className="text--bold">{Math.abs(reminder | 0)}</h2>
                   <h2 className="text">días</h2>
                 </HStack>
               </HStack>

@@ -3,9 +3,6 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-  "functions": {
-    "source": "functions"
-  },
   "emulators": {
     "functions": {
       "port": 5001
@@ -16,5 +13,13 @@
     "ui": {
       "enabled": true
     }
+  },
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
   }
 }

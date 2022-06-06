@@ -1,5 +1,6 @@
 import { Heading, VStack } from '@chakra-ui/react'
 import React from 'react'
+import { Link } from 'react-router-dom';
 import "../CSS/navbar.css";
 import { logout } from '../firebase';
 
@@ -29,10 +30,10 @@ function Header({ title, subtitle, Bandera = false }) {
                 Bandera ?
                     <nav>
                         <ul className='nav_links'>
-                            <li><a href="home">Home</a></li>
-                            <li><a href="goals">Metas</a></li>
-                            <li><a href="health">Bienestar</a></li>
-                            <li><a href="calendar">Calendario</a></li>
+                            <li><Link to="/home">Home</Link></li>
+                            <li><Link to="/goals">Metas</Link></li>
+                            <li><Link to="/health">Bienestar</Link></li>
+                            <li><Link to="/calendar">Calendario</Link></li>
                             <li><a onClick={LogOut} href="#">Log Out</a></li>
                         </ul>
                     </nav>
