@@ -69,9 +69,14 @@ function App() {
         navigate('/')
       }
     }
+
+
     if (user) {
       getUserData();
+    } else if (!loading && !user) {
+      navigate('/')
     }
+
   }, [user]);
 
   return (
@@ -86,7 +91,6 @@ function App() {
         <Route exact path="/calendar" element={<Calendario />} />
         <Route exact path="/welcome" element={<Welcome />} />
       </Routes>
-      =
     </ChakraProvider>
   );
 }

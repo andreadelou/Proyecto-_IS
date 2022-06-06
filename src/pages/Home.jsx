@@ -7,6 +7,7 @@ import "../CSS/Home.css";
 import Header from "../components/Header.js";
 import blob from "../assets/blob01.png";
 import { fetchExpiredTasks, getPoints } from "../services/goals.service.js";
+import { proximatarea } from "../services/goals.service";
 
 // masacotas          :3
 import happyfrog from "../assets/happyfrog.png";
@@ -19,8 +20,8 @@ import { getUserInfo } from "../services/users.service.js";
 
 function Home() {
   const navigate = useNavigate(); // navigate
-
-  // Auth State
+  const [title, setTitle] = useState();
+  const [reminder, setReminder] = useState();
   const [user, loading, error] = useAuthState(auth);
   const [points, setPoints] = useState();
   const [pet, setPet] = useState();
@@ -30,11 +31,11 @@ function Home() {
     if (!user) return navigate("/");
     const getUserData = async () => {
       const data = await getUserInfo(user); // Get the current user information
+      setPoints(data.points ?? 0);
       setPet(data.pet);
     };
     const getGoalData = async () => {
       const data = await fetchExpiredTasks(); // Fetch the expired goals
-      console.log(data);
       if (data.length > 0) {
         const d = new Date();
         const currentDays = d.getTime() / 1000 / (60 * 60 * 24);
@@ -49,12 +50,21 @@ function Home() {
         }
       }
     };
+    const getultimameta = async () => {
+      const proximameta = await proximatarea();
+      setTitle(proximameta[0].title);
+      const d = new Date();
+      const currentDays = d.getTime() / 1000 / (60 * 60 * 24);
+      const goalDays = proximameta[0].reminder.seconds / (60 * 60 * 24);
+      setReminder(Math.ceil(goalDays - currentDays));
+    };
     if (user) {
       getUserData();
       getGoalData();
+      getultimameta();
     }
-    setPoints(getPoints());
   }, [user, loading]);
+
   /**
    * Renders a pet
    */
@@ -93,21 +103,27 @@ function Home() {
         <VStack align={"flex-start"} gap={"20px"}>
           <div className="points">
             <h1 className="text--bold">{points}</h1>
-            <p className="points__text">puntos </p>
+            <p className="points__text">puntos</p>
           </div>
 
-          <div className="next-activity">
-            <HStack justifyContent={"space-between"} gap={"20"}>
-              <VStack alignItems={"self-start"}>
-                <h2 className="next_activity__text">Proxima tarea:</h2>
-                <h2 className="next_activity__text">Meditar</h2>
-              </VStack>
-              <HStack alignItems={"baseline"} className="next-activity__time">
-                <h2 className="text--bold">3</h2>
-                <h2 className="text">días</h2>
+          {title ? (
+            <div className="next-activity">
+              <HStack justifyContent={"space-between"} gap={"20"}>
+                <VStack alignItems={"self-start"}>
+                  <h2 className="next_activity__text">Proxima tarea:</h2>
+                  <h2 className="next_activity__text">{title}</h2>{" "}
+                  {/* AQUI TENE QUE IR LA TAREAAAAAAAA  */}
+                </VStack>
+                <HStack alignItems={"baseline"} className="next-activity__time">
+                  {reminder < 0 ? <h2 className="text">hace</h2> : ""}
+                  <h2 className="text--bold">{Math.abs(reminder | 0)}</h2>
+                  <h2 className="text">días</h2>
+                </HStack>
               </HStack>
-            </HStack>
-          </div>
+            </div>
+          ) : (
+            ""
+          )}
         </VStack>
         {/* ONDA DE LA MASCOTA  */}
 
