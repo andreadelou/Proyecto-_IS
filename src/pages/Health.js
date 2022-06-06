@@ -1,61 +1,122 @@
 import React from "react";
 import Header from "../components/Header";
 import "../CSS/Health.css";
-import {
-  addTodoToGoal,
-  getAllGoals,
-  saveGoal,
-  updateGoal,
-  updateGoalTodo,
-  deleteGoal,
-} from "../services/goals.service";
+/*import {
+  fetchLengthCategory
+} from "../services/goals.service";*/
 import GoalModal from "../components/GoalModal";
 
 //importando imagen
 import blob2 from "../assets/blob02.png";
 
-import ProgressBar from "../components/Progress";
+//import ProgressBar from "../components/ProgressBar.jsx";
+
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase.js";
+
+import { fetchAllGoalsAndGroupByCategory } from "../services/goals.service";
+
+
+import { useEffect, useState } from "react";
+
+import PieChart from "../components/PiCharts";
+
 
 function Health() {
 
-  //jala el total de metas y cuantas han sido completadas para sacar el porcentaje
-  //Categoria Salud
-  let totalS = getAllGoals().filter(element => element.category == "health").length;
-  let contS = getAllGoals().filter(element => element.category == "health" && element.completed == true).length;
-  //verifica que no sea cero para que no de error la division
-  if (totalS == 0) {
-    totalS = 1;
-  }
-  let C_Salud = (contS * 100) / totalS;
-  let porcentajeS = C_Salud + "%";
+  const [ejercicioT, setEjercicioT] = useState(0);
+    const [apredizajeT, setApredizajeT] = useState(0);
+    const [saludT, setSaludT] = useState(0);
+    const [saludMental, setsaludMental] = useState(0);
 
-  //Categoria Ejercicio
-  let totalE = getAllGoals().filter(element => element.category == "exercise").length;
-  let contE = getAllGoals().filter(element => element.category == "exercise" && element.completed == true).length;
-  //verifica que no sea cero para que no de error la division
-  if (totalE == 0) {
-    totalE = 1;
-  }
-  let C_Ejercicio = (contE * 100) / totalE;
-  let porcentajeE = C_Ejercicio + "%";
+    const [lista, setLista] = useState([]);
 
-  //Categoria Meditar
-  let totalM = getAllGoals().filter(element => element.category == "learn").length;
-  let contM = getAllGoals().filter(element => element.category == "learn" && element.completed == true).length;
-  if (totalM == 0) {
-    totalM = 1;
-  }
-  let C_Meditar = (contM * 100) / totalM;
-  let porcentajeM = C_Meditar + "%";
 
-  //Categoria Salud Mental
-  let totalSM = getAllGoals().filter(element => element.category == "mental-health").length;
-  let contSM = getAllGoals().filter(element => element.category == "mental-health" && element.completed == true).length;
-  if (totalSM == 0) {
-    totalSM = 1;
-  }
-  let C_SaludM = (contSM * 100) / totalSM;
-  let porcentajeSM = C_SaludM + "%";
+    const [user, loading, error] = useAuthState(auth);
+    const [goals, setGoals] = useState([]);
+  
+    useEffect(() => {
+      if (auth.currentUser) {
+        fetchGoals();
+      }
+    }, [user]);
+    const fetchGoals = async () => {
+      await fetchGoalsByCategory();
+    };
+    
+    
+  const fetchGoalsByCategory = async () => {
+    const goals = await fetchAllGoalsAndGroupByCategory();
+    //setEjercicioT(goals[goals.category == 'exercise'].length)
+    /*setApredizajeT(goals.learn.length)
+    setSaludT(goals.health.length)
+    setSaludMentalT(goals.mental_health.length)*/
+
+    setGoals(Object.entries(goals));
+    
+    console.log(goals);
+
+    
+
+    try{
+    setEjercicioT(goals.exercise.length);
+    
+    }
+    catch{
+      setEjercicioT(0);
+    }
+    try{
+    setApredizajeT(goals.learn.length);
+
+    }
+    catch{
+      setApredizajeT(0);
+    }
+    try{
+      setSaludT(goals.health.length);
+
+    }
+    catch{
+      setSaludT(0);
+    }
+    try{
+    setsaludMental(goals.mentalhealth.length);
+
+    }
+    catch{
+      setsaludMental(0);
+    }
+
+
+  };
+
+
+  const num = [];
+  let total = 0;
+
+  num.push(ejercicioT);
+  
+  num.push(apredizajeT);
+  
+  num.push(saludT);
+  
+  num.push(saludMental);
+
+  console.log(num);
+
+  total = num[0]+num[1]+num[2]+num[3];
+
+  console.log(total);
+
+  let exer = 0;
+  let apren = 0;
+  let salu = 0;
+  let saludM = 0;
+
+  exer = (ejercicioT*100)/total;
+  apren = (apredizajeT*100)/total;
+  salu = (saludT*100)/total;
+  saludM = (saludMental*100)/total;
 
 
 
@@ -64,44 +125,45 @@ function Health() {
 
       <header className="header">
         <Header title="Bienestar" subtitle="Estadísticas de tus metas" Bandera={true}></Header>
-        <img className="uno" src={blob2} alt="uno" />
-        <img className="dos" src={blob2} alt="dos" />
+        <p>porcentaje por categoria de tus metas con respecto al total de metas</p>
+        <img className="uno" src="" alt="uno" />
+        <img className="dos" src="" alt="dos" />
       </header>
 
       <div className="metas-container">
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Ejercicio</h3>
-            <p className="porcentaje">{porcentajeE}</p>
+            <p className="porcentaje">{exer}%</p>
           </div>
-          <ProgressBar className="bar" value={C_Ejercicio} max={100} />
+
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Meditar</h3>
-            <p className="porcentaje">{porcentajeM}</p>
+            <p className="porcentaje">{apren}%</p>
           </div>
-          <ProgressBar className="bar" value={C_Meditar} max={100} />
+
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Salud</h3>
-            <p className="porcentaje">{porcentajeS}
-            </p>
+            <p className="porcentaje">{salu}%</p>
           </div>
-          <ProgressBar className="bar" value={C_Salud} max={100} />
+
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Salud Mental</h3>
-            <p className="porcentaje">{porcentajeSM}</p>
+            <p className="porcentaje">{saludM}%</p>
           </div>
-          <ProgressBar className="bar" value={C_SaludM} max={100} />
+
         </div>
         <div className="progress">
           <div className="progress__content"></div>
         </div>
       </div>
+      <PieChart></PieChart>
     </div>
 
 

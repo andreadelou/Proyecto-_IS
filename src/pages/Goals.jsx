@@ -158,7 +158,7 @@ function Goals() {
       return <div className="colorA"></div>;
     } else if (param == "health") {
       return <div className="colorC"></div>;
-    } else if (param == "mental-health") {
+    } else if (param == "mentalhealth") {
       return <div className="colorM"></div>;
     }
   };
