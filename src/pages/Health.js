@@ -25,26 +25,26 @@ import PieChart from "../components/PiCharts";
 function Health() {
 
   const [ejercicioT, setEjercicioT] = useState(0);
-    const [apredizajeT, setApredizajeT] = useState(0);
-    const [saludT, setSaludT] = useState(0);
-    const [saludMental, setsaludMental] = useState(0);
+  const [apredizajeT, setApredizajeT] = useState(0);
+  const [saludT, setSaludT] = useState(0);
+  const [saludMental, setsaludMental] = useState(0);
 
-    const [lista, setLista] = useState([]);
+  const [lista, setLista] = useState([]);
 
 
-    const [user, loading, error] = useAuthState(auth);
-    const [goals, setGoals] = useState([]);
-  
-    useEffect(() => {
-      if (auth.currentUser) {
-        fetchGoals();
-      }
-    }, [user]);
-    const fetchGoals = async () => {
-      await fetchGoalsByCategory();
-    };
-    
-    
+  const [user, loading, error] = useAuthState(auth);
+  const [goals, setGoals] = useState([]);
+
+  useEffect(() => {
+    if (auth.currentUser) {
+      fetchGoals();
+    }
+  }, [user]);
+  const fetchGoals = async () => {
+    await fetchGoalsByCategory();
+  };
+
+
   const fetchGoalsByCategory = async () => {
     const goals = await fetchAllGoalsAndGroupByCategory();
     //setEjercicioT(goals[goals.category == 'exercise'].length)
@@ -53,37 +53,37 @@ function Health() {
     setSaludMentalT(goals.mental_health.length)*/
 
     setGoals(Object.entries(goals));
-    
+
     console.log(goals);
 
-    
 
-    try{
-    setEjercicioT(goals.exercise.length);
-    
+
+    try {
+      setEjercicioT(goals.exercise.length);
+
     }
-    catch{
+    catch {
       setEjercicioT(0);
     }
-    try{
-    setApredizajeT(goals.learn.length);
+    try {
+      setApredizajeT(goals.learn.length);
 
     }
-    catch{
+    catch {
       setApredizajeT(0);
     }
-    try{
+    try {
       setSaludT(goals.health.length);
 
     }
-    catch{
+    catch {
       setSaludT(0);
     }
-    try{
-    setsaludMental(goals.mentalhealth.length);
+    try {
+      setsaludMental(goals.mentalhealth.length);
 
     }
-    catch{
+    catch {
       setsaludMental(0);
     }
 
@@ -95,16 +95,16 @@ function Health() {
   let total = 0;
 
   num.push(ejercicioT);
-  
+
   num.push(apredizajeT);
-  
+
   num.push(saludT);
-  
+
   num.push(saludMental);
 
   console.log(num);
 
-  total = num[0]+num[1]+num[2]+num[3];
+  total = num[0] + num[1] + num[2] + num[3];
 
   console.log(total);
 
@@ -113,10 +113,10 @@ function Health() {
   let salu = 0;
   let saludM = 0;
 
-  exer = (ejercicioT*100)/total;
-  apren = (apredizajeT*100)/total;
-  salu = (saludT*100)/total;
-  saludM = (saludMental*100)/total;
+  exer = (ejercicioT * 100) / total;
+  apren = (apredizajeT * 100) / total;
+  salu = (saludT * 100) / total;
+  saludM = (saludMental * 100) / total;
 
 
 
@@ -134,28 +134,28 @@ function Health() {
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Ejercicio</h3>
-            <p className="porcentaje">{exer}%</p>
+            <p className="porcentaje">{exer.toFixed(2)}%</p>
           </div>
 
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Meditar</h3>
-            <p className="porcentaje">{apren}%</p>
+            <p className="porcentaje">{apren.toFixed(2)}%</p>
           </div>
 
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Salud</h3>
-            <p className="porcentaje">{salu}%</p>
+            <p className="porcentaje">{salu.toFixed(2)}%</p>
           </div>
 
         </div>
         <div className="metas-container__stat">
           <div className="metas-container__stat-header">
             <h3 className="">Salud Mental</h3>
-            <p className="porcentaje">{saludM}%</p>
+            <p className="porcentaje">{saludM.toFixed(2)}%</p>
           </div>
 
         </div>
