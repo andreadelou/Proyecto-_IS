@@ -9,10 +9,13 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { fetchAllGoals } from "../services/goals.service";
+import { fetchAllGoals, fetchGoalsByDate } from "../services/goals.service";
 import { auth } from "../firebase.js";
+import moment from "moment";
 
-function NuevasMetas() {
+
+
+function NuevasMetas({ startDate, endDate }) {
     const [user, loading, error] = useAuthState(auth);
 
     const [goals, setMetas] = useState([]);
@@ -22,21 +25,30 @@ function NuevasMetas() {
     //fetch goals
     const fetchGoals = async () => {
         const metas = await fetchAllGoals();
-        console.log(metas);
         setMetas(metas);
     };
+    const filterGoalsByDate = async (start, end) => {
+        const g = await fetchGoalsByDate(start, end);
+        setMetas(g);
+    }
     useEffect(() => {
         if (auth.currentUser) {
             fetchGoals();
         }
-    }, [user]);
+        if (startDate && endDate) {
+            filterGoalsByDate(startDate, endDate)
+        }
+    }, [user, startDate, endDate]);
 
-    const metasCard = goals.map((meta) => <h1 key={meta}>{meta.title}</h1>);
+    const metasCard = goals.map((meta, idx) => <div key={idx}>
+        <h1>{(new Date(meta.reminder.seconds * 1000)).toLocaleDateString()} - {meta.title}</h1>
+
+    </div>);
 
     //fetch categorias
     const fetchCategoria = async () => {
         const metas = await fetchAllGoals();
-        console.log(metas);
+
         setCategoria(metas);
     };
     useEffect(() => {
@@ -45,50 +57,24 @@ function NuevasMetas() {
         }
     }, [user]);
 
-    const categoryCard = categoria.map((cate) => (
-        <h1 key={cate}>{cate.category}</h1>
-    ));
 
-    //fetch fecha
-    const fetchFecha = async () => {
-        const metas = await fetchAllGoals();
-        console.log(metas);
-        setFecha(
-            metas.map((meta) =>
-                new Date(meta.reminder.seconds * 1000).toLocaleDateString()
-            )
-        );
-    };
+
     useEffect(() => {
         if (auth.currentUser) {
-            fetchFecha();
         }
     }, [user]);
 
-    const metasFecha = fecha.map((fechar) => <h1 key={fechar}>{fechar}</h1>);
+    const metasFecha = fecha.map((fechar, idx) => <h1 key={idx}>{fechar}</h1>);
 
     const fechafinal = [];
 
     var a = 0;
 
-    // for (a in metasFecha) {
-    //     let date = new Intl.DateTimeFormat("en-US", {
-    //         year: "numeric",
-    //         month: "2-digit",
-    //         day: "2-digit",
-    //     }).format(metasFecha[a]);
-    //     a++;
-    //     fechafinal.push(date);
-    // }
-
-    console.log(metasFecha[0]);
 
     var i = -1;
 
     //empieza el for
     for (i in metasCard) {
-        console.log("sigue");
-        i++;
         return (
             <div>
                 <Card className="cartas">
@@ -96,12 +82,12 @@ function NuevasMetas() {
                         <Typography variant="h5" component="h2">
                             Tareas
                         </Typography>
-                        <Typography>
-                            <h1 className="infoytiempo">
-                                {metasCard}
-                                {metasFecha}
-                            </h1>
-                        </Typography>
+
+
+                        {metasCard}
+
+
+
                     </CardContent>
                 </Card>
             </div>
@@ -111,20 +97,18 @@ function NuevasMetas() {
 
 function Calendario() {
     const [date, setDate] = useState(new Date()); //date que sale abajo del calendario
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
     const [user, loading, error] = useAuthState(auth);
 
     const [goals, setMetas] = useState([]);
 
     useEffect(() => {
         if (auth.currentUser) {
-            fetchGoals();
+            // fetchGoals();
         }
     }, [user]);
-    const fetchGoals = async () => {
-        const metas = await fetchAllGoals();
-        // console.log(metas)
-        setMetas(metas);
-    };
+
 
     return (
         <div className="principal">
@@ -145,7 +129,11 @@ function Calendario() {
 
             <div className="calendar">
                 <div className="calendar-container">
-                    <Calendar onChange={setDate} value={date} locale="es" />
+                    <Calendar onChange={(e) => {
+                        setStartDate(moment(e).startOf('day').toDate());
+                        setEndDate(moment(e).endOf('day').toDate());
+                        setDate(e);
+                    }} value={date} locale="es" />
                 </div>
                 <p className="text-center">
                     <span className="bold">Dia seleccionado:</span>
@@ -155,7 +143,7 @@ function Calendario() {
             </div>
 
             <div className="tareas">
-                <h1>{NuevasMetas()}</h1>
+                <h1>{NuevasMetas({ startDate: startDate, endDate: endDate })}</h1>
             </div>
         </div>
     );

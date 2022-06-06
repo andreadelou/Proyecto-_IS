@@ -17,6 +17,7 @@
     "firebase": "^9.6.10",
     "framer-motion": "3.10.6",
     "mdb-react-ui-kit": "^3.0.0",
+    "moment": "^2.29.3",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.3.1",

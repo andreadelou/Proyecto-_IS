@@ -184,3 +184,21 @@ export const fetchAllGoalsAndGroupByCategory = async () => {
 
     return goals;   // Return the grouped goals
 }
+
+
+/**
+ * Fetch goals by a given date
+ * @param {*} date 
+ */
+export const fetchGoalsByDate = async (start, end) => {
+    const uid = auth.currentUser.uid;
+    const goalsCol = collection(db, 'goals');
+    const q = query(goalsCol, where("uid", "==", uid), where("reminder", ">=", start), where("reminder", "<=", end))
+    const goalsSnapshot = await getDocs(q);
+    return goalsSnapshot.docs.map(d => {
+        return {
+            id: d.id,
+            ...d.data(),
+        }
+    }) ?? [];
+}
