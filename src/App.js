@@ -70,11 +70,13 @@ function App() {
       }
     }
 
+
     if (user) {
       getUserData();
-    } else {
-      navigate('/');
+    } else if (!loading && !user) {
+      navigate('/')
     }
+
   }, [user]);
 
   return (
