@@ -14,7 +14,9 @@ ChartJs.register(
 );
 
 
-function PieCharts() {
+function PieCharts({
+	goals
+}) {
 	const [ejercicioT, setEjercicioT] = useState(0);
 	const [apredizajeT, setApredizajeT] = useState(0);
 	const [saludT, setSaludT] = useState(0);
@@ -24,30 +26,20 @@ function PieCharts() {
 
 
 	const [user, loading, error] = useAuthState(auth);
-	const [goals, setGoals] = useState([]);
 
 	useEffect(() => {
-		if (auth.currentUser) {
-			fetchGoals();
-		}
-	}, [user]);
-	const fetchGoals = async () => {
-		await fetchGoalsByCategory();
-	};
+		createGoalsChart()
+	});
 
 
-	const fetchGoalsByCategory = async () => {
-		const goals = await fetchAllGoalsAndGroupByCategory();
+	const createGoalsChart = async () => {
 		//setEjercicioT(goals[goals.category == 'exercise'].length)
 		/*setApredizajeT(goals.learn.length)
 		setSaludT(goals.health.length)
 		setSaludMentalT(goals.mental_health.length)*/
 
-		setGoals(Object.entries(goals));
-
 		try {
 			setEjercicioT(goals.exercise.length);
-
 		}
 		catch {
 			setEjercicioT(0);

@@ -169,7 +169,7 @@ export const fetchAllGoalsAndGroupByCategory = async (completed = false) => {
 	const q = query(goalsCol, where("uid", "==", uid))
 	const goalsSnapshot = await getDocs(q);
 	const goals = {};
-	for (const goal of goalsSnapshot.docs.filter(goal => goal.data().completed === completed).map(goal => {
+	for (const goal of goalsSnapshot.docs.filter(goal => completed ? true : !goal.data().completed).map(goal => {
 		return {
 			id: goal.id,
 			...goal.data()

@@ -29,31 +29,34 @@ function Health() {
 	const [apredizajeT, setApredizajeT] = useState(0);
 	const [saludT, setSaludT] = useState(0);
 	const [saludMental, setsaludMental] = useState(0);
+	const [includeCompletedGoals, setIncludeCompletedGoals] = useState(false);
 
 	const [lista, setLista] = useState([]);
 
 
 	const [user, loading, error] = useAuthState(auth);
 	const [goals, setGoals] = useState([]);
+	const [goalsByCategory, setGoalsByCategory] = useState([]);
 
 	useEffect(() => {
 		if (auth.currentUser) {
 			fetchGoals();
 		}
-	}, [user]);
+	}, [user, includeCompletedGoals]);
 	const fetchGoals = async () => {
 		await fetchGoalsByCategory();
 	};
 
 
 	const fetchGoalsByCategory = async () => {
-		const goals = await fetchAllGoalsAndGroupByCategory(true);
+		const goals = await fetchAllGoalsAndGroupByCategory(includeCompletedGoals);
 		//setEjercicioT(goals[goals.category == 'exercise'].length)
 		/*setApredizajeT(goals.learn.length)
 		setSaludT(goals.health.length)
 		setSaludMentalT(goals.mental_health.length)*/
 
 		setGoals(Object.entries(goals));
+		setGoalsByCategory(goals)
 
 		try {
 			setEjercicioT(goals.exercise.length);
@@ -120,7 +123,7 @@ function Health() {
 			<header className="header">
 				<Header title="Bienestar" subtitle="Estadísticas de tus metas" Bandera={true}></Header>
 				<HStack my={'2rem'}>
-					<Checkbox defaultChecked checked={true} onChange={(e) => { console.log(e.target.checked) }}>Checkbox</Checkbox>
+					<Checkbox checked={includeCompletedGoals} onChange={(e) => { setIncludeCompletedGoals(e.target.checked) }}>Incluir Metas Completadas</Checkbox>
 				</HStack>
 				<p>Porcentaje por categoria de tus metas con respecto al total de metas</p>
 				<img className="uno" src="" alt="uno" />
@@ -160,7 +163,7 @@ function Health() {
 					<div className="progress__content"></div>
 				</div>
 			</div>
-			<PieChart></PieChart>
+			<PieChart goals={goalsByCategory}></PieChart>
 		</div>
 
 
