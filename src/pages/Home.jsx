@@ -135,7 +135,6 @@ function Home() {
           )}
         </VStack>
         {/* ONDA DE LA MASCOTA  */}
-
         <VStack className="mascota">
 					{renderPet()}
 					<Button
