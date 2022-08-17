@@ -137,9 +137,6 @@ function Home() {
         {/* ONDA DE LA MASCOTA  */}
 
         <VStack className="mascota">
-          {/* <h1>
-            Mascota
-          </h1> */}
 					{renderPet()}
 					<Button
 						backgroundColor="primary"
@@ -152,8 +149,7 @@ function Home() {
         </VStack>
         {/* FIN DE ONDA DE LA MASCOTA */}
       </HStack>
-			{/* <Button onClick={logout}>Logout</Button> */}
-
+			{/* ==== STORE MODAL ==== */}
       <Modal isOpen={isOpen} onClose={onClose} size={"6xl"}>
         <ModalOverlay />
         <ModalContent>
@@ -189,7 +185,8 @@ function Home() {
 						}
           </ModalBody>
         </ModalContent>
-      </Modal>
+			</Modal>
+			{/* ==== STORE MODAL ==== */}
     </div>
   );
 }
