@@ -127,12 +127,20 @@ function Home() {
         </VStack>
         {/* ONDA DE LA MASCOTA  */}
 
-        <div className="mascota">
+        <VStack className="mascota">
           {/* <h1>
             Mascota
           </h1> */}
-          {renderPet()}
-        </div>
+					{renderPet()}
+					<Button
+						backgroundColor="primary"
+            textColor="textLight"
+            _hover={{
+              backgroundColor: "primaryLight",
+						}}
+						
+					>Personalizar</Button>
+        </VStack>
         {/* FIN DE ONDA DE LA MASCOTA */}
       </HStack>
       {/* <Button onClick={logout}>Logout</Button> */}
