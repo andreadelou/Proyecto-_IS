@@ -20,7 +20,7 @@ import { fetchAllGoalsAndGroupByCategory } from "../services/goals.service";
 import { useEffect, useState } from "react";
 
 import PieChart from "../components/PiCharts";
-import { Checkbox, Heading, HStack, Text } from "@chakra-ui/react";
+import { Alert, AlertIcon, Checkbox, Heading, HStack, Text } from "@chakra-ui/react";
 
 
 function Health() {
@@ -167,7 +167,10 @@ function Health() {
 						<PieChart goals={goalsByCategory}></PieChart>
 					</HStack>
 
-				</div> : ''}
+				</div> : <Alert status='info'>
+					<AlertIcon />
+					No tienes metas sin completar.
+				</Alert>}
 
 		</div>
 
