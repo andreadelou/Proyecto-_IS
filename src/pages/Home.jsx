@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { auth, logout } from "../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { Button, HStack, Image, VStack } from "@chakra-ui/react";
+import { Button, HStack, Image, useDisclosure, VStack, Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton, } from "@chakra-ui/react";
 import "../CSS/Home.css";
 import Header from "../components/Header.js";
 import blob from "../assets/blob01.png";
@@ -18,6 +24,7 @@ import mehplant from "../assets/mehplant.png";
 import sadplant from "../assets/sadplant.png";
 import { getUserInfo } from "../services/users.service.js";
 
+
 function Home() {
   const navigate = useNavigate(); // navigate
   const [title, setTitle] = useState();
@@ -25,7 +32,9 @@ function Home() {
   const [user, loading, error] = useAuthState(auth);
   const [points, setPoints] = useState();
   const [pet, setPet] = useState();
-  const [petState, setPetState] = useState(0);
+	const [petState, setPetState] = useState(0);
+	const { isOpen, onOpen, onClose } = useDisclosure()
+	const [currentModalPage, setCurrentModalPage] = useState("locker");
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
@@ -138,12 +147,49 @@ function Home() {
             _hover={{
               backgroundColor: "primaryLight",
 						}}
-						
+						onClick={onOpen}
 					>Personalizar</Button>
         </VStack>
         {/* FIN DE ONDA DE LA MASCOTA */}
       </HStack>
-      {/* <Button onClick={logout}>Logout</Button> */}
+			{/* <Button onClick={logout}>Logout</Button> */}
+
+      <Modal isOpen={isOpen} onClose={onClose} size={"6xl"}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Personaliza tu Mascota</ModalHeader>
+          <ModalCloseButton />
+					<ModalBody>
+						<HStack justifyContent={"space-around"}>
+							<Button
+								borderRadius={100}
+								flex={1}
+								onClick={() => {setCurrentModalPage("store")}}
+								backgroundColor={currentModalPage !== "store" ? "primary" : "primaryDark"}
+								textColor="textLight"
+								_hover={{
+									backgroundColor: "primaryLight",
+								}}
+							>Tienda</Button>
+							<Button borderRadius={100} flex={1}
+								backgroundColor={currentModalPage !== "locker" ? "primary" : "primaryDark"}
+								onClick={() => {setCurrentModalPage("locker")}}
+            		textColor="textLight"
+            		_hover={{
+              		backgroundColor: "primaryLight",
+								}}>Personajes</Button>
+						</HStack>
+						{ currentModalPage === "locker" ?
+							<>
+								Armario
+							</> :
+							<>
+								Tienda
+							</>
+						}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </div>
   );
 }
