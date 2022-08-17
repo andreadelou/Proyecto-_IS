@@ -169,11 +169,7 @@ h2 {
 .metas-container {
   display: flex;
   flex-direction: column;
-  width: 50vw;
-}
-
-.metas-container:not(:last-child) {
-  margin-bottom: 20px;
+  width: 70vw;
 }
 
 .metas-container__stat {
@@ -191,12 +187,16 @@ h2 {
 
 .metas-container__stat-header {
   margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 30rem;
 }
 
 .bar{
   position: relative;
 }
 .porcentaje{
-  position: absolute;
+  /* position: absolute; */
   left: 700px;
 }

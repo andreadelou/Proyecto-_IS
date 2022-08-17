@@ -20,7 +20,7 @@ import { fetchAllGoalsAndGroupByCategory } from "../services/goals.service";
 import { useEffect, useState } from "react";
 
 import PieChart from "../components/PiCharts";
-import { Checkbox, HStack } from "@chakra-ui/react";
+import { Checkbox, Heading, HStack, Text } from "@chakra-ui/react";
 
 
 function Health() {
@@ -35,7 +35,6 @@ function Health() {
 
 
 	const [user, loading, error] = useAuthState(auth);
-	const [goals, setGoals] = useState([]);
 	const [goalsByCategory, setGoalsByCategory] = useState([]);
 
 	useEffect(() => {
@@ -55,7 +54,6 @@ function Health() {
 		setSaludT(goals.health.length)
 		setSaludMentalT(goals.mental_health.length)*/
 
-		setGoals(Object.entries(goals));
 		setGoalsByCategory(goals)
 
 		try {
@@ -125,45 +123,52 @@ function Health() {
 				<HStack my={'2rem'}>
 					<Checkbox checked={includeCompletedGoals} onChange={(e) => { setIncludeCompletedGoals(e.target.checked) }}>Incluir Metas Completadas</Checkbox>
 				</HStack>
-				<p>Porcentaje por categoria de tus metas con respecto al total de metas</p>
 				<img className="uno" src="" alt="uno" />
 				<img className="dos" src="" alt="dos" />
 			</header>
 
-			<div className="metas-container">
-				<div className="metas-container__stat">
-					<div className="metas-container__stat-header">
-						<h3 className="">Ejercicio</h3>
-						<p className="porcentaje">{exer.toFixed(2)}%</p>
-					</div>
+			{Object.keys(goalsByCategory).length > 0 ?
+				<div className="metas-container">
+					<Text mb={5} fontWeight={"bold"}>Porcentaje por categoria de tus metas con respecto al total de metas</Text>
+					<HStack gap={24} alignItems={"center"}>
+						<div className="metas-stats">
+							<div className="metas-container__stat">
+								<div className="metas-container__stat-header">
+									<h3 className="">Ejercicio</h3>
+									<p className="porcentaje">{exer.toFixed(2)}%</p>
+								</div>
 
-				</div>
-				<div className="metas-container__stat">
-					<div className="metas-container__stat-header">
-						<h3 className="">Meditar</h3>
-						<p className="porcentaje">{apren.toFixed(2)}%</p>
-					</div>
+							</div>
+							<div className="metas-container__stat">
+								<div className="metas-container__stat-header">
+									<h3 className="">Meditar</h3>
+									<p className="porcentaje">{apren.toFixed(2)}%</p>
+								</div>
 
-				</div>
-				<div className="metas-container__stat">
-					<div className="metas-container__stat-header">
-						<h3 className="">Salud</h3>
-						<p className="porcentaje">{salu.toFixed(2)}%</p>
-					</div>
+							</div>
+							<div className="metas-container__stat">
+								<div className="metas-container__stat-header">
+									<h3 className="">Salud</h3>
+									<p className="porcentaje">{salu.toFixed(2)}%</p>
+								</div>
 
-				</div>
-				<div className="metas-container__stat">
-					<div className="metas-container__stat-header">
-						<h3 className="">Salud Mental</h3>
-						<p className="porcentaje">{saludM.toFixed(2)}%</p>
-					</div>
+							</div>
+							<div className="metas-container__stat">
+								<div className="metas-container__stat-header">
+									<h3 className="">Salud Mental</h3>
+									<p className="porcentaje">{saludM.toFixed(2)}%</p>
+								</div>
 
-				</div>
-				<div className="progress">
-					<div className="progress__content"></div>
-				</div>
-			</div>
-			<PieChart goals={goalsByCategory}></PieChart>
+							</div>
+							<div className="progress">
+								<div className="progress__content"></div>
+							</div>
+						</div>
+						<PieChart goals={goalsByCategory}></PieChart>
+					</HStack>
+
+				</div> : ''}
+
 		</div>
 
 

@@ -118,7 +118,7 @@ function PieCharts({
 
 
 	return (
-		<div className="App" style={{ width: '30%', height: '30%' }}>
+		<div style={{ width: '25%', height: '25%' }}>
 			<Pie data={data} />
 
 		</div>
