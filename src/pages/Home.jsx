@@ -160,14 +160,14 @@ function Home() {
 								borderRadius={100}
 								flex={1}
 								onClick={() => {setCurrentModalPage("store")}}
-								backgroundColor={currentModalPage !== "store" ? "primary" : "primaryDark"}
+								backgroundColor={currentModalPage !== "store" ? "primaryDark" : "primary"}
 								textColor="textLight"
 								_hover={{
 									backgroundColor: "primaryLight",
 								}}
 							>Tienda</Button>
 							<Button borderRadius={100} flex={1}
-								backgroundColor={currentModalPage !== "locker" ? "primary" : "primaryDark"}
+								backgroundColor={currentModalPage !== "locker" ? "primaryDark" : "primary"}
 								onClick={() => {setCurrentModalPage("locker")}}
             		textColor="textLight"
             		_hover={{
