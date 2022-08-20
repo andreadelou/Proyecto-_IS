@@ -24,6 +24,9 @@ import mehplant from "../assets/mehplant.png";
 import sadplant from "../assets/sadplant.png";
 import { getUserInfo } from "../services/users.service.js";
 
+//mascotas de armario
+import cuadrofondo from "../assets/cuadrofondo.png";
+
 
 function Home() {
   const navigate = useNavigate(); // navigate
@@ -177,6 +180,30 @@ function Home() {
 						{ currentModalPage === "locker" ?
 							<>
 								Armario
+                <div className="personajesArmario"  style={{width: "1100px", height: "700px"/*, backgroundColor: "red"*/}}>
+                  {/*fondos fila1*/}
+                  <img src = {cuadrofondo} alt="cuadro1" style={{width: "300px", height: "200px", position: "absolute", left: "4%"}}/>
+                  
+                  <img src = {cuadrofondo} alt="cuadro2" style={{width: "300px", height: "200px", position: "absolute", left: "37%"}}/>
+
+                  <img src = {cuadrofondo} alt="cuadro3" style={{width: "300px", height: "200px", position: "relative", left: "67%", margin:"30px"}} />
+
+                  {/*fondos fila2*/}
+                  <img src = {cuadrofondo} alt="cuadro4" style={{width: "300px", height: "200px", position: "absolute", left: "4%"}}/>
+                  
+                  <img src = {cuadrofondo} alt="cuadro5" style={{width: "300px", height: "200px", position: "absolute", left: "37%"}}/>
+
+                  <img src = {cuadrofondo} alt="cuadro6" style={{width: "300px", height: "200px", position: "relative", left: "67%", margin:"30px"  }} />
+
+
+                  {/*fondos fila3*/}
+                  <img src = {cuadrofondo} alt="cuadro4" style={{width: "300px", height: "200px", position: "absolute", left: "4%"}}/>
+                  
+                  <img src = {cuadrofondo} alt="cuadro5" style={{width: "300px", height: "200px", position: "absolute", left: "37%"}}/>
+
+                  <img src = {cuadrofondo} alt="cuadro6" style={{width: "300px", height: "200px", position: "relative", left: "70%"}} />
+                </div>
+
 							</> :
 							<>
 								Tienda
