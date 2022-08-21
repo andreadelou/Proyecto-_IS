@@ -30,6 +30,17 @@ import horse from "../assets/horse.png";
 import sunflower from "../assets/sunflower.png";
 import nube from "../assets/nube.png";
 import plus from "../assets/plus.png";
+import dog from "../assets/dog.png";
+import twoflower from "../assets/twoflower.png";
+import cat from "../assets/cat.png";
+import butterfly from "../assets/butterfly.png";
+import bird from "../assets/bird.png";
+import snail from "../assets/snail.png";
+import panda from "../assets/panda.png";
+import ghost from "../assets/ghost.png";
+
+import buybutton from "../assets/buybutton.png";
+
 
 
 function Home() {
@@ -242,6 +253,115 @@ function Home() {
 							</> :
 							<>
 								Tienda
+
+                <div className="personajesArmarioFondo"  style={{width: "1100px", height: "700px"/*, backgroundColor: "red"*/, marginTop:"30px"}}>
+                  {/*fondos fila1*/}
+                  <img src = {cuadrofondo} alt="cuadro1" style={{width: "300px", height: "200px", position: "absolute", left: "4%"}}/>
+                  
+                  <img src = {cuadrofondo} alt="cuadro2" style={{width: "300px", height: "200px", position: "absolute", left: "37%"}}/>
+
+                  <img src = {cuadrofondo} alt="cuadro3" style={{width: "300px", height: "200px",position: "relative", left: "70%", margin:"30px"}} />
+                  
+
+                  {/*fondos fila2*/}
+                  <img src = {cuadrofondo} alt="cuadro4" style={{width: "300px", height: "200px", position: "absolute", left: "4%"}}/>
+                  
+                  <img src = {cuadrofondo} alt="cuadro5" style={{width: "300px", height: "200px", position: "absolute", left: "37%"}}/>
+
+                  <img src = {cuadrofondo} alt="cuadro6" style={{width: "300px", height: "200px", position: "relative", left: "70%", margin:"30px"  }} />
+
+
+                  {/*fondos fila3*/}
+                  <img src = {cuadrofondo} alt="cuadro4" style={{width: "300px", height: "200px", position: "absolute", left: "4%"}}/>
+                  
+                  <img src = {cuadrofondo} alt="cuadro5" style={{width: "300px", height: "200px", position: "absolute", left: "37%"}}/>
+
+                  <img src = {cuadrofondo} alt="cuadro6" style={{width: "300px", height: "200px", position: "relative", left: "70%", margin:"30px" }} />
+
+
+
+                  <div className="personajesArmario" style={{width: "1100px", height: "700px", position: "absolute", marginTop:"30px"}}>
+                    {/*imagenes fila1*/}
+
+                    <img src = {horse} alt="cuadro1" style={{width: "130px", height: "130px", position: "absolute", left: "6%", top:"-100%"}}/>
+                    
+                    <img src = {cat} alt="cuadro2" style={{width: "130px", height: "130px", position: "absolute", left: "42%", top:"-100%"}}/>
+
+                    <img src = {sunflower } alt="cuadro3" style={{width: "110px", height: "120px", position: "absolute", left: "80%", top:"-98%"}} />
+
+                    {/*imagenes fila2*/}
+
+                    <img src = {nube} alt="cuadro1" style={{width: "130px", height: "130px", position: "absolute", left: "6%", top:"-66%"}}/>
+                    
+                    <img src = {twoflower} alt="cuadro2" style={{width: "130px", height: "120px", position: "absolute", left: "42%", top:"-64%"}}/>
+
+                    <img src = {bird} alt="cuadro3" style={{width: "130px", height: "120px", position: "absolute", left: "78%",top:"-64%"}} />
+
+                    {/*imagenes fila3*/}
+
+                    <img src = {snail} alt="cuadro1" style={{width: "130px", height: "120px", position: "absolute", left: "6%", top:"-31%"}}/>
+                    
+                    <img src = {panda} alt="cuadro2" style={{width: "130px", height: "122px", position: "absolute", left: "42%", top:"-31%"}}/>
+
+                    <img src = {ghost} alt="cuadro3" style={{width: "120px", height: "120px", position: "absolute", left: "77%",top:"-31%"}} />
+
+                  </div>
+
+                  <div className="personajesArmarioTexto" style={{width: "1100px", height: "700px", position: "absolute", marginTop:"30px"}}>
+                    {/*texto fila1*/}
+
+                    <h3 style={{position: "absolute", left: "5%", top:"-100%"}}>50 puntos</h3>
+
+                    <h3 style={{position: "absolute", left: "40%", top:"-100%"}}>50 puntos</h3>
+
+                    <h3 style={{position: "absolute", left: "76%", top:"-100%"}}>50 puntos</h3>
+
+                    {/*texto fila2*/}
+
+                    <h3 style={{position: "absolute", left: "5%", top:"-67%"}}>50 puntos</h3>
+
+                    <h3 style={{position: "absolute", left: "40%", top:"-67%"}}>50 puntos</h3>
+
+                    <h3 style={{position: "absolute", left: "77%",top:"-67%"}}>50 puntos</h3>
+
+                    {/*texto fila3*/}
+
+                    <h3 style={{position: "absolute", left: " 5%", top:"-34%"}}>50 puntos</h3>
+
+                    <h3 style={{position: "absolute", left: "40%", top:"-34%"}}>50 puntos</h3>
+
+                    <h3 style={{position: "absolute", left: "76%",top:"-34%"}}>50 puntos</h3>
+
+                  </div>
+
+                  <div className="botoncompra" style={{width: "1100px", height: "700px", position: "absolute", marginTop:"30px"}}>
+                    {/*boton fila1*/}
+
+                    <img src = {buybutton} alt="cuadro1" style={{width: "97px", height: "97px", position: "absolute", left: "18%", top:"-87%"}}/>
+                    
+                    <img src = {buybutton} alt="cuadro2" style={{width: "97px", height: "97px", position: "absolute", left: "54%", top:"-87%"}}/>
+
+                    <img src = {buybutton } alt="cuadro3" style={{width: "97px", height: "97px", position: "absolute", left: "89%", top:"-87%"}} />
+
+                    {/*boton fila2*/}
+
+                    <img src = {buybutton} alt="cuadro1" style={{width: "97px", height: "97px", position: "absolute", left: "18%", top:"-54%"}}/>
+                    
+                    <img src = {buybutton} alt="cuadro2" style={{width: "97px", height: "97px", position: "absolute", left: "54%", top:"-54%"}}/>
+
+                    <img src = {buybutton} alt="cuadro3" style={{width: "97px", height: "97px", position: "absolute", left: "89%",top:"-54%"}} />
+
+                    {/*boton fila3*/}
+
+                    <img src = {buybutton} alt="cuadro1" style={{width: "100px", height: "100px", position: "absolute", left: "18%", top:"-21%"}}/>
+
+                    <img src = {buybutton} alt="cuadro2" style={{width: "100px", height: "100px", position: "absolute", left: "54%", top:"-21%"}}/>
+
+                    <img src = {buybutton} alt="cuadro3" style={{width: "100px", height: "100px", position: "absolute", left: "89%",top:"-21%"}} />
+
+                  </div>
+
+                </div>
 							</>
 						}
           </ModalBody>
