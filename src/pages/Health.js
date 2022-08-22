@@ -1,13 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
 import "../CSS/Health.css";
-/*import {
-	fetchLengthCategory
-} from "../services/goals.service";*/
-import GoalModal from "../components/GoalModal";
-
-//importando imagen
-import blob2 from "../assets/blob02.png";
 
 //import ProgressBar from "../components/ProgressBar.jsx";
 
@@ -20,7 +13,7 @@ import { fetchAllGoalsAndGroupByCategory } from "../services/goals.service";
 import { useEffect, useState } from "react";
 
 import PieChart from "../components/PiCharts";
-import { Alert, AlertIcon, Checkbox, Heading, HStack, Text } from "@chakra-ui/react";
+import { Alert, AlertIcon, Checkbox, HStack, Text } from "@chakra-ui/react";
 
 
 function Health() {
@@ -31,10 +24,8 @@ function Health() {
 	const [saludMental, setsaludMental] = useState(0);
 	const [includeCompletedGoals, setIncludeCompletedGoals] = useState(false);
 
-	const [lista, setLista] = useState([]);
 
-
-	const [user, loading, error] = useAuthState(auth);
+	const [user] = useAuthState(auth);
 	const [goalsByCategory, setGoalsByCategory] = useState([]);
 
 	useEffect(() => {
