@@ -2,10 +2,8 @@ import './CSS/App.css';
 
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import {
-	BrowserRouter as Router,
 	Routes,
 	Route,
-	Link,
 	useNavigate,
 	useLocation
 } from "react-router-dom"; import Register from './pages/Register';
@@ -17,7 +15,7 @@ import Goals from './pages/Goals';
 import Welcome from './pages/Welcome';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getUserInfo } from './services/users.service';
 
 
@@ -56,8 +54,8 @@ function App() {
 	});
 	const navigate = useNavigate();
 	const location = useLocation();
-	const [user, loading, error] = useAuthState(auth);
-	const [userData, setUserData] = useState();
+	const [user, loading] = useAuthState(auth);
+	const [, setUserData] = useState();
 
 	useEffect(() => {
 		const getUserData = async () => {
