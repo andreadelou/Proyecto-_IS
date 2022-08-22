@@ -24,11 +24,26 @@ import mehplant from "../assets/mehplant.png";
 import sadplant from "../assets/sadplant.png";
 import { getUserInfo } from "../services/users.service.js";
 
-//mascotas de armario
+//fondo botones
 import cuadrofondo from "../assets/cuadrofondo.png";
+
+
+//mascotas nuevas
+import happybot from "../assets/happybot.png";
+import happycloud from "../assets/happycloud.png";
+import happydog from "../assets/happydog.png";
+import happyflower from "../assets/happyflower.png";
+import happyghost from "../assets/happyghost.png";
+import happyteddy from "../assets/happyteddy.png";
+import happyice from "../assets/happyice.png";
+import happyblue from "../assets/happyblue.png";
+import happypurple from "../assets/happypurple.png";
+
+
 import horse from "../assets/horse.png";
 import sunflower from "../assets/sunflower.png";
 import nube from "../assets/nube.png";
+
 import plus from "../assets/plus.png";
 
 
