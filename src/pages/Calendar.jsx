@@ -16,11 +16,11 @@ import moment from "moment";
 
 
 function NuevasMetas({ startDate, endDate }) {
-	const [user, loading, error] = useAuthState(auth);
+	const [user] = useAuthState(auth);
 
 	const [goals, setMetas] = useState([]);
-	const [categoria, setCategoria] = useState([]);
-	const [fecha, setFecha] = useState([]);
+	const [setCategoria] = useState([]);
+	
 
 	//fetch goals
 	const fetchGoals = async () => {
