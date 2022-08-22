@@ -39,6 +39,9 @@ import happydog from "../assets/happydog.png";
 import happyflower from "../assets/happyflower.png";
 import happyghost from "../assets/happyghost.png";
 import happyteddy from "../assets/happyteddy.png";
+import happyice from "../assets/happyice.png";
+import happyblue from "../assets/happyblue.png";
+import happypurple from "../assets/happypurple.png";
 
 import plus from "../assets/plus.png";
 
@@ -672,38 +675,38 @@ function Home() {
                                         {/*imagenes fila3*/}
 
                                         <img
-                                            src={happyflower}
+                                            src={happyice}
                                             alt="cuadro1"
                                             style={{
-                                                width: "130px",
-                                                height: "120px",
+                                                width: "170px",
+                                                height: "200px",
                                                 position: "absolute",
-                                                left: "6%",
-                                                top: "-31%",
+                                                left: "9%",
+                                                top: "-35%",
                                             }}
                                         />
 
                                         <img
-                                            src={happyghost}
+                                            src={happyblue}
                                             alt="cuadro2"
                                             style={{
-                                                width: "130px",
-                                                height: "122px",
+                                                width: "220px",
+                                                height: "240px",
                                                 position: "absolute",
-                                                left: "42%",
-                                                top: "-31%",
+                                                left: "38%",
+                                                top: "-36%",
                                             }}
                                         />
 
                                         <img
-                                            src={happyteddy}
+                                            src={happypurple}
                                             alt="cuadro3"
                                             style={{
-                                                width: "120px",
-                                                height: "120px",
+                                                width: "220px",
+                                                height: "240px",
                                                 position: "absolute",
-                                                left: "77%",
-                                                top: "-31%",
+                                                left: "74%",
+                                                top: "-36%",
                                             }}
                                         />
                                     </div>
