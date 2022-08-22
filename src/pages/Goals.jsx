@@ -6,7 +6,6 @@ import TodoList from "../components/TodoList.jsx";
 import blob2 from "../assets/blob02.png";
 import { Button, useDisclosure } from "@chakra-ui/react";
 import {
-  addPoints,
   // addTodoToGoal,
   insertGoal,
   // saveGoal,
@@ -23,7 +22,7 @@ import { addPointsToUser } from "../services/users.service";
 function Goals() {
   const [goals, setGoals] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [user, loading, error] = useAuthState(auth);
+  const [user,,] = useAuthState(auth);
   const [goalsProgress, setGoalsProgress] = useState({});
 
   useEffect(() => {
@@ -181,7 +180,9 @@ function Goals() {
             textColor="textLight"
             _hover={{
               backgroundColor: "primaryLight",
-            }}
+						}}
+						role="button"
+						name="createGoalButton"
             marginBottom={10}
             onClick={onOpen}
           >
