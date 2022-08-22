@@ -24,6 +24,13 @@ import mehplant from "../assets/mehplant.png";
 import sadplant from "../assets/sadplant.png";
 import { getUserInfo } from "../services/users.service.js";
 
+//mascotas de armario
+import cuadrofondo from "../assets/cuadrofondo.png";
+import horse from "../assets/horse.png";
+import sunflower from "../assets/sunflower.png";
+import nube from "../assets/nube.png";
+import plus from "../assets/plus.png";
+
 
 function Home() {
   const navigate = useNavigate(); // navigate
@@ -177,6 +184,61 @@ function Home() {
 						{ currentModalPage === "locker" ?
 							<>
 								Armario
+                <div className="personajesArmarioFondo"  style={{width: "1100px", height: "700px"/*, backgroundColor: "red"*/, marginTop:"30px"}}>
+                  {/*fondos fila1*/}
+                  <img src = {cuadrofondo} alt="cuadro1" style={{width: "300px", height: "200px", position: "absolute", left: "4%"}}/>
+                  
+                  <img src = {cuadrofondo} alt="cuadro2" style={{width: "300px", height: "200px", position: "absolute", left: "37%"}}/>
+
+                  <img src = {cuadrofondo} alt="cuadro3" style={{width: "300px", height: "200px",position: "relative", left: "70%", margin:"30px"}} />
+                  
+
+                  {/*fondos fila2*/}
+                  <img src = {cuadrofondo} alt="cuadro4" style={{width: "300px", height: "200px", position: "absolute", left: "4%"}}/>
+                  
+                  <img src = {cuadrofondo} alt="cuadro5" style={{width: "300px", height: "200px", position: "absolute", left: "37%"}}/>
+
+                  <img src = {cuadrofondo} alt="cuadro6" style={{width: "300px", height: "200px", position: "relative", left: "70%", margin:"30px"  }} />
+
+
+                  {/*fondos fila3*/}
+                  <img src = {cuadrofondo} alt="cuadro4" style={{width: "300px", height: "200px", position: "absolute", left: "4%"}}/>
+                  
+                  <img src = {cuadrofondo} alt="cuadro5" style={{width: "300px", height: "200px", position: "absolute", left: "37%"}}/>
+
+                  <img src = {cuadrofondo} alt="cuadro6" style={{width: "300px", height: "200px", position: "relative", left: "70%", margin:"30px" }} />
+
+
+
+                  <div className="personajesArmario" style={{width: "1100px", height: "700px", position: "absolute", marginTop:"30px"}}>
+                    {/*imagenes fila1*/}
+
+                    <img src = {horse} alt="cuadro1" style={{width: "200px", height: "160px", position: "absolute", left: "5%", top:"-100%"}}/>
+                    
+                    <img src = {happyfrog} alt="cuadro2" style={{width: "200px", height: "170px", position: "absolute", left: "40%", top:"-100%"}}/>
+
+                    <img src = {sunflower } alt="cuadro3" style={{width: "190px", height: "150px", position: "absolute", left: "78%", top:"-100%"}} />
+
+                    {/*imagenes fila2*/}
+
+                    <img src = {nube} alt="cuadro1" style={{width: "200px", height: "160px", position: "absolute", left: "5%", top:"-67%"}}/>
+                    
+                    <img src = {plus} alt="cuadro2" style={{width: "100px", height: "100px", position: "absolute", left: "45%", top:"-63%"}}/>
+
+                    <img src = {plus} alt="cuadro3" style={{width: "100px", height: "100px", position: "absolute", left: "82%",top:"-63%"}} />
+
+                    {/*imagenes fila3*/}
+
+                    <img src = {plus} alt="cuadro1" style={{width: "100px", height: "100px", position: "absolute", left: "11%", top:"-30%"}}/>
+                    
+                    <img src = {plus} alt="cuadro2" style={{width: "100px", height: "100px", position: "absolute", left: "45%", top:"-30%"}}/>
+
+                    <img src = {plus} alt="cuadro3" style={{width: "100px", height: "100px", position: "absolute", left: "82%",top:"-30%"}} />
+
+                  </div>
+
+                </div>
+
 							</> :
 							<>
 								Tienda
