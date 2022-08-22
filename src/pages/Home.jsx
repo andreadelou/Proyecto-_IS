@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { auth, logout } from "../firebase.js";
+import { auth } from "../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { Button, HStack, Image, useDisclosure, VStack, Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
+  
   ModalBody,
   ModalCloseButton, } from "@chakra-ui/react";
 import "../CSS/Home.css";
 import Header from "../components/Header.js";
 import blob from "../assets/blob01.png";
-import { fetchExpiredTasks, getPoints } from "../services/goals.service.js";
+import { fetchExpiredTasks } from "../services/goals.service.js";
 import { proximatarea } from "../services/goals.service";
 
 // masacotas          :3
@@ -36,7 +36,7 @@ function Home() {
   const navigate = useNavigate(); // navigate
   const [title, setTitle] = useState();
   const [reminder, setReminder] = useState();
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [points, setPoints] = useState();
   const [pet, setPet] = useState();
 	const [petState, setPetState] = useState(0);
@@ -175,11 +175,11 @@ function Home() {
 							>Tienda</Button>
 							<Button borderRadius={100} flex={1}
 								backgroundColor={currentModalPage !== "locker" ? "primaryDark" : "primary"}
-								onClick={() => {setCurrentModalPage("locker")}}
-            		textColor="textLight"
-            		_hover={{
-              		backgroundColor: "primaryLight",
-								}}>Personajes</Button>
+								onClick={() => {setCurrentModalPage("locker")}} textColor="textLight" _hover={{
+              backgroundColor: "primaryLight",
+								}}>
+								Personajes
+							</Button>
 						</HStack>
 						{ currentModalPage === "locker" ?
 							<>
