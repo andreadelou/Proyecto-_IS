@@ -48,7 +48,27 @@ export class Profile implements ActiveRecord<Profile> {
 		this.pet = v;
 	}
 	
+	private constructor(id: string, name: string, points: number, active: boolean,
+		configured: boolean, pet: string)
+	{
+		this.id = id;
+		this.name = name;
+		this.points = points;
+		this.active = active;
+		this.configured = configured;
+		this.pet = pet;
+	}
+
+	public static async create(id: string, name: string, points: number, active: boolean,
+		configured: boolean, pet: string): Promise<Profile> {
+			// Call the firebase method to create the profile
+			// If successful, return the profile
+	}
 	
+	public static async findOne(id: string): Promise<Profile> {
+		// Call the firebase method to find the profile by id
+		// If successful, return the profile
+	}
 
 	save(): Promise<Profile> {
 		throw new Error('Method not implemented.');
