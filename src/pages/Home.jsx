@@ -228,7 +228,14 @@ function Home() {
                             >
                                 Personajes
                             </Button>
+
+                            function buy(name){
+                            console.log(name)
+                        }
+
                         </HStack>
+
+                        
                         {currentModalPage === "locker" ? (
                             <>
                                 Armario
@@ -837,6 +844,7 @@ function Home() {
                                                 left: "18%",
                                                 top: "-87%",
                                             }}
+                                            onClick="buy(\'' + happyplant + '\')"
                                         />
 
                                         <img
