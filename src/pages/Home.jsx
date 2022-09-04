@@ -229,10 +229,6 @@ function Home() {
                                 Personajes
                             </Button>
 
-                            function buy(name){
-                            console.log(name)
-                        }
-
                         </HStack>
 
                         
