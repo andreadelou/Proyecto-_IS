@@ -2,8 +2,8 @@
 /**
  * Active Records
  */
-export interface ActiveRecord {
-	save(): Promise<ActiveRecord>
-	delete(): Promise<ActiveRecord>
-	update(): Promise<ActiveRecord>
+export interface ActiveRecord<E> {
+	save(): Promise<E>
+	delete(): Promise<E>
+	update(): Promise<E>
 }
