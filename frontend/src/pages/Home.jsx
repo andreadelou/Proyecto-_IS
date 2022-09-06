@@ -99,7 +99,7 @@ function Home() {
     }, [user, loading]);
     
     const buy = (petname) => {
-        console.log('Click');
+        console.log(petname);
     } 
     
     /**
@@ -847,7 +847,7 @@ function Home() {
                                                 left: "18%",
                                                 top: "-87%",
                                             }}
-                                            onClick={() => buy(happyplant)}
+                                            onClick={() => buy("plant")}
                                         />
 
                                         <img
@@ -860,6 +860,7 @@ function Home() {
                                                 left: "54%",
                                                 top: "-87%",
                                             }}
+                                            onClick={() => buy("ghost")}
                                         />
 
                                         <img
@@ -872,6 +873,7 @@ function Home() {
                                                 left: "89%",
                                                 top: "-87%",
                                             }}
+                                            onClick={() => buy("teddy")}
                                         />
 
                                         {/*boton fila2*/}
@@ -886,6 +888,7 @@ function Home() {
                                                 left: "18%",
                                                 top: "-54%",
                                             }}
+                                            onClick={() => buy("bot")}
                                         />
 
                                         <img
@@ -898,6 +901,7 @@ function Home() {
                                                 left: "54%",
                                                 top: "-54%",
                                             }}
+                                            onClick={() => buy("cloud")}
                                         />
 
                                         <img
@@ -910,6 +914,7 @@ function Home() {
                                                 left: "89%",
                                                 top: "-54%",
                                             }}
+                                            onClick={() => buy("dog")}    
                                         />
 
                                         {/*boton fila3*/}
@@ -924,6 +929,7 @@ function Home() {
                                                 left: "18%",
                                                 top: "-21%",
                                             }}
+                                            onClick={() => buy("ice")}
                                         />
 
                                         <img
@@ -936,6 +942,7 @@ function Home() {
                                                 left: "54%",
                                                 top: "-21%",
                                             }}
+                                            onClick={() => buy("blue")}
                                         />
 
                                         <img
@@ -948,6 +955,7 @@ function Home() {
                                                 left: "89%",
                                                 top: "-21%",
                                             }}
+                                            onClick={() => buy("purple")}
                                         />
                                     </div>
                                 </div>
