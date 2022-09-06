@@ -93,8 +93,15 @@ function Home() {
             getGoalData();
             getultimameta();
         }
-    }, [user, loading]);
 
+        
+
+    }, [user, loading]);
+    
+    const buy = (petname) => {
+        console.log('Click');
+    } 
+    
     /**
      * Renders a pet
      */
@@ -840,7 +847,7 @@ function Home() {
                                                 left: "18%",
                                                 top: "-87%",
                                             }}
-                                            onClick="buy(\'' + happyplant + '\')"
+                                            onClick={() => buy(happyplant)}
                                         />
 
                                         <img
