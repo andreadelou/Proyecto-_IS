@@ -99,6 +99,8 @@ function Home() {
     }, [user, loading]);
     
     const buy = (petname) => {
+        // comprar la mascota
+        getUserData(); //llama a la funcion que tiene el reconocimientos de puntos
         console.log(petname);
     } 
     
@@ -847,7 +849,7 @@ function Home() {
                                                 left: "18%",
                                                 top: "-87%",
                                             }}
-                                            onClick={() => buy("plant")}
+                                            onClick={() => buy("flower")}
                                         />
 
                                         <img
