@@ -374,7 +374,7 @@ function Home() {
                                             marginTop: "30px",
                                         }}
                                     >
-                                        
+
                                         {/*imagenes fila1*/}
 
                                         <button className='c1' onClick={() => {
@@ -396,6 +396,10 @@ function Home() {
                                         </button>
 
 
+                                        <button className='c1' onClick={() => {
+                                            setPet('frog');
+                                        }} 
+                                        >
                                         <img
                                             src={happyfrog}
                                             alt="cuadro2"
@@ -407,6 +411,7 @@ function Home() {
                                                 top: "-100%",
                                             }}
                                         />
+                                        </button>
 
                                         <img
                                             src={plus}
