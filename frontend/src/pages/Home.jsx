@@ -9,6 +9,7 @@ import {
     useDisclosure,
     VStack,
     Modal,
+    useToast,
     ModalOverlay,
     ModalContent,
     ModalHeader,
@@ -20,6 +21,7 @@ import Header from "../components/Header.js";
 import blob from "../assets/blob01.png";
 import { fetchExpiredTasks } from "../services/goals.service.js";
 import { proximatarea } from "../services/goals.service";
+import { addPointsToUser } from "../services/users.service";
 
 // masacotas          :3
 import happyfrog from "../assets/happyfrog.png";
@@ -56,14 +58,21 @@ function Home() {
     const [petState, setPetState] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [currentModalPage, setCurrentModalPage] = useState("locker");
+      // Use the toast
+    const toast = useToast();
+
+    const getUserData = async () => {
+        const data = await getUserInfo(user); // Get the current user information
+        setPoints(data.points ?? 0);
+        const puntos = (data.points ?? 0);
+        setPet(data.pet);
+        return puntos;
+    };
+
     useEffect(() => {
         if (loading) return;
         if (!user) return navigate("/");
-        const getUserData = async () => {
-            const data = await getUserInfo(user); // Get the current user information
-            setPoints(data.points ?? 0);
-            setPet(data.pet);
-        };
+        
         const getGoalData = async () => {
             const data = await fetchExpiredTasks(); // Fetch the expired goals
             if (data.length > 0) {
@@ -93,8 +102,50 @@ function Home() {
             getGoalData();
             getultimameta();
         }
-    }, [user, loading]);
 
+        
+
+    }, [user, loading]);
+    
+    const buy = async (petname) => { 
+        //funcion que verifica si puede comprar a la mascota que desea
+        // comprar la mascota
+        const puntos =  await getUserData(); // obitene los puntos del usuario
+        console.log(puntos);
+        console.log(petname);
+        
+        if ( puntos >= 50 ){
+            
+            toast({
+                title: 'Se logro comprar la mascota',
+                description: "siuuu",
+                status: 'success',
+                position: 'top',
+                duration: 9000,
+                isClosable: true,
+              });
+
+              addPointsToUser(-50, user); //setea los puntos de la mascota
+            
+            
+
+        }
+        else{
+            toast({
+                title: 'No tienes los puntos suficientes :c',
+                description: "Ponte las pilas",
+                status: 'error',
+                position: 'top',
+                duration: 9000,
+                isClosable: true,
+              });
+        }
+        
+
+        
+
+    } 
+    
     /**
      * Renders a pet
      */
@@ -228,7 +279,10 @@ function Home() {
                             >
                                 Personajes
                             </Button>
+
                         </HStack>
+
+                        
                         {currentModalPage === "locker" ? (
                             <>
                                 Armario
@@ -837,6 +891,7 @@ function Home() {
                                                 left: "18%",
                                                 top: "-87%",
                                             }}
+                                            onClick={() => buy("flower")}
                                         />
 
                                         <img
@@ -849,6 +904,7 @@ function Home() {
                                                 left: "54%",
                                                 top: "-87%",
                                             }}
+                                            onClick={() => buy("ghost")}
                                         />
 
                                         <img
@@ -861,6 +917,7 @@ function Home() {
                                                 left: "89%",
                                                 top: "-87%",
                                             }}
+                                            onClick={() => buy("teddy")}
                                         />
 
                                         {/*boton fila2*/}
@@ -875,6 +932,7 @@ function Home() {
                                                 left: "18%",
                                                 top: "-54%",
                                             }}
+                                            onClick={() => buy("bot")}
                                         />
 
                                         <img
@@ -887,6 +945,7 @@ function Home() {
                                                 left: "54%",
                                                 top: "-54%",
                                             }}
+                                            onClick={() => buy("cloud")}
                                         />
 
                                         <img
@@ -899,6 +958,7 @@ function Home() {
                                                 left: "89%",
                                                 top: "-54%",
                                             }}
+                                            onClick={() => buy("dog")}    
                                         />
 
                                         {/*boton fila3*/}
@@ -913,6 +973,7 @@ function Home() {
                                                 left: "18%",
                                                 top: "-21%",
                                             }}
+                                            onClick={() => buy("ice")}
                                         />
 
                                         <img
@@ -925,6 +986,7 @@ function Home() {
                                                 left: "54%",
                                                 top: "-21%",
                                             }}
+                                            onClick={() => buy("blue")}
                                         />
 
                                         <img
@@ -937,6 +999,7 @@ function Home() {
                                                 left: "89%",
                                                 top: "-21%",
                                             }}
+                                            onClick={() => buy("purple")}
                                         />
                                     </div>
                                 </div>
