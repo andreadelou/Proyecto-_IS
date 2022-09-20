@@ -9,6 +9,7 @@ import {
     useDisclosure,
     VStack,
     Modal,
+    useToast,
     ModalOverlay,
     ModalContent,
     ModalHeader,
@@ -56,14 +57,21 @@ function Home() {
     const [petState, setPetState] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [currentModalPage, setCurrentModalPage] = useState("locker");
+      // Use the toast
+    const toast = useToast();
+
+    const getUserData = async () => {
+        const data = await getUserInfo(user); // Get the current user information
+        setPoints(data.points ?? 0);
+        const puntos = (data.points ?? 0);
+        setPet(data.pet);
+        return puntos;
+    };
+
     useEffect(() => {
         if (loading) return;
         if (!user) return navigate("/");
-        const getUserData = async () => {
-            const data = await getUserInfo(user); // Get the current user information
-            setPoints(data.points ?? 0);
-            setPet(data.pet);
-        };
+        
         const getGoalData = async () => {
             const data = await fetchExpiredTasks(); // Fetch the expired goals
             if (data.length > 0) {
@@ -98,10 +106,43 @@ function Home() {
 
     }, [user, loading]);
     
-    const buy = (petname) => {
+    const buy = async (petname) => { 
+        //funcion que verifica si puede comprar a la mascota que desea
         // comprar la mascota
-        getUserData(); //llama a la funcion que tiene el reconocimientos de puntos
+        const puntos =  await getUserData(); // obitene los puntos del usuario
+        console.log(puntos);
         console.log(petname);
+        
+        if ( puntos >= 50 ){
+            
+            toast({
+                title: 'Se logro comprar la mascota',
+                description: "siuuu",
+                status: 'success',
+                position: 'top',
+                duration: 9000,
+                isClosable: true,
+              });
+
+            puntos = puntos-50;
+            
+            
+
+        }
+        else{
+            toast({
+                title: 'No tienes los puntos suficientes :c',
+                description: "Ponte las pilas",
+                status: 'error',
+                position: 'top',
+                duration: 9000,
+                isClosable: true,
+              });
+        }
+        
+
+        
+
     } 
     
     /**
