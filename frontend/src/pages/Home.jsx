@@ -135,11 +135,7 @@ function Home() {
                 isClosable: true,
             });
 
-            mascots.unshift(petname);
-
-            // mascots.push(petname[0]); //Agrega mascota a la lista
-            console.log(mascots.length);
-            console.log("nuevo");
+            mascots.unshift(petname); //Agrega mascota a la lista
 
             addPointsToUser(-50, user); //setea los puntos de la mascota
         } else {
@@ -898,7 +894,7 @@ function Home() {
                                                 left: "18%",
                                                 top: "-87%",
                                             }}
-                                            onClick={() => buy("flower")}
+                                            onClick={() => buy(happyflower)}
                                         />
 
                                         <img
@@ -924,7 +920,7 @@ function Home() {
                                                 left: "89%",
                                                 top: "-87%",
                                             }}
-                                            onClick={() => buy("teddy")}
+                                            onClick={() => buy(happyteddy)}
                                         />
 
                                         {/*boton fila2*/}
@@ -939,7 +935,7 @@ function Home() {
                                                 left: "18%",
                                                 top: "-54%",
                                             }}
-                                            onClick={() => buy("bot")}
+                                            onClick={() => buy(happybot)}
                                         />
 
                                         <img
@@ -952,7 +948,7 @@ function Home() {
                                                 left: "54%",
                                                 top: "-54%",
                                             }}
-                                            onClick={() => buy("cloud")}
+                                            onClick={() => buy(happycloud)}
                                         />
 
                                         <img
@@ -965,7 +961,7 @@ function Home() {
                                                 left: "89%",
                                                 top: "-54%",
                                             }}
-                                            onClick={() => buy("dog")}
+                                            onClick={() => buy(happydog)}
                                         />
 
                                         {/*boton fila3*/}
@@ -980,7 +976,7 @@ function Home() {
                                                 left: "18%",
                                                 top: "-21%",
                                             }}
-                                            onClick={() => buy("ice")}
+                                            onClick={() => buy(happyice)}
                                         />
 
                                         <img
@@ -993,7 +989,7 @@ function Home() {
                                                 left: "54%",
                                                 top: "-21%",
                                             }}
-                                            onClick={() => buy("blue")}
+                                            onClick={() => buy(happyblue)}
                                         />
 
                                         <img
@@ -1006,7 +1002,7 @@ function Home() {
                                                 left: "89%",
                                                 top: "-21%",
                                             }}
-                                            onClick={() => buy("purple")}
+                                            onClick={() => buy(happypurple)}
                                         />
                                     </div>
                                 </div>
