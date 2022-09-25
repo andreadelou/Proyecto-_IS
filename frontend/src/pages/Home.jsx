@@ -28,7 +28,9 @@ import sadfrog from "../assets/sadfrog.png";
 import happyplant from "../assets/happyplant.png";
 import mehplant from "../assets/mehplant.png";
 import sadplant from "../assets/sadplant.png";
-import { getUserInfo } from "../services/users.service.js";
+import { getUserInfo,
+         setNewPet
+        } from "../services/users.service";
 
 //mascotas de armario
 import cuadrofondo from "../assets/cuadrofondo.png";
@@ -379,6 +381,7 @@ function Home() {
 
                                         <button className='c1' onClick={() => {
                                             setPet('plant');
+                                            setNewPet('plant',user);
                                         }} 
                                         >
                                         <img
@@ -398,6 +401,7 @@ function Home() {
 
                                         <button className='c1' onClick={() => {
                                             setPet('frog');
+                                            setNewPet('frog',user);
                                         }} 
                                         >
                                         <img
