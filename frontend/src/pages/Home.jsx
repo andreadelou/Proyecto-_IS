@@ -71,8 +71,6 @@ function Home() {
         plus,
         plus,
         plus,
-        plus,
-        plus,
     ];
 
     const getUserData = async () => {
