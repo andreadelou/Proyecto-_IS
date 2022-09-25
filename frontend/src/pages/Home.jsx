@@ -58,13 +58,15 @@ function Home() {
     const [petState, setPetState] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [currentModalPage, setCurrentModalPage] = useState("locker");
-      // Use the toast
+    // Use the toast
     const toast = useToast();
+
+    let mascots = [happyfrog, happyplant];
 
     const getUserData = async () => {
         const data = await getUserInfo(user); // Get the current user information
         setPoints(data.points ?? 0);
-        const puntos = (data.points ?? 0);
+        const puntos = data.points ?? 0;
         setPet(data.pet);
         return puntos;
     };
@@ -72,7 +74,7 @@ function Home() {
     useEffect(() => {
         if (loading) return;
         if (!user) return navigate("/");
-        
+
         const getGoalData = async () => {
             const data = await fetchExpiredTasks(); // Fetch the expired goals
             if (data.length > 0) {
@@ -102,50 +104,40 @@ function Home() {
             getGoalData();
             getultimameta();
         }
-
-        
-
     }, [user, loading]);
-    
-    const buy = async (petname) => { 
+
+    const buy = async (petname) => {
         //funcion que verifica si puede comprar a la mascota que desea
         // comprar la mascota
-        const puntos =  await getUserData(); // obitene los puntos del usuario
+        const puntos = await getUserData(); // obitene los puntos del usuario
         console.log(puntos);
         console.log(petname);
-        
-        if ( puntos >= 50 ){
-            
+
+        if (puntos >= 50) {
             toast({
-                title: 'Se logro comprar la mascota',
+                title: "Se logro comprar la mascota",
                 description: "siuuu",
-                status: 'success',
-                position: 'top',
+                status: "success",
+                position: "top",
                 duration: 9000,
                 isClosable: true,
-              });
+            });
+            mascots.push(petname);
 
-              addPointsToUser(-50, user); //setea los puntos de la mascota
-            
-            
-
-        }
-        else{
+            addPointsToUser(-50, user); //setea los puntos de la mascota
+        } else {
             toast({
-                title: 'No tienes los puntos suficientes :c',
+                title: "No tienes los puntos suficientes :c",
                 description: "Ponte las pilas",
-                status: 'error',
-                position: 'top',
+                status: "error",
+                position: "top",
                 duration: 9000,
                 isClosable: true,
-              });
+            });
         }
-        
+        console.log(mascots);
+    };
 
-        
-
-    } 
-    
     /**
      * Renders a pet
      */
@@ -279,10 +271,8 @@ function Home() {
                             >
                                 Personajes
                             </Button>
-
                         </HStack>
 
-                        
                         {currentModalPage === "locker" ? (
                             <>
                                 Armario
@@ -958,7 +948,7 @@ function Home() {
                                                 left: "89%",
                                                 top: "-54%",
                                             }}
-                                            onClick={() => buy("dog")}    
+                                            onClick={() => buy("dog")}
                                         />
 
                                         {/*boton fila3*/}
