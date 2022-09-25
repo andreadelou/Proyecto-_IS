@@ -61,7 +61,19 @@ function Home() {
     // Use the toast
     const toast = useToast();
 
-    let mascots = [happyfrog, happyplant];
+    let mascots = [
+        happyfrog,
+        happyplant,
+        plus,
+        plus,
+        plus,
+        plus,
+        plus,
+        plus,
+        plus,
+        plus,
+        plus,
+    ];
 
     const getUserData = async () => {
         const data = await getUserInfo(user); // Get the current user information
@@ -122,7 +134,12 @@ function Home() {
                 duration: 9000,
                 isClosable: true,
             });
-            mascots.push(petname);
+
+            mascots.unshift(petname);
+
+            // mascots.push(petname[0]); //Agrega mascota a la lista
+            console.log(mascots.length);
+            console.log("nuevo");
 
             addPointsToUser(-50, user); //setea los puntos de la mascota
         } else {
@@ -401,7 +418,7 @@ function Home() {
                                         {/*imagenes fila1*/}
 
                                         <img
-                                            src={happyplant}
+                                            src={mascots[0]}
                                             alt="cuadro1"
                                             style={{
                                                 width: "200px",
@@ -413,7 +430,7 @@ function Home() {
                                         />
 
                                         <img
-                                            src={happyfrog}
+                                            src={mascots[1]}
                                             alt="cuadro2"
                                             style={{
                                                 width: "200px",
@@ -425,7 +442,7 @@ function Home() {
                                         />
 
                                         <img
-                                            src={plus}
+                                            src={mascots[2]}
                                             alt="cuadro3"
                                             style={{
                                                 width: "100px",
@@ -439,7 +456,7 @@ function Home() {
                                         {/*imagenes fila2*/}
 
                                         <img
-                                            src={plus}
+                                            src={mascots[3]}
                                             alt="cuadro1"
                                             style={{
                                                 width: "100px",
@@ -451,7 +468,7 @@ function Home() {
                                         />
 
                                         <img
-                                            src={plus}
+                                            src={mascots[4]}
                                             alt="cuadro2"
                                             style={{
                                                 width: "100px",
@@ -463,7 +480,7 @@ function Home() {
                                         />
 
                                         <img
-                                            src={plus}
+                                            src={mascots[5]}
                                             alt="cuadro3"
                                             style={{
                                                 width: "100px",
@@ -477,7 +494,7 @@ function Home() {
                                         {/*imagenes fila3*/}
 
                                         <img
-                                            src={plus}
+                                            src={mascots[6]}
                                             alt="cuadro1"
                                             style={{
                                                 width: "100px",
@@ -489,7 +506,7 @@ function Home() {
                                         />
 
                                         <img
-                                            src={plus}
+                                            src={mascots[7]}
                                             alt="cuadro2"
                                             style={{
                                                 width: "100px",
@@ -501,7 +518,7 @@ function Home() {
                                         />
 
                                         <img
-                                            src={plus}
+                                            src={mascots[8]}
                                             alt="cuadro3"
                                             style={{
                                                 width: "100px",
@@ -894,7 +911,7 @@ function Home() {
                                                 left: "54%",
                                                 top: "-87%",
                                             }}
-                                            onClick={() => buy("ghost")}
+                                            onClick={() => buy(happyghost)}
                                         />
 
                                         <img
