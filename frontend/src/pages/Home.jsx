@@ -61,7 +61,7 @@ function Home() {
     // Use the toast
     const toast = useToast();
 
-    let mascots = [
+    let pets = [
         happyfrog,
         happyplant,
         plus,
@@ -78,6 +78,8 @@ function Home() {
         setPoints(data.points ?? 0);
         const puntos = data.points ?? 0;
         setPet(data.pet);
+        const armario = data.armario;
+        setArmario(data.armario);
         return puntos;
     };
 
@@ -133,10 +135,10 @@ function Home() {
                 isClosable: true,
             });
 
-            mascots.unshift(petname); //Agrega mascota a la lista
+            pets.unshift(petname); //Agrega mascota a la lista
 
             addPointsToUser(-50, user); //setea los puntos de la mascota
-            setArmario(mascots, user); //Guarda la mascota
+            setArmario(pets, user); //Guarda la mascota
         } else {
             toast({
                 title: "No tienes los puntos suficientes :c",
@@ -147,7 +149,7 @@ function Home() {
                 isClosable: true,
             });
         }
-        console.log(mascots);
+        console.log(pets);
     };
 
     /**
@@ -413,7 +415,7 @@ function Home() {
                                         {/*imagenes fila1*/}
 
                                         <img
-                                            src={mascots[0]}
+                                            src={pets[0]}
                                             alt="cuadro1"
                                             style={{
                                                 width: "200px",
@@ -425,7 +427,7 @@ function Home() {
                                         />
 
                                         <img
-                                            src={mascots[1]}
+                                            src={pets[1]}
                                             alt="cuadro2"
                                             style={{
                                                 width: "200px",
@@ -437,7 +439,7 @@ function Home() {
                                         />
 
                                         <img
-                                            src={mascots[2]}
+                                            src={pets[2]}
                                             alt="cuadro3"
                                             style={{
                                                 width: "100px",
@@ -451,7 +453,7 @@ function Home() {
                                         {/*imagenes fila2*/}
 
                                         <img
-                                            src={mascots[3]}
+                                            src={pets[3]}
                                             alt="cuadro1"
                                             style={{
                                                 width: "100px",
@@ -463,7 +465,7 @@ function Home() {
                                         />
 
                                         <img
-                                            src={mascots[4]}
+                                            src={pets[4]}
                                             alt="cuadro2"
                                             style={{
                                                 width: "100px",
@@ -475,7 +477,7 @@ function Home() {
                                         />
 
                                         <img
-                                            src={mascots[5]}
+                                            src={pets[5]}
                                             alt="cuadro3"
                                             style={{
                                                 width: "100px",
@@ -489,7 +491,7 @@ function Home() {
                                         {/*imagenes fila3*/}
 
                                         <img
-                                            src={mascots[6]}
+                                            src={pets[6]}
                                             alt="cuadro1"
                                             style={{
                                                 width: "100px",
@@ -501,7 +503,7 @@ function Home() {
                                         />
 
                                         <img
-                                            src={mascots[7]}
+                                            src={pets[7]}
                                             alt="cuadro2"
                                             style={{
                                                 width: "100px",
@@ -513,7 +515,7 @@ function Home() {
                                         />
 
                                         <img
-                                            src={mascots[8]}
+                                            src={pets[8]}
                                             alt="cuadro3"
                                             style={{
                                                 width: "100px",

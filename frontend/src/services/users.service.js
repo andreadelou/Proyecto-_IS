@@ -53,9 +53,10 @@ export const getUserInfo = async (user) => {
     }
 };
 
-/* 
-Guardar array de las mascotas
-
+/**
+ * Armario
+ * @param {*} newpet
+ * @param {*} user
  */
 export const setArmario = async (newpet, user) => {
     const userInfo = await getUserInfo(user);
