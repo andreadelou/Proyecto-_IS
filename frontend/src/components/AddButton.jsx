@@ -4,7 +4,7 @@ import "../CSS/AddButton.css";
 
 function AddButton({ onAdd }) {
   return (
-    <button className="add-button" onClick={onAdd}>
+    <button data-testid="onaddButton"  className="add-button" onClick={onAdd}>
       <AddIcon />
     </button>
   );

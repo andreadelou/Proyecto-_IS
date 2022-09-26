@@ -24,7 +24,7 @@ function EditButton({ onEdit }) {
   };
 
   return (
-    <><button className="edit-button" onClick={onOpen}>
+    <><button data-testid="oneditButton"  className="edit-button" onClick={onOpen}>
       <EditIcon />
     </button>
     <GoalModalTwo

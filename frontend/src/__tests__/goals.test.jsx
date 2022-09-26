@@ -4,6 +4,7 @@ const { render, getByTestId, screen, fireEvent } = require("@testing-library/rea
 const { act } = require("react-dom/test-utils")
 const { BrowserRouter } = require("react-router-dom")
 const { default: GoalModal } = require("../components/GoalModal")
+const { default: TodoForm } = require("../components/TodoForm")
 
 
 describe("Tests for the goals logic", () => {
@@ -70,6 +71,54 @@ describe("Tests for the goals logic", () => {
 		fireEvent.click(saveButton)
 		// Assert
 		expect(onSaveMock).toHaveBeenCalled()
+	})
+
+	test("Clicking on the plus icon calls the method that creates the item.", async () => {
+		// Arrange
+		const onAddMock = jest
+			.fn()
+			.mockName('onAdd')
+		
+			await act(async() => {
+			render(
+				<TodoForm
+					isOpen={true} onAdd={onAddMock}
+
+					title="test goal"
+				/>,
+				{ wrapper: BrowserRouter }
+			)  
+			})
+		const addButton = screen.getByTestId('onaddButton')
+		// Act
+		fireEvent.click(addButton)
+		// Assert
+		expect(onAddMock).toHaveBeenCalled()	// The method that adds the todo should be called
+	})
+
+	test("Clicking the edit button calls the method that edits the item.", async () => {
+		// Arrange
+		const onEditMock = jest
+			.fn()
+			.mockName('onEdit')
+		
+			await act(async() => {
+			render(
+				<TodoForm
+					isOpen={true}
+					onEdit={onEditMock}
+
+					title="test goal"
+				/>,
+				{ wrapper: BrowserRouter }
+			)  
+			})
+		const editButton = screen.getByTestId('oneditButton')
+		// Act
+		fireEvent.click(editButton)
+		// Assert
+		const goalSaveButton = screen.getByTestId('goalSaveButton')
+		expect(goalSaveButton).toBeDefined()
 	})
 
 })
