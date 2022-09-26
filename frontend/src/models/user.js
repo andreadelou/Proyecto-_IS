@@ -23,6 +23,7 @@ export class User {
 		if (this.points < price) return false;	// The user can't buy a pet if there are no enoguh points
 		this.pets.push(pet);
 		this.points = this.points - price;
+		return true	// The purchase of the pet was successfull
 	}
 
 }
