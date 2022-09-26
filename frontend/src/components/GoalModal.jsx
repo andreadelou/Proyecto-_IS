@@ -4,6 +4,7 @@ import {
   InputGroup,
   InputLeftElement,
   Select,
+	Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -22,6 +23,7 @@ import {
 function GoalModal({ isOpen, onClose, onOpen, onSave }) {
   const [reminder, setreminder] = useState(null);
   const [goalTitle, setGoalTitle] = useState(null);
+  const [goalDescription, setGoalDescription] = useState(null);
   const [goalCategory, setGoalCategory] = useState(null);
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -37,6 +39,16 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
               placeholder="Título de tu meta"
               onChange={($event) => {
                 setGoalTitle($event.target.value);
+              }}
+            />
+					</FormControl>
+					<FormControl>
+						<Input
+							data-testid="description"
+              marginBottom={2}
+              placeholder="Descripción de tu meta"
+              onChange={($event) => {
+                setGoalDescription($event.target.value);
               }}
             />
           </FormControl>
@@ -91,7 +103,8 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
             onClick={() => {
               onClose();
               setGoalTitle(null);
-              setGoalCategory(null);
+							setGoalCategory(null);
+							setGoalDescription(null);
               setreminder(null);
               onSave(goalTitle, goalCategory, reminder);
 						}}
