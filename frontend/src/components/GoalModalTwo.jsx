@@ -45,7 +45,8 @@ function GoalModalTwo({ isOpen, onClose, onOpen, onSave }) {
         <ModalFooter>
           <Button
             colorScheme="blue"
-            backgroundColor="primary"
+						backgroundColor="primary"
+						data-testid="goalSaveButton"
             textColor="textLight"
             _hover={{
               backgroundColor: "primaryLight",
