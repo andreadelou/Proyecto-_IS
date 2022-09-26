@@ -30,7 +30,9 @@ import sadfrog from "../assets/sadfrog.png";
 import happyplant from "../assets/happyplant.png";
 import mehplant from "../assets/mehplant.png";
 import sadplant from "../assets/sadplant.png";
-import { getUserInfo } from "../services/users.service.js";
+import { getUserInfo,
+         setNewPet
+        } from "../services/users.service";
 
 //mascotas de armario
 import cuadrofondo from "../assets/cuadrofondo.png";
@@ -55,6 +57,7 @@ function Home() {
     const [user, loading] = useAuthState(auth);
     const [points, setPoints] = useState();
     const [pet, setPet] = useState();
+    
     const [petState, setPetState] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [currentModalPage, setCurrentModalPage] = useState("locker");
@@ -72,6 +75,12 @@ function Home() {
     useEffect(() => {
         if (loading) return;
         if (!user) return navigate("/");
+        const getUserData = async () => {
+            const data = await getUserInfo(user); // Get the current user information
+            setPoints(data.points ?? 0);
+            setPet(data.pet);
+            //setPet("plant");
+        };
         
         const getGoalData = async () => {
             const data = await fetchExpiredTasks(); // Fetch the expired goals
@@ -102,6 +111,7 @@ function Home() {
             getGoalData();
             getultimameta();
         }
+
 
         
 
@@ -150,19 +160,35 @@ function Home() {
      * Renders a pet
      */
     const renderPet = () => {
-        if (pet !== "frog" && pet !== "plant") return; // Do not render if pet is not present
-        const petArray =
+        //if (pet !== "frog" && pet !== "plant") return; // Do not render if pet is not present
+        /*const petArray =
             pet === "frog"
                 ? [happyfrog, mehfrog, sadfrog]
-                : [happyplant, mehplant, sadplant];
-        return (
-            <Image
-                src={petArray[petState]}
-                alt="Rana feliz"
-                width="200px"
-                height="200px"
-            />
-        );
+                : [happyplant, mehplant, sadplant];*/
+        //const [petArray, setPetArray] = useState([happyfrog, mehfrog, sadfrog]);
+        
+        if(pet == "frog"){
+            const petArray = [happyfrog, mehfrog, sadfrog];
+            return (
+                <Image
+                    src={petArray[petState]}
+                    alt="Rana feliz"
+                    width="200px"
+                    height="200px"
+                />
+            );
+        }
+        else if(pet === "plant"){
+            const petArray = [happyplant, mehplant, sadplant];
+            return (
+                <Image
+                    src={petArray[petState]}
+                    alt="Rana feliz"
+                    width="200px"
+                    height="200px"
+                />
+            );
+        }
     };
     return (
         <div className="home">
@@ -295,6 +321,7 @@ function Home() {
                                     }}
                                 >
                                     {/*fondos fila1*/}
+                                    
                                     <img
                                         src={cuadrofondo}
                                         alt="cuadro1"
@@ -408,9 +435,16 @@ function Home() {
                                             marginTop: "30px",
                                         }}
                                     >
+
                                         {/*imagenes fila1*/}
 
+                                        <button className='c1' onClick={() => {
+                                            setPet('plant');
+                                            setNewPet('plant',user);
+                                        }} 
+                                        >
                                         <img
+                                        
                                             src={happyplant}
                                             alt="cuadro1"
                                             style={{
@@ -421,7 +455,14 @@ function Home() {
                                                 top: "-100%",
                                             }}
                                         />
+                                        </button>
 
+
+                                        <button className='c1' onClick={() => {
+                                            setPet('frog');
+                                            setNewPet('frog',user);
+                                        }} 
+                                        >
                                         <img
                                             src={happyfrog}
                                             alt="cuadro2"
@@ -433,6 +474,7 @@ function Home() {
                                                 top: "-100%",
                                             }}
                                         />
+                                        </button>
 
                                         <img
                                             src={plus}

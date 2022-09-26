@@ -29,6 +29,19 @@ export const addPointsToUser = async (points, user) => {
 	updateUserInfo(user.uid, userInfo); // Update the user points
 }
 
+/**
+ * Add points to the user
+ * @param {*} pet 
+ * @param {*} user 
+ */
+ export const setNewPet = async (pet, user) => {
+    const userInfo = await getUserInfo(user);   // Get the user info
+    let userPet = userInfo.pet;  // Get the user points
+    userPet = pet;  // Add the points to the user
+    userInfo.pet = userPet;
+    updateUserInfo(user.uid, userInfo); // Update the user points
+}
+
 
 /**
  * Get the info from the user
