@@ -31,7 +31,8 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
         <ModalCloseButton />
         <ModalBody>
           <FormControl>
-            <Input
+						<Input
+							data-testid="title"
               marginBottom={2}
               placeholder="Título de tu meta"
               onChange={($event) => {
@@ -40,7 +41,8 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
             />
           </FormControl>
           <FormControl marginBottom={2}>
-            <Select
+						<Select
+							data-testid="category"
               marginBottom={2}
               placeholder="Selecciona una categoría"
               onChange={($event) => {
@@ -62,7 +64,8 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
                     pointerEvents={"none"}
                     children={<FaCalendar />}
                   />
-                  <Input
+									<Input
+										data-testid="reminder"
                     placeholder="Recordatorio"
                     readOnly={true}
                     value={reminder ? reminder.toLocaleDateString("en-US") : ""}
@@ -91,7 +94,8 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
               setGoalCategory(null);
               setreminder(null);
               onSave(goalTitle, goalCategory, reminder);
-            }}
+						}}
+						data-testid="save"
             disabled={!goalTitle || !goalCategory || !reminder}
           >
             Guardar
