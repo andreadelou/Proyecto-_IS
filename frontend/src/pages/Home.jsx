@@ -136,7 +136,7 @@ function Home() {
             mascots.unshift(petname); //Agrega mascota a la lista
 
             addPointsToUser(-50, user); //setea los puntos de la mascota
-            mascotitas(mascots, user); //Guarda la mascota
+            setArmario(mascots, user); //Guarda la mascota
         } else {
             toast({
                 title: "No tienes los puntos suficientes :c",
