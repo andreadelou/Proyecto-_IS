@@ -21,7 +21,7 @@ import Header from "../components/Header.js";
 import blob from "../assets/blob01.png";
 import { fetchExpiredTasks } from "../services/goals.service.js";
 import { proximatarea } from "../services/goals.service";
-import { addPointsToUser } from "../services/users.service";
+import { addPointsToUser, setArmario } from "../services/users.service";
 
 // masacotas          :3
 import happyfrog from "../assets/happyfrog.png";
@@ -136,6 +136,7 @@ function Home() {
             mascots.unshift(petname); //Agrega mascota a la lista
 
             addPointsToUser(-50, user); //setea los puntos de la mascota
+            mascotitas(mascots, user); //Guarda la mascota
         } else {
             toast({
                 title: "No tienes los puntos suficientes :c",
