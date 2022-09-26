@@ -37,9 +37,6 @@ function Goals() {
 
   const fetchAll = async () => {
     const goals = await fetchAllGoals();
-    for (const goal of goals) {
-      console.log(goal.reminder.seconds);
-    }
   };
 
   const fetchGoalsByCategory = async () => {
