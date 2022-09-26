@@ -6,13 +6,13 @@ import { collection, addDoc, Timestamp, getDocs, updateDoc, doc, query, where, s
  * @param {*} user 
  */
 export const createUserInCollection = async (user) => {
-    await setDoc(doc(db, 'users', user.uid), {
-        uid: user.uid,
-        name: '',
-        active: true,
-        configured: false,
-        email: user.email
-    });
+	await setDoc(doc(db, 'users', user.uid), {
+		uid: user.uid,
+		name: '',
+		active: true,
+		configured: false,
+		email: user.email
+	});
 }
 
 
@@ -22,11 +22,11 @@ export const createUserInCollection = async (user) => {
  * @param {*} user 
  */
 export const addPointsToUser = async (points, user) => {
-    const userInfo = await getUserInfo(user);   // Get the user info
-    let userPoints = userInfo.points ?? 0;  // Get the user points
-    userPoints += points;  // Add the points to the user
-    userInfo.points = userPoints;
-    updateUserInfo(user.uid, userInfo); // Update the user points
+	const userInfo = await getUserInfo(user);   // Get the user info
+	let userPoints = userInfo.points ?? 0;  // Get the user points
+	userPoints += points;  // Add the points to the user
+	userInfo.points = userPoints;
+	updateUserInfo(user.uid, userInfo); // Update the user points
 }
 
 
@@ -35,13 +35,13 @@ export const addPointsToUser = async (points, user) => {
  * @param {string} user 
  */
 export const getUserInfo = async (user) => {
-    const u = await getDoc(doc(db, 'users', user.uid))
-    if (u.exists()) {
-        return u.data();
-    } else {
-        await createUserInCollection(user); // Create the user data
-        getUserInfo(user);  // Call the function again
-    }
+	const u = await getDoc(doc(db, 'users', user.uid))
+	if (u.exists()) {
+		return u.data();
+	} else {
+		await createUserInCollection(user); // Create the user data
+		getUserInfo(user);  // Call the function again
+	}
 }
 
 /**
@@ -50,6 +50,16 @@ export const getUserInfo = async (user) => {
  * @param {*} data 
  */
 export const updateUserInfo = async (uid, data) => {
-    const docRef = doc(db, 'users', uid);    // Get the document reference from firebase
-    await updateDoc(docRef, data);   // Update the document
+	const docRef = doc(db, 'users', uid);    // Get the document reference from firebase
+	await updateDoc(docRef, data);   // Update the document
+}
+
+
+/**
+ * Adds a pet to an user
+ * @param {string} uid 
+ * @param {string} pet 
+ */
+export const addPetToUser = async (uid, pet) => {
+
 }
