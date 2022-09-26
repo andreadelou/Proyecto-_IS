@@ -12,12 +12,13 @@ function TodoForm({
   completed,
   onToggleCompleted,
   onEdit,
-  percentage = 0,
+	percentage = 0,
+	description = ""
 }) {
   const [todo, setTodo] = useState({
     id: "",
     task: "",
-    completed: false,
+		completed: false,
   });
 
   return (
@@ -39,8 +40,12 @@ function TodoForm({
               className="todo-form__input"
             >
               {title}
-            </h1>
-          </div>
+						</h1>
+						
+					</div>
+					<div className="todo-form__description">
+						<p>{description}</p>
+					</div>
           <div className="todo-form__progress-bar">
             <div
               className="todo-form__progress-bar--progress"

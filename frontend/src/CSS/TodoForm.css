@@ -49,6 +49,9 @@ progress {
   align-items: center;
   width: 100%;
 }
+.todo-form__description {
+  margin: 10px 0px;
+}
 
 @keyframes progress-animation {
   to {

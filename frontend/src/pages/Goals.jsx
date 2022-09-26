@@ -42,7 +42,7 @@ function Goals() {
   const fetchGoalsByCategory = async () => {
     const goals = await fetchAllGoalsAndGroupByCategory();
 
-    setGoals(Object.entries(goals));
+		setGoals(Object.entries(goals));
     for (const goal of Object.values(goals).flat()) {
       calcProgress(goal); // Calculate the progress for the specific giak,
     }
@@ -129,8 +129,8 @@ function Goals() {
    * @param {*} title
    * @param {*} category
    */
-  const createNewGoal = async (title, category, reminder) => {
-    await insertGoal(title, category, reminder);
+  const createNewGoal = async (title, category, reminder, description = '') => {
+    await insertGoal(title, category, reminder, description);
     fetchGoals();
   };
 
@@ -189,7 +189,8 @@ function Goals() {
           <div className="goals__goal">
             {goals.map((entries) => (
               <div key={entries[0]}>
-                <h2>{entries[0]}</h2>
+								<h2>{entries[0]}</h2>
+								
                 <div>{renderSwitch(entries[0])}</div>
 
                 {entries[1].map((goal) => (
@@ -203,7 +204,8 @@ function Goals() {
                       completed={goal.completed}
                       onToggleCompleted={() => {
                         updateGoalCompleted(goal, goal.id);
-                      }}
+											}}
+											description = {goal.description}
                       onAdd={() => {
                         addTodo(goal.id);
                       }}
@@ -233,8 +235,8 @@ function Goals() {
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
-        onSave={(title, category, reminder) => {
-          createNewGoal(title, category, reminder);
+        onSave={(title, category, reminder, description = '') => {
+          createNewGoal(title, category, reminder, description);
         }}
       />
     </>

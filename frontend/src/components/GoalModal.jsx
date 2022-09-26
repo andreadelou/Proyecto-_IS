@@ -106,7 +106,7 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
 							setGoalCategory(null);
 							setGoalDescription(null);
               setreminder(null);
-              onSave(goalTitle, goalCategory, reminder);
+              onSave(goalTitle, goalCategory, reminder, goalDescription);
 						}}
 						data-testid="save"
             disabled={!goalTitle || !goalCategory || !reminder}
