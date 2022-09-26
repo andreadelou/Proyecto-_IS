@@ -57,11 +57,11 @@ export const getUserInfo = async (user) => {
 Guardar array de las mascotas
 
  */
-export const setArmario = async (pet, user) => {
+export const setArmario = async (newpet, user) => {
     const userInfo = await getUserInfo(user);
-    let userPet = userInfo.pet;
-    userPet = pet;
-    userInfo.pet = userPet;
+    let usernewpet = userInfo.newpet;
+    usernewpet = newpet;
+    userInfo.newpet = usernewpet;
     updateUserInfo(user.uid, userInfo);
 };
 
