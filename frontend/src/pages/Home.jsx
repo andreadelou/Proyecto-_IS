@@ -47,6 +47,8 @@ import happypurple from "../assets/happypurple.png";
 import plus from "../assets/plus.png";
 
 import buybutton from "../assets/buybutton.png";
+import { againstNullOrUndefined } from "../utils/guard.jsx";
+import { User } from "../models/user.js";
 
 function Home() {
     const navigate = useNavigate(); // navigate
@@ -112,26 +114,25 @@ function Home() {
         // comprar la mascota
         const puntos =  await getUserData(); // obitene los puntos del usuario
         console.log(puntos);
-        console.log(petname);
-        
-        if ( puntos >= 50 ){
-            
-            toast({
-                title: 'Se logro comprar la mascota',
-                description: "siuuu",
-                status: 'success',
-                position: 'top',
-                duration: 9000,
-                isClosable: true,
-              });
-
-              addPointsToUser(-50, user); //setea los puntos de la mascota
-            
-            
-
-        }
-        else{
-            toast({
+				const userInfo = await getUserInfo(user)
+				if (againstNullOrUndefined(userInfo)) {
+					// Create the user instance
+					const user = new User(userInfo.uid, userInfo.points, userInfo.active,
+					userInfo.configured, userInfo.email, userInfo.name, userInfo.pet, userInfo.pets)
+					const successPurchase = user.addPet(pet, 50);
+					if (successPurchase) {
+						toast({
+								title: 'Se logro comprar la mascota',
+								description: "Siuuu",
+								status: 'success',
+								position: 'top',
+								duration: 9000,
+								isClosable: true,
+							});
+		
+							addPointsToUser(-50, user); //setea los puntos de la mascota
+					} else {
+						toast({
                 title: 'No tienes los puntos suficientes :c',
                 description: "Ponte las pilas",
                 status: 'error',
@@ -139,11 +140,10 @@ function Home() {
                 duration: 9000,
                 isClosable: true,
               });
-        }
-        
-
-        
-
+						}
+					
+					
+				}        
     } 
     
     /**
@@ -156,7 +156,7 @@ function Home() {
                 ? [happyfrog, mehfrog, sadfrog]
                 : [happyplant, mehplant, sadplant];
         return (
-            <Image
+           <Image
                 src={petArray[petState]}
                 alt="Rana feliz"
                 width="200px"

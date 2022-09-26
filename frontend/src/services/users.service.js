@@ -32,7 +32,7 @@ export const addPointsToUser = async (points, user) => {
 
 /**
  * Get the info from the user
- * @param {string} user 
+ * @param {object} user 
  */
 export const getUserInfo = async (user) => {
 	const u = await getDoc(doc(db, 'users', user.uid))
