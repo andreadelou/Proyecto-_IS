@@ -59,7 +59,7 @@ Guardar array de las mascotas
  */
 export const setArmario = async (newpet, user) => {
     const userInfo = await getUserInfo(user);
-    let usernewpet = userInfo.newpet[2];
+    let usernewpet = userInfo.newpet;
     usernewpet = newpet;
     userInfo.newpet = usernewpet;
     updateUserInfo(user.uid, userInfo);
