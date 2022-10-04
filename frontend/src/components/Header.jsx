@@ -5,12 +5,11 @@ import "../CSS/navbar.css";
 import { logout } from '../firebase';
 
 
+export async function logOut() {
+	await logout()
+}
 
 function Header({ title, subtitle, Bandera = false }) {
-
-    async function LogOut() {
-        await logout()
-    }
 
     return (
         <div style={{
@@ -34,7 +33,7 @@ function Header({ title, subtitle, Bandera = false }) {
                             <li><Link to="/goals">Metas</Link></li>
                             <li><Link to="/health">Bienestar</Link></li>
                             <li><Link to="/calendar">Calendario</Link></li>
-                            <li><a onClick={LogOut} href="#">Log Out</a></li>
+                            <li data-testid="logoutButton" ><a onClick={logOut} href="#">Log Out</a></li>
                         </ul>
                     </nav>
                     : ''

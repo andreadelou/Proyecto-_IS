@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/Goals.css";
-import Header from "../components/Header.js";
+import Header from "../components/Header.jsx";
 import TodoForm from "../components/TodoForm.jsx";
 import TodoList from "../components/TodoList.jsx";
 import blob2 from "../assets/blob02.png";
