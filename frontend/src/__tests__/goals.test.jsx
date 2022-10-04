@@ -1,6 +1,6 @@
 // import Goals from "../pages/Goals"
-
-const { render, getByTestId, screen, fireEvent } = require("@testing-library/react")
+import React from 'react'
+const { render, screen, fireEvent } = require("@testing-library/react")
 const { act } = require("react-dom/test-utils")
 const { BrowserRouter } = require("react-router-dom")
 const { default: GoalModal } = require("../components/GoalModal")
@@ -120,5 +120,6 @@ describe("Tests for the goals logic", () => {
 		const goalSaveButton = screen.getByTestId('goalSaveButton')
 		expect(goalSaveButton).toBeDefined()
 	})
+
 
 })

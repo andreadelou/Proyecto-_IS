@@ -1,7 +1,7 @@
 
 // import Goals from "../pages/Goals"
-
-const { render, getByTestId, screen, fireEvent } = require("@testing-library/react")
+import React from "react"
+const { render, screen, fireEvent } = require("@testing-library/react")
 const { act } = require("react-dom/test-utils")
 const { default: AddButton } = require("../components/AddButton")
 
