@@ -8,6 +8,7 @@ import App from '../App'
 import { act } from 'react-dom/test-utils'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
+import ForgetPasswordModal from '../components/ForgetPasswordModal'
 
 
 
@@ -71,5 +72,47 @@ describe("Authentication tests", () => {
 		fireEvent.change(birthday, { target: { value: '01/01/2000' } })
 		// Assert
 		expect(registerButton.closest('button')).toBeDisabled()
+	})
+	it('Button is enabled when an email is typed', async () => {
+		// Arrange
+		const onOpenMock = jest
+			.fn()
+			.mockName('onOpen')
+		const onCloseMock = jest
+			.fn()
+			.mockName('onClose')
+		await act(async () => {
+			render(<ForgetPasswordModal isOpen onClose={onCloseMock} onOpen={onOpenMock} />, {wrapper: BrowserRouter})  
+		})
+		const emailInput = screen.getByTestId('email')
+		const sendEmailButton = screen.getByTestId('sendButton')
+		// Act
+		fireEvent.change(emailInput, {target: {value: 'guillermo@gmail.com'}})
+		// Assert
+		expect(sendEmailButton.closest('button')).not.toBeDisabled()
+
+	})
+
+	it('Sends a recover email when the users fills the form and clicks it', async () => {
+		// Arrange
+		const onOpenMock = jest
+		.fn()
+		.mockName('onOpen')
+		const onCloseMock = jest
+		.fn()
+		.mockName('onClose')
+		const sendEmailMock = jest.fn().mockName('sendEmail')
+		
+			await act(async () => {
+				render(<ForgetPasswordModal sendEmail={sendEmailMock} isOpen onClose={onCloseMock} onOpen={onOpenMock} />, {wrapper: BrowserRouter})  
+			})
+		const emailInput = screen.getByTestId('email')
+		const sendEmailButton = screen.getByTestId('sendButton')
+		fireEvent.change(emailInput, {target: {value: 'guillermo@gmail.com'}})
+		// Act
+		fireEvent.click(sendEmailButton)
+		// Assert
+		expect(sendEmailMock).toHaveBeenCalled()
+
 	})
 })

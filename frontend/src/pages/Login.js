@@ -93,6 +93,14 @@ function Login() {
 
 	}
 
+	const sendEmail = async (email) => {
+		const success = await sendResetPasswordEmail(email);
+		if (success) {
+			onSuccess();
+			onClose();
+		}
+	}
+
 
 	const onSuccessReset = () => {
 		toast({
@@ -118,7 +126,7 @@ function Login() {
 				/>
 			</header>
 			<div className="form">
-				<ForgetPasswordModal onOpen={onOpen} isOpen={isOpen} onClose={onClose} onSuccess={onSuccessReset} />
+				<ForgetPasswordModal sendEmail={sendEmail} onOpen={onOpen} isOpen={isOpen} onClose={onClose} onSuccess={onSuccessReset} />
 				<VStack spacing={"24px"} width="30%" alignItems={"start"}>
 					<InputGroup>
 						<InputLeftElement pointerEvents={"none"} children={<EmailIcon />} />
