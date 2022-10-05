@@ -9,7 +9,7 @@ export async function logOut() {
 	await logout()
 }
 
-function Header({ title, subtitle, Bandera = false }) {
+export function Header({ title, subtitle, Bandera = false }) {
 
     return (
         <div style={{
@@ -33,7 +33,7 @@ function Header({ title, subtitle, Bandera = false }) {
                             <li><Link to="/goals">Metas</Link></li>
                             <li><Link to="/health">Bienestar</Link></li>
                             <li><Link to="/calendar">Calendario</Link></li>
-                            <li data-testid="logoutButton" ><a onClick={logOut} href="#">Log Out</a></li>
+                            <li  ><a onClick={logOut} href="#" data-testid="logoutButton">Log Out</a></li>
                         </ul>
                     </nav>
                     : ''
