@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import blob from "../assets/blob01.png";
-import { loginWithEmailAndPassword, auth, logout } from '../firebase.js';
+import { loginWithEmailAndPassword, auth, logout, sendResetPasswordEmail } from '../firebase.js';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import 'react-datepicker/dist/react-datepicker.css'
@@ -60,8 +60,8 @@ function Login() {
 				setRemindUser(true);
 			}
 		}
-		return () => { isMounted = false }
 		setFinishChekRemindUser(true);
+		return () => { isMounted = false }
 	}, [user, loading]);
 
 
@@ -96,7 +96,7 @@ function Login() {
 	const sendEmail = async (email) => {
 		const success = await sendResetPasswordEmail(email);
 		if (success) {
-			onSuccess();
+
 			onClose();
 		}
 	}
@@ -138,7 +138,7 @@ function Login() {
 					</InputGroup>
 					{finishedCheckRemindUser ?
 						<InputGroup>
-							<Checkbox defaultChecked={remindUser} onChange={(e) => {
+							<Checkbox data-testid="remindCheckbox" defaultChecked={remindUser} onChange={(e) => {
 								if (!(e.target.checked)) {
 									localStorage.removeItem('email');
 								}
@@ -147,7 +147,7 @@ function Login() {
 						</InputGroup>
 
 						: ''}
-					<Link color={"primary"} onClick={onOpen}>¿Olvidaste tu contraseña?</Link>
+					<Link color={"primary"} onClick={onOpen} data-testid="forgetPassword">¿Olvidaste tu contraseña?</Link>
 					<HStack spacing={"24px"}>
 						<Button
 							display={"inline-block"}
@@ -167,6 +167,7 @@ function Login() {
 						</Button>
 
 						<Button
+							data-testid="registerButton"
 							display={"inline-block"}
 							backgroundColor="primary"
 							textColor="textLight"
