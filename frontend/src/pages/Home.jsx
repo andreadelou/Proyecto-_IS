@@ -17,7 +17,7 @@ import {
     ModalCloseButton,
 } from "@chakra-ui/react";
 import "../CSS/Home.css";
-import Header from "../components/Header.js";
+import Header from "../components/Header.jsx";
 import blob from "../assets/blob01.png";
 import { fetchExpiredTasks } from "../services/goals.service.js";
 import { proximatarea } from "../services/goals.service";
