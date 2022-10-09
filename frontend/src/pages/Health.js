@@ -112,7 +112,7 @@ function Health() {
 			<header className="header">
 				<Header title="Bienestar" subtitle="Estadísticas de tus metas" Bandera={true}></Header>
 				<HStack my={'2rem'}>
-					<Checkbox checked={includeCompletedGoals} onChange={(e) => { setIncludeCompletedGoals(e.target.checked) }}>Incluir Metas Completadas</Checkbox>
+					<Checkbox data-testid = "checkboxHealth" checked={includeCompletedGoals} onChange={(e) => { setIncludeCompletedGoals(e.target.checked) }}>Incluir Metas Completadas</Checkbox>
 				</HStack>
 				<img className="uno" src="" alt="uno" />
 				<img className="dos" src="" alt="dos" />
