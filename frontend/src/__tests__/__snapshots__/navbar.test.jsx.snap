@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test para <Navbar/> Navbar renderiza correctamente 1`] = `
+<div>
+  <div
+    style="display: flex; justify-content: space-between; align-items: flex-start;"
+  >
+    <div
+      class="chakra-stack css-dhhbxq"
+    >
+      <h1
+        class="chakra-heading css-ultdq7"
+      >
+        Hola
+      </h1>
+      <h2
+        class="chakra-heading css-6orinh"
+      >
+        Mundo
+      </h2>
+    </div>
+    <nav>
+      <ul
+        class="nav_links"
+      >
+        <li>
+          <a
+            href="#"
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+          >
+            Metas
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+          >
+            Bienestar
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+          >
+            Calendario
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+`;
