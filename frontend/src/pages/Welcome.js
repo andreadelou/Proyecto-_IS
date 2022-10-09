@@ -83,10 +83,10 @@ function Welcome() {
 			<span className='subtitulos'>Selecciona al menos dos</span>
 			<p></p>
 
-			<button className='botonesnow' onClick={() => { toggleGoal('exercise') }}>
+			<button data-testid="exerciseButton" className='botonesnow' onClick={() => { toggleGoal('exercise') }}>
 				{goals.includes('exercise') ? <FaCheckCircle className='botonesnow__icon' /> : ''}
 				<img src={trotar} height="40" width="60" alt='ejercicio' />Ejercicio </button>
-			<button className='botonesnow' onClick={() => { toggleGoal('mentalhealth') }} >
+			<button data-testid="meditarButton" className='botonesnow' onClick={() => { toggleGoal('mentalhealth') }} >
 				{goals.includes('mentalhealth') ? <FaCheckCircle className='botonesnow__icon' /> : ''}
 				<img src={meditar} alt="meditar" height="40" width="60" />Meditar </button>
 			<p></p>
@@ -102,13 +102,13 @@ function Welcome() {
 
 			<span className='subtitulos'>Escoge tu nueva mascota</span>
 			<p></p>
-			<button className='botonesnow' onClick={() => {
+			<button data-testid="frogButton" className='botonesnow' onClick={() => {
 				setPet('frog');
 			}} >
 				{pet === 'frog' ? <FaCheckCircle className='botonesnow__icon' /> : ''}
 				<img src={rana} height="40" width="60" />
 			</button>
-			<button className='botonesnow' onClick={() => {
+			<button data-testid="plantButton" className='botonesnow' onClick={() => {
 				setPet('plant');
 			}} >{pet === 'plant' ? <FaCheckCircle className='botonesnow__icon' /> : ''}
 				<img src={planta} height="40" width="60" />
@@ -119,6 +119,7 @@ function Welcome() {
 				backgroundColor="primary"
 				textColor="textLight"
 				onClick={saveConfiguration}
+				data-testid="startButton"
 				disabled={!pet || goals.length < 2}>Comenzar</Button>
 			<Image
 				position={"absolute"}

@@ -25,8 +25,8 @@ function Goals() {
   const [user,,] = useAuthState(auth);
   const [goalsProgress, setGoalsProgress] = useState({});
 
-  useEffect(() => {
-    if (auth.currentUser) {
+	useEffect(() => {
+		if (auth.currentUser) {
       fetchGoals();
       fetchAll();
     }
