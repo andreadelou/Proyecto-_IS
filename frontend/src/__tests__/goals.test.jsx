@@ -5,9 +5,23 @@ const { act } = require("react-dom/test-utils")
 const { BrowserRouter } = require("react-router-dom")
 const { default: GoalModal } = require("../components/GoalModal")
 const { default: TodoForm } = require("../components/TodoForm")
+const { default: Goals } = require("../pages/Goals")
 
 
 describe("Tests for the goals logic", () => {
+	
+	beforeEach(() => {
+		// mockFirebase({currentUser: {email: 'Guillermo@gmail.com'}})
+	})
+	test('Fetch all goals when the user logs in', async () => {
+		
+		await act(async() => {
+			render(
+				<Goals />,
+				{ wrapper: BrowserRouter }
+			)  
+		})
+	})
 	
 	test('Allows to save a goal if the fields are filled', async () => {
 		// Arrange

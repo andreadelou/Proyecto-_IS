@@ -1,6 +1,15 @@
 import { User } from "../models/user"
+import { createUserInCollection } from "../services/users.service";
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+
 
 describe("Buy pet", () => {
+
+	beforeEach(() => {
+			console.log(firebase)		
+        
+  })
 	it('User buys a pet.', () => {
 		// Arrange
 		const sut = new User('abcd', 100, true, true, 'example@email.com', 'Guillermo', 'frog', []);
@@ -34,4 +43,10 @@ describe("Buy pet", () => {
 		expect(result).toBeFalsy();
 	})
 
+	xit('Can create an user on a collection', async () => {
+		await createUserInCollection({uid: 123, email: 'foo@bar.com'})
+	})
+
 })
+
+ 
