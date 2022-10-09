@@ -5,16 +5,19 @@ import Header  from '../components/Header'
 
 const { BrowserRouter } = require("react-router-dom")
 
+import * as firebase from '../firebase';
+
 describe('Header tests', () => {
 	it('Should call logout method', async () => {
-		const mockGetData = jest.spyOn(Header, "logOut").mockImplementation(() => {console.log('hi')})
 		// Arrange
 		await act(async () => {
 			render(
-				<Header.Header title="Titulo" subtitle="Hola" Bandera/>,
+				<Header title="Titulo" subtitle="Hola" Bandera/>,
 				{ wrapper: BrowserRouter }
-			)  
-		})
+				)  
+			})
+		const mockGetData = jest.spyOn(firebase, 'logout').mockImplementation(() => {console.log('TESTING LOGOUT METHOD')})
+		
 		const logoutButton = await screen.findByTestId('logoutButton')
 		// Act
 		fireEvent.click(logoutButton)
