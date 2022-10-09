@@ -43,7 +43,7 @@ describe("Buy pet", () => {
 		expect(result).toBeFalsy();
 	})
 
-	it('Can create an user on a collection', async () => {
+	xit('Can create an user on a collection', async () => {
 		await createUserInCollection({uid: 123, email: 'foo@bar.com'})
 	})
 
