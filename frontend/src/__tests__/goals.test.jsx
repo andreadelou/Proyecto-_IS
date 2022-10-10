@@ -277,4 +277,20 @@ describe("Tests for the goals logic", () => {
 	
 
 
-})
+    test("Fetch goals when there is a current user", async () => {
+        jest.spyOn(firebaseHooks, "useAuthState").mockReturnValue([
+            { uid: "123", email: "foo@bar.com" },
+            false,
+        ]);
+        jest.spyOn(
+            goalsService,
+            "fetchAllGoalsAndGroupByCategory"
+        ).mockReturnValue([]);
+        jest.spyOn(goalsService, "fetchAllGoals").mockReturnValue([]);
+        await act(async () => {
+            render(<Goals date1="2022-05-05" date2="2022-06-06" />, {
+                wrapper: BrowserRouter,
+            });
+        });
+    });
+});
