@@ -19,7 +19,7 @@ function NuevasMetas({ startDate, endDate }) {
 	const [user] = useAuthState(auth);
 
 	const [goals, setMetas] = useState([]);
-	const [setCategoria] = useState([]);
+	const [cat,setCategoria] = useState([]);
 	
 
 	//fetch goals
@@ -32,7 +32,7 @@ function NuevasMetas({ startDate, endDate }) {
 		setMetas(g);
 	}
 	useEffect(() => {
-		if (auth.currentUser) {
+		if (user) {
 			fetchGoals();
 		}
 		if (startDate && endDate) {
@@ -51,18 +51,12 @@ function NuevasMetas({ startDate, endDate }) {
 
 		setCategoria(metas);
 	};
+	
 	useEffect(() => {
-		if (auth.currentUser) {
+		if (user) {
 			fetchCategoria();
 		}
 	}, [user]);
-
-
-
-	useEffect(() => {
-	}, [user]);
-
-
 
 	var i = -1;
 
@@ -88,18 +82,10 @@ function NuevasMetas({ startDate, endDate }) {
 	}
 }
 
-function Calendario() {
+function Calendario({date1, date2}) {
 	const [date, setDate] = useState(new Date()); //date que sale abajo del calendario
-	const [startDate, setStartDate] = useState();
-	const [endDate, setEndDate] = useState();
-	const [user] = useAuthState(auth);
-
-	useEffect(() => {
-		if (auth.currentUser) {
-			// fetchGoals();
-		}
-	}, [user]);
-
+	const [startDate, setStartDate] = useState(date1);
+	const [endDate, setEndDate] = useState(date2);
 
 	return (
 		<div className="principal">

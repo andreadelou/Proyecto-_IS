@@ -12,7 +12,8 @@ const { BrowserRouter } = require("react-router-dom");
 const { default: Calendar } = require("../pages/Calendar");
 import * as goalsService from "../services/goals.service";
 import NuevasMetas from "../pages/Calendar";
-import Calendario from "../pages/Calendar";
+import * as firebaseHooks from "react-firebase-hooks/auth";
+import * as userService from '../services/users.service'
 
 test("Checks text", async () => {
     await act(async () => {
@@ -53,3 +54,15 @@ test("Goals", async () => {
         render(<Calendar />, { wrapper: BrowserRouter });
     });
 });
+
+
+test('Fetch goals when there is a current user', async () => {
+	jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
+		[{ uid: '123', email: 'foo@bar.com' }, false]);
+	jest.spyOn(goalsService, "fetchGoalsByDate").mockReturnValue(
+		[]);
+	jest.spyOn(goalsService, "fetchAllGoals").mockReturnValue([]);
+	await act(async () => {
+        render(<NuevasMetas date1='2022-05-05' date2='2022-06-06' />, { wrapper: BrowserRouter });
+    });
+})
