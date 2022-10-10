@@ -31,10 +31,15 @@ describe('Tests para <Welcome>', () => {
 				await act(async () => { 
 					fireEvent.click(frogButton)
 				})
+				await act(async () => { 
+					fireEvent.click(startButton)
+				})
 		})
 	})
 
 	test('Can toggle a goal', async () => {
+
+		jest.spyOn(usersService, 'updateUserInfo').mockReturnValue(true)
 			await act(async() => {
 				render(
 				<Welcome />,

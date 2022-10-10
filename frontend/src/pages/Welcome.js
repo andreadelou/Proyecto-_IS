@@ -18,9 +18,10 @@ import {
 import { FaCheckCircle } from "react-icons/fa";
 import { updateUserInfo } from '../services/users.service.js';
 import { insertGoal } from '../services/goals.service.js';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function Welcome() {
-
+	const [user, loadingUser] = useAuthState(auth);
 	const [pet, setPet] = useState(''); // State for pet picker
 	const [goals, setGoals] = useState([]); // State for goals picker
 	const [loading, setLoading] = useState(false);
@@ -48,7 +49,7 @@ function Welcome() {
 		if (loading) {
 			return;
 		}
-		await updateUserInfo(auth.currentUser.uid, { configured: true, pet });
+		await updateUserInfo(user.uid, { configured: true, pet });
 		for (const goal of goals) {
 			let title = '';
 			switch (goal) {
