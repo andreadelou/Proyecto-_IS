@@ -1,5 +1,6 @@
 import { act, fireEvent, render, screen} from '@testing-library/react';
 import React from 'react';
+import * as firebaseHooks from 'react-firebase-hooks/auth';
 import { BrowserRouter } from 'react-router-dom';
 import Welcome from '../pages/Welcome';
 import * as goalsService from '../services/goals.service'
@@ -8,6 +9,9 @@ import * as usersService from '../services/users.service'
 
 describe('Tests para <Welcome>', () => { 
 	test('Can toggle the pet', async () => {
+		jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
+			[{ uid: '123', email: 'foo@bar.com' }, false]);
+		
 		await act(async() => {
 			render(
 				<Welcome />,
@@ -31,10 +35,16 @@ describe('Tests para <Welcome>', () => {
 				await act(async () => { 
 					fireEvent.click(frogButton)
 				})
+				await act(async () => { 
+					fireEvent.click(startButton)
+				})
 		})
 	})
 
 	test('Can toggle a goal', async () => {
+	jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
+			[{ uid: '123', email: 'foo@bar.com' }, false]);
+		jest.spyOn(usersService, 'updateUserInfo').mockReturnValue(true)
 			await act(async() => {
 				render(
 				<Welcome />,
