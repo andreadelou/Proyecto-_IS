@@ -45,10 +45,8 @@ function Welcome() {
 	 * Save the user configuration
 	 */
 	const saveConfiguration = async () => {
-		setLoading(true);
-		if (loading) {
-			return;
-		}
+
+
 		await updateUserInfo(user.uid, { configured: true, pet });
 		for (const goal of goals) {
 			let title = '';
