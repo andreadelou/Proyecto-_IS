@@ -89,13 +89,17 @@ function Home() {
             if (data.length > 0) {
                 const d = new Date();
                 const currentDays = d.getTime() / 1000 / (60 * 60 * 24);
-                const goalDays = data[0].reminder.seconds / (60 * 60 * 24);
-
-                if (Math.floor(currentDays - goalDays) === 1) {
-                    setPetState(1);
-                } else if (Math.floor(currentDays - goalDays) >= 2) {
+							const goalDays = data[0].reminder.seconds / (60 * 60 * 24);
+							
+							console.log(currentDays - goalDays);
+								
+							if (Math.floor(currentDays - goalDays) === 1) {
+								setPetState(1);
+							} else if (Math.floor(currentDays - goalDays) >= 2) {
+								
                     setPetState(2);
-                } else {
+							} else {
+								
                     setPetState(0);
                 }
             }
@@ -108,11 +112,11 @@ function Home() {
             const goalDays = proximameta[0].reminder.seconds / (60 * 60 * 24);
             setReminder(Math.ceil(goalDays - currentDays));
         };
-        if (user) {
-            getUserData();
-            getGoalData();
-            getultimameta();
-        }
+  
+        getUserData();
+        getGoalData();
+        getultimameta();
+        
 
 
         
@@ -123,7 +127,6 @@ function Home() {
         //funcion que verifica si puede comprar a la mascota que desea
         // comprar la mascota
         const puntos =  await getUserData(); // obitene los puntos del usuario
-        console.log(puntos);
 				const userInfo = await getUserInfo(user)
 				if (againstNullOrUndefined(userInfo)) {
 					// Create the user instance
