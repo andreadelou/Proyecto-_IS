@@ -33,7 +33,8 @@ function GoalModalTwo({ isOpen, onClose, onOpen, onSave }) {
         <ModalBody>
           <FormControl>
             <Input
-              marginBottom={2}
+							marginBottom={2}
+							data-testid="goalTitle"
               placeholder="Título de tu meta"
               onChange={($event) => {
                 setGoalTitle($event.target.value);
