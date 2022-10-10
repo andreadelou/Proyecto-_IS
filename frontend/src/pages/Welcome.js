@@ -45,9 +45,8 @@ function Welcome() {
 	 * Save the user configuration
 	 */
 	const saveConfiguration = async () => {
-
-
 		await updateUserInfo(user.uid, { configured: true, pet });
+		console.log('sdfsd')
 		for (const goal of goals) {
 			let title = '';
 			switch (goal) {
@@ -62,8 +61,6 @@ function Welcome() {
 					break;
 				case 'learn':
 					title = 'Estudiar';
-					break;
-				default:
 					break;
 			}
 

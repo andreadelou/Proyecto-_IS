@@ -44,7 +44,8 @@ describe('Tests para <Welcome>', () => {
 	test('Can toggle a goal', async () => {
 	jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
 			[{ uid: '123', email: 'foo@bar.com' }, false]);
-		jest.spyOn(usersService, 'updateUserInfo').mockReturnValue(true)
+		jest.spyOn(usersService, 'updateUserInfo').mockImplementation(jest.fn())
+		jest.spyOn(goalsService, 'insertGoal').mockImplementation(jest.fn())
 			await act(async() => {
 				render(
 				<Welcome />,
@@ -53,8 +54,16 @@ describe('Tests para <Welcome>', () => {
 			
 				const exerciseButton = screen.getByText('Ejercicio')
 				const learnButton = screen.getByText('Leer')
+
 				const healthButton = screen.getByText('Medicina')
+				const meditateButton = screen.getByText('Meditar')
+				const startButton = screen.getByTestId('startButton')
+				const frogButton = screen.getByTestId('frogButton')
+
 			
+				await act(async () => {
+					fireEvent.click(exerciseButton)
+				})
 				await act(async () => {
 					fireEvent.click(exerciseButton)
 				})
@@ -65,9 +74,17 @@ describe('Tests para <Welcome>', () => {
 					fireEvent.click(learnButton)
 				})
 				await act(async () => {
+					fireEvent.click(meditateButton)
+				})
+				await act(async () => {
 					fireEvent.click(healthButton)
 				})
-			
+				await act(async () => {
+					fireEvent.click(frogButton)
+				})
+				await act(async () => { 
+					fireEvent.click(startButton)
+				})
 		})
 	})
  })
