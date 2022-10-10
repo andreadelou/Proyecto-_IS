@@ -2,6 +2,8 @@ import { User } from "../models/user"
 import { createUserInCollection, getUserInfo, updateUserInfo } from "../services/users.service";
 import firebase from 'firebase/app'
 import * as firestore from 'firebase/firestore'
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../firebase";
 
 describe("Users tests", () => {
 
@@ -50,7 +52,15 @@ describe("Users tests", () => {
 	})
 
 	it('update user information', async () => { 
-		 await updateUserInfo('1icT46W2zDhm2azgnMp4BzhmCei1',{email: 'test@example.com'})
+		// Arrange
+		const uid = '1icT46W2zDhm2azgnMp4BzhmCei12'
+		createUserInCollection({uid: uid, email: 'test@example.com'})
+		// Act
+		const result = await updateUserInfo(uid, { email: 'tes2@example.com' })
+		// Assert
+		expect(result).toBeTruthy()
+		const docRef = doc(db, 'users', uid);    // Get the document reference from firebase
+		await deleteDoc(docRef)
 	})
 	
 
@@ -62,7 +72,7 @@ describe("Users tests", () => {
 		const sut = new User('abcd', 100, true, true, 'example@email.com', 'Guillermo', 'frog');
 		sut.addPet(null, null)
 		expect(sut.points).toEqual(100)
-
+		
 	})
 
 })

@@ -1,5 +1,5 @@
 import { db } from '../firebase'
-import { updateDoc, doc, setDoc, getDoc } from 'firebase/firestore'
+import { updateDoc, doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore'
 
 /**
  * Creates an user collection in firestore
@@ -65,4 +65,5 @@ export const getUserInfo = async (user) => {
 export const updateUserInfo = async (uid, data) => {
 	const docRef = doc(db, 'users', uid);    // Get the document reference from firebase
 	await updateDoc(docRef, data);   // Update the document
+	return true
 }
