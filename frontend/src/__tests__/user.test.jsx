@@ -1,8 +1,7 @@
 import { User } from "../models/user"
 import { createUserInCollection, getUserInfo, updateUserInfo } from "../services/users.service";
 import firebase from 'firebase/app'
-import 'firebase/firestore'
-
+import * as firestore from 'firebase/firestore'
 
 describe("Users tests", () => {
 
@@ -54,6 +53,10 @@ describe("Users tests", () => {
 		 await updateUserInfo('1icT46W2zDhm2azgnMp4BzhmCei1',{email: 'test@example.com'})
 	})
 	
+
+	xit('get user information', async () => {
+		await getUserInfo({uid: '1icT46W2zDhm2azgnMp4BzhmCei1'})
+	})
 
 })
 

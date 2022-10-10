@@ -1,5 +1,5 @@
-import { auth, db } from '../firebase'
-import { collection, addDoc, Timestamp, getDocs, updateDoc, doc, query, where, setDoc, getDoc } from 'firebase/firestore'
+import { db } from '../firebase'
+import { updateDoc, doc, setDoc, getDoc } from 'firebase/firestore'
 
 /**
  * Creates an user collection in firestore
