@@ -59,7 +59,7 @@ describe("Users tests", () => {
 	})
 
 	it('cannot add a pet if there is no price and pet', () => {
-		const sut = new User('abcd', 100, true, true, 'example@email.com', 'Guillermo', 'frog', []);
+		const sut = new User('abcd', 100, true, true, 'example@email.com', 'Guillermo', 'frog');
 		sut.addPet(null, null)
 		expect(sut.points).toEqual(100)
 
