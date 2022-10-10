@@ -18,9 +18,10 @@ import {
 import { FaCheckCircle } from "react-icons/fa";
 import { updateUserInfo } from '../services/users.service.js';
 import { insertGoal } from '../services/goals.service.js';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function Welcome() {
-
+	const [user, loadingUser] = useAuthState(auth);
 	const [pet, setPet] = useState(''); // State for pet picker
 	const [goals, setGoals] = useState([]); // State for goals picker
 	const [loading, setLoading] = useState(false);
@@ -44,11 +45,8 @@ function Welcome() {
 	 * Save the user configuration
 	 */
 	const saveConfiguration = async () => {
-		setLoading(true);
-		if (loading) {
-			return;
-		}
-		await updateUserInfo(auth.currentUser.uid, { configured: true, pet });
+		await updateUserInfo(user.uid, { configured: true, pet });
+		console.log('sdfsd')
 		for (const goal of goals) {
 			let title = '';
 			switch (goal) {
@@ -63,8 +61,6 @@ function Welcome() {
 					break;
 				case 'learn':
 					title = 'Estudiar';
-					break;
-				default:
 					break;
 			}
 
