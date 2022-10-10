@@ -50,8 +50,8 @@ describe('Tests en <Home/>', () => {
 
 	test('Goal is going to expire today', async () => {
 		jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
-			[{ uid: '123', email: 'foo@bar.com' }, false]);
-		jest.spyOn(userService, 'getUserInfo').mockReturnValue({ uid: '123', email: 'foo@bar.com' });
+			[{ uid: '123', email: 'foo@bar.com' , pet: 'plant'}, false]);
+		jest.spyOn(userService, 'getUserInfo').mockReturnValue({ uid: '123', email: 'foo@bar.com', pet: 'plant' });
 		 const d = new Date();
 		jest.spyOn(goalsService, 'proximatarea').mockReturnValue([{
 			title: '123', reminder: {
@@ -60,6 +60,27 @@ describe('Tests en <Home/>', () => {
 		jest.spyOn(goalsService, 'fetchExpiredTasks').mockReturnValue([{
 			title: '123', reminder: {
 			seconds: (d.getTime() / 1000)
+		}}]);
+		await act(async () => {
+			render(
+				<Home />,
+				{ wrapper: BrowserRouter }
+			)  
+		})
+	})
+
+	test('Goal is going to expire two days ago', async () => {
+		jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
+			[{ uid: '123', email: 'foo@bar.com', pet: 'frog' }, false]);
+		jest.spyOn(userService, 'getUserInfo').mockReturnValue({ uid: '123', email: 'foo@bar.com', pet: 'frogest.sp' });
+		 const d = new Date();
+		jest.spyOn(goalsService, 'proximatarea').mockReturnValue([{
+			title: '123', reminder: {
+			seconds: (d.getTime() / 1000) + (999 * 60 * 60 * 24) 
+		}}]);
+		jest.spyOn(goalsService, 'fetchExpiredTasks').mockReturnValue([{
+			title: '123', reminder: {
+			seconds: (d.getTime() / 1000) - ( 3600* 25) 
 		}}]);
 		await act(async () => {
 			render(
