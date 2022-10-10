@@ -33,8 +33,8 @@ describe('Tests en <Home/>', () => {
 	test('No expired tasks', async () => {
 
 		jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
-			[{ uid: '123', email: 'foo@bar.com' }, false]);
-		jest.spyOn(userService, 'getUserInfo').mockReturnValue({uid: '123', email: 'foo@bar.com'});
+			[{ uid: '123', email: 'foo@bar.com', pet: 'frog' }, false]);
+		jest.spyOn(userService, 'getUserInfo').mockReturnValue({uid: '123', email: 'foo@bar.com', pet:'frog'});
 		jest.spyOn(goalsService, 'fetchExpiredTasks').mockReturnValue([]);
 		jest.spyOn(goalsService, 'proximatarea').mockReturnValue([{
 			title: '123', reminder: {

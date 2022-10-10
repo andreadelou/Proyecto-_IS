@@ -29,7 +29,16 @@ describe('Health tests', () => {
 
 
 	test("Calls fetch all goals", async () => {
-	jest.spyOn(goalsService, 'fetchAllGoalsAndGroupByCategory').mockReturnValue({});
+		jest.spyOn(goalsService, 'fetchAllGoalsAndGroupByCategory').mockReturnValue({
+		'exercise': [{
+				title: 'goal1',
+				id: '123',
+				todos: [{completed: true}, {completed: false}]
+			}],
+			'learn': [],
+'health': [],
+'mentalhealth': [],
+	});
 	jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
 			[{ uid: '123', email: 'foo@bar.com' }, false]);
 	await act(async () => {

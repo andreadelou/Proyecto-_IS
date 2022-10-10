@@ -7,6 +7,7 @@ const { default: GoalModal } = require("../components/GoalModal")
 const { default: TodoForm } = require("../components/TodoForm")
 const { default: Goals } = require("../pages/Goals")
 import * as firebaseHooks from 'react-firebase-hooks/auth';
+import Todo from '../components/Todo'
 import * as goalsService from '../services/goals.service';
 import * as usersService from '../services/users.service';
 
@@ -292,5 +293,15 @@ describe("Tests for the goals logic", () => {
                 wrapper: BrowserRouter,
             });
         });
-    });
+		});
+	
+	test("Can Render a Todo", () => {
+		const toggleComplete = jest.fn()
+		const removeTodo = jest.fn()
+		const onTodoChange = jest.fn()
+		render(<Todo todo={{ value: '123', completed: false }} toggleComplete={toggleComplete} removeTodo={removeTodo} onTodoChange={onTodoChange} />)
+		const todoInput = screen.getByPlaceholderText('Escribe la sub tarea')
+		fireEvent.change(todoInput, { target: { value: 'mafer@gmail.com' } })
+		expect(onTodoChange).toHaveBeenCalled()
+	})
 });
