@@ -1,10 +1,10 @@
 import { User } from "../models/user"
-import { createUserInCollection } from "../services/users.service";
+import { createUserInCollection, getUserInfo, updateUserInfo } from "../services/users.service";
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 
-describe("Buy pet", () => {
+describe("Users tests", () => {
 
 	beforeEach(() => {
 			console.log(firebase)		
@@ -43,9 +43,17 @@ describe("Buy pet", () => {
 		expect(result).toBeFalsy();
 	})
 
-	xit('Can create an user on a collection', async () => {
-		await createUserInCollection({uid: 123, email: 'foo@bar.com'})
+	it('Can create an user on a collection', async () => {
+		await createUserInCollection({
+			uid: '1232',
+			email: 'test@example.com'
+		})
 	})
+
+	it('update user information', async () => { 
+		 await updateUserInfo('1icT46W2zDhm2azgnMp4BzhmCei1',{email: 'test@example.com'})
+	})
+	
 
 })
 

@@ -34,12 +34,12 @@ export const addPointsToUser = async (points, user) => {
  * @param {*} pet 
  * @param {*} user 
  */
- export const setNewPet = async (pet, user) => {
-    const userInfo = await getUserInfo(user);   // Get the user info
-    let userPet = userInfo.pet;  // Get the user points
-    userPet = pet;  // Add the points to the user
-    userInfo.pet = userPet;
-    updateUserInfo(user.uid, userInfo); // Update the user points
+export const setNewPet = async (pet, user) => {
+	const userInfo = await getUserInfo(user);   // Get the user info
+	let userPet = userInfo.pet;  // Get the user points
+	userPet = pet;  // Add the points to the user
+	userInfo.pet = userPet;
+	updateUserInfo(user.uid, userInfo); // Update the user points
 }
 
 
@@ -65,14 +65,4 @@ export const getUserInfo = async (user) => {
 export const updateUserInfo = async (uid, data) => {
 	const docRef = doc(db, 'users', uid);    // Get the document reference from firebase
 	await updateDoc(docRef, data);   // Update the document
-}
-
-
-/**
- * Adds a pet to an user
- * @param {string} uid 
- * @param {string} pet 
- */
-export const addPetToUser = async (uid, pet) => {
-
 }
