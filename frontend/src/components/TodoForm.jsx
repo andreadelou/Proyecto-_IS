@@ -27,7 +27,8 @@ function TodoForm({
         <div className="todo-form__goal">
           <div className="todo-form__title">
             <input
-              type="checkbox"
+							type="checkbox"
+							data-testid="completedGoal"
               defaultChecked={completed}
               onChange={onToggleCompleted}
               name="goal-checkbox"

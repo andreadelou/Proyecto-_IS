@@ -26,7 +26,7 @@ function Goals() {
   const [goalsProgress, setGoalsProgress] = useState({});
 
 	useEffect(() => {
-		if (auth.currentUser) {
+		if (user) {
       fetchGoals();
       fetchAll();
     }
@@ -52,7 +52,8 @@ function Goals() {
    * Add a todo
    * @param {*} goalId
    */
-  const addTodo = async (goalId) => {
+	const addTodo = async (goalId) => {
+		console.log('adding todo!!!')
     let updatedGoal = {};
     const newGoals = goals.map((entries) => {
       entries[1].map((goal) => {
