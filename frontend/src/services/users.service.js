@@ -23,7 +23,7 @@ export const createUserInCollection = async (user) => {
  */
 export const addPointsToUser = async (points, user) => {
 	const userInfo = await getUserInfo(user);   // Get the user info
-	let userPoints = userInfo.points ?? 0;  // Get the user points
+	let userPoints = userInfo.points;  // Get the user points
 	userPoints += points;  // Add the points to the user
 	userInfo.points = userPoints;
 	updateUserInfo(user.uid, userInfo); // Update the user points
