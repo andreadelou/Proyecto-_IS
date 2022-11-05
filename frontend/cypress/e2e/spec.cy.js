@@ -1,17 +1,65 @@
-describe('My First Test', () => {
-  it('Rueba crear meta', () => {
-    cy.visit('https://mind-app-b0b0f.web.app/#/')
+// log in
 
-    // cy.contains('type').click()
+describe('Logging In - Basic Auth', function () {
+  // we can use these values to log in
+  const username = 'lam20102@uvg.edu.gt'
+  const password = 'princesa71'
 
-    // Should be on a new URL which
-    // includes '/commands/actions'
-    cy.url().should('include', '/commands/actions')
+  context('cy.request', () => {
+    // https://on.cypress.io/request
 
-    // Get an input, type into it and verify
-    // that the value has been updated
-    cy.get('.action-email')
-      .type('lam20102@uvg.edu.gt')
-      .should('have.value', 'lam20102@uvg.edu.gt')
+    it('without authorization gets 401', () => {
+      cy.request({
+        url: 'https://mind-app-b0b0f.web.app/#/',
+        failOnStatusCode: false,
+      }).its('status').should('equal', 401)
+    })
+
+    it('with authorization', () => {
+      cy.request({
+        url: 'https://mind-app-b0b0f.web.app/#/',
+        auth: {
+          username, password,
+        },
+      }).its('status').should('equal', 200)
+    })
+
+    it('can post', () => {
+      cy.request({
+        url: 'https://mind-app-b0b0f.web.app/#/',
+        method: 'POST',
+        auth: {
+          username, password,
+        },
+        body: {
+          text: 'ping!',
+        },
+      }).then((response) => {
+        expect(response.status, 'status').to.equal(200)
+        expect(response.body).to.deep.equal({
+          text: 'ping!',
+        })
+      })
+    })
+  })
+
+  context('cy.visit', () => {
+    // https://on.cypress.io/visit
+
+    it('loads the page using basic auth', () => {
+      cy.visit('https://mind-app-b0b0f.web.app/#/', {
+        auth: {
+          username,
+          password,
+        },
+      })
+
+      // confirm that all static resources have loaded
+      cy.get('#app-message').should('not.be.empty')
+      cy.log('app.js loaded')
+
+      // cy.contains('h1', 'Red').should('have.css', 'color', 'rgb(255, 0, 0)')
+      cy.log('app.css loaded')
+    })
   })
 })
