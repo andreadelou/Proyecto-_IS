@@ -97,7 +97,7 @@ describe('Logging In - Basic Auth', function () {
     
       cy.visit('https://mind-app-b0b0f.web.app/#/home')
       // cy.wait('@getUserModels')
-      cy.contains('h2', 'Models').should('be.visible')
+      cy.contains('h1', 'Home').should('be.visible')
     })
 
     
