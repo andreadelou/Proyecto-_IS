@@ -1,5 +1,7 @@
 describe('My First Test', () => {
-  it('Does not do much!, Hi', () => {
-    expect(true).to.equal(true)
+  it('clicks the link "type"', () => {
+    cy.visit('https://example.cypress.io')
+
+    cy.contains('type').click()
   })
 })
