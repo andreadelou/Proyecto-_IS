@@ -1,7 +1,7 @@
 import { User } from "../models/user"
-import { addPointsToUser, createUserInCollection, getUserInfo, updateUserInfo } from "../services/users.service";
+import { addPointsToUser, createUserInCollection, getUserInfo, setNewPet, updateUserInfo } from "../services/users.service";
 import firebase from 'firebase/app'
-import { deleteDoc, doc, getDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 jest.mock('firebase/firestore');
 jest.mock('firebase/auth');
@@ -89,7 +89,25 @@ describe("Users tests", () => {
 	})
 
 	test('Creates a new user if it does note exists', async () => {
-		
+		getDoc.mockResolvedValue(
+			{
+				exists: jest.fn().mockReturnValue(false),
+				data: jest.fn().mockReturnValue({})
+			}
+			)
+		await getUserInfo({ uid: '123' })
+		expect(setDoc).toHaveBeenCalled();
+	})
+
+	test('Can set new pet', async () => {
+		getDoc.mockResolvedValue(
+			{
+				exists: jest.fn().mockReturnValue(true),
+				data: jest.fn().mockReturnValue({uid: '123', pet:'s'})
+			}
+		)
+		await setNewPet('frog', {uid: '123', pet: ''})
+		expect(getDoc).toHaveBeenCalled();
 	})
 
 })
