@@ -19,6 +19,17 @@ describe('goals.service tests', () => {
 		expect(parseInt(pointsFromLocal)).toEqual(pointsToAdd)
 	})
 
+	it('Can add points to the user no points', () => {
+		// Arrange
+		const pointsToAdd = 10
+		localStorage.removeItem('points');
+		// Act
+		addPoints(pointsToAdd)
+		// Assert
+		const pointsFromLocal = localStorage.getItem('points')
+		expect(parseInt(pointsFromLocal)).toEqual(pointsToAdd)
+	})
+
 	it('can get points from the user', () => {
 		// Arrange
 		localStorage.setItem('points', 10)
@@ -26,6 +37,14 @@ describe('goals.service tests', () => {
 		const points = getPoints()
 		// Assert
 		expect(parseInt(points)).toEqual(10)
+	})
+	it('can get points from the user with no points', () => {
+		// Arrange
+		localStorage.removeItem('points')
+		// Act
+		const points = getPoints()
+		// Assert
+		expect(parseInt(points)).toEqual(0)
 	})
 
 	it('can save goals in local storage', () => {
