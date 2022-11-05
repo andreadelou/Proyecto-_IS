@@ -44,7 +44,7 @@ describe("Users tests", () => {
 		expect(result).toBeFalsy();
 	})
 
-	it('Can create an user on a collection', async () => {
+	xit('Can create an user on a collection', async () => {
 		await createUserInCollection({
 			uid: '1232',
 			email: 'test@example.com'
@@ -59,6 +59,7 @@ describe("Users tests", () => {
 		const result = await updateUserInfo(uid, { email: 'tes2@example.com' })
 		// Assert
 		expect(result).toBeTruthy()
+		// Clean
 		const docRef = doc(db, 'users', uid);    // Get the document reference from firebase
 		await deleteDoc(docRef)
 	})

@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";   // Initialize firebase app
 import { getFirestore } from "firebase/firestore"
 

@@ -34,7 +34,7 @@ export const deleteGoal = (goalId) => {
  * Add points
  */
 export const addPoints = (quantiy) => {
-	let currentPoints = Number(localStorage.getItem('points')) ?? 0;
+	let currentPoints = Number(localStorage.getItem('points'));
 	localStorage.setItem('points', currentPoints + quantiy)
 }
 
@@ -44,7 +44,7 @@ export const addPoints = (quantiy) => {
  * @returns {Number}
  */
 export const getPoints = () => {
-	return Number(localStorage.getItem('points')) ?? 0;
+	return Number(localStorage.getItem('points'));
 }
 
 
@@ -66,13 +66,6 @@ export const updateGoalTodo = async (goal, todoIndex, updatedTodo) => {
  * @param {*} goal 
  */
 export const updateGoal = async (goalId, updatedGoal) => {
-	// goals = goals.map((goal) => {
-	//     if (goal.id === goalId) {
-	//         goal = updatedGoal;
-	//     }
-	//     return goal;
-	// });
-	// saveGoalsInLocal();
 	const docRef = doc(db, 'goals', goalId);    // Get the document reference from firebase
 	await updateDoc(docRef, updatedGoal);   // Update the document
 }
@@ -99,14 +92,13 @@ export const saveGoal = (title, category) => {
  * Insert a goal in firestore.
  */
 export const insertGoal = async (title, category, reminder = '', description = '') => {
-	const uid = auth.currentUser.uid;
 	await addDoc(collection(db, 'goals'), {
 		title,
 		category,
 		reminder,
 		completed: false,
 		description,
-		uid,
+		uid: auth?.currentUser.uid,
 		createdAt: (new Date()).toISOString(),
 		todos: [
 
@@ -119,24 +111,25 @@ export const insertGoal = async (title, category, reminder = '', description = '
  * @returns {[]}
  */
 export const fetchAllGoals = async () => {
-	const uid = auth.currentUser.uid;
+	const uid = auth?.currentUser.uid;
 
 	const goalsCol = collection(db, 'goals');
 	const q = query(goalsCol, where("uid", "==", uid))
 	const goalsSnapshot = await getDocs(q);
+	console.log(goalsSnapshot)
 	return goalsSnapshot.docs.map(d => {
 		return {
 			id: d.id,
 			...d.data(),
 		}
-	}) ?? [];
+	});
 }
 
 /**
  * Fetch most recent goals
  */
 export const fetchExpiredTasks = async () => {
-	const uid = auth.currentUser.uid;
+	const uid = auth?.currentUser.uid;
 
 	const goalsCol = collection(db, 'goals');
 	const q = query(goalsCol, where("uid", "==", uid), where('completed', "==", false), orderBy('reminder', 'asc'), limit(1))
@@ -146,13 +139,13 @@ export const fetchExpiredTasks = async () => {
 			id: d.id,
 			...d.data(),
 		}
-	}) ?? [];
+	});
 }
 
 
 /*La primera tarea */
 export const proximatarea = async () => {
-	const uid = auth.currentUser.uid;
+	const uid = auth?.currentUser.uid;
 	const goalsCol = collection(db, 'goals');
 	const q = query(goalsCol, where("uid", "==", uid), where("completed", "==", false), orderBy("reminder", "asc"), limit(1))
 	const goalsSnapshot = await getDocs(q);
@@ -161,11 +154,11 @@ export const proximatarea = async () => {
 			id: d.id,
 			...d.data(),
 		}
-	}) ?? [];
+	});
 }
 
 export const fetchAllGoalsAndGroupByCategory = async (completed = false) => {
-	const uid = auth.currentUser.uid;
+	const uid = auth?.currentUser.uid;
 	const goalsCol = collection(db, 'goals');
 	const q = query(goalsCol, where("uid", "==", uid))
 	const goalsSnapshot = await getDocs(q);
@@ -192,7 +185,7 @@ export const fetchAllGoalsAndGroupByCategory = async (completed = false) => {
  * @param {*} date 
  */
 export const fetchGoalsByDate = async (start, end) => {
-	const uid = auth.currentUser.uid;
+	const uid = auth?.currentUser.uid;
 	const goalsCol = collection(db, 'goals');
 	const q = query(goalsCol, where("uid", "==", uid), where("reminder", ">=", start), where("reminder", "<=", end))
 	const goalsSnapshot = await getDocs(q);
@@ -201,5 +194,5 @@ export const fetchGoalsByDate = async (start, end) => {
 			id: d.id,
 			...d.data(),
 		}
-	}) ?? [];
+	});
 }
