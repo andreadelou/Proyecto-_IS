@@ -37,7 +37,7 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
 							data-testid="title"
               marginBottom={2}
               placeholder="Título de tu meta"
-              onChange={($event) => {
+							onChange={($event) => {
                 setGoalTitle($event.target.value);
               }}
             />
@@ -85,7 +85,8 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
                 </InputGroup>
               }
               selected={reminder}
-              onChange={(date) => {
+							onChange={(date) => {
+						
                 setreminder(date);
               }}
             />
@@ -100,7 +101,8 @@ function GoalModal({ isOpen, onClose, onOpen, onSave }) {
             _hover={{
               backgroundColor: "primaryLight",
             }}
-            onClick={() => {
+						onClick={() => {
+							console.log('saved clicekd!!!', goalTitle)
               onClose();
               setGoalTitle(null);
 							setGoalCategory(null);

@@ -100,7 +100,6 @@ describe("Tests for the goals logic", () => {
 			render(
 				<TodoForm
 					isOpen={true} onAdd={onAddMock}
-
 					title="test goal"
 				/>,
 				{ wrapper: BrowserRouter }
@@ -113,7 +112,12 @@ describe("Tests for the goals logic", () => {
 		expect(onAddMock).toHaveBeenCalled()	// The method that adds the todo should be called
 	})
 
+
+
 	test("Clicking the edit button calls the method that edits the item.", async () => {
+		jest.spyOn(goalsService, 'updateGoal').mockReturnValue();
+	jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
+			[{ uid: '123', email: 'foo@bar.com' }, false]);
 		// Arrange
 		const onEditMock = jest
 			.fn()
@@ -303,5 +307,53 @@ describe("Tests for the goals logic", () => {
 		const todoInput = screen.getByPlaceholderText('Escribe la sub tarea')
 		fireEvent.change(todoInput, { target: { value: 'mafer@gmail.com' } })
 		expect(onTodoChange).toHaveBeenCalled()
+	})
+
+	test('Can create a new goal', async () => { 
+		jest.spyOn(goalsService, "insertGoal").mockResolvedValue({});
+		jest.spyOn(firebaseHooks, "useAuthState").mockReturnValue([
+            { uid: "123", email: "foo@bar.com" },
+            false,
+    ]);
+			jest.spyOn(goalsService, 'fetchAllGoalsAndGroupByCategory').mockReturnValue({
+			'exercise': [{
+				title: 'goal1',
+				id: '123',
+				todos: [{completed: true}, {completed: false}]
+			}],
+			'learn': [{
+				title: 'goal1',
+				id: '1233',
+				todos: [{completed: true}]
+			}],
+			'mentalhealth': [{
+				title: 'goal1',
+				id: '12334',
+				todos: [{completed: true}]
+			}],
+			'health': [{
+				title: 'goal1',
+				id: '123345',
+				todos: [{completed: true}]
+			}]
+		});
+		await act(async () => {
+			render(
+				<Goals />,
+				{ wrapper: BrowserRouter }
+			)
+		});
+		const createGoalButton = screen.getByText("Nueva Meta");
+		fireEvent.click(createGoalButton);
+		// Get the form input and buttons
+		const categoryInput = screen.getByTestId('category');
+		const reminderInput = screen.getByTestId('reminder');
+		const titleInput = screen.getByPlaceholderText('Título de tu meta');
+		const saveButton = screen.getByTestId('save');
+		fireEvent.change(titleInput, { target: { value: 'Titulo mi meta' } })
+		fireEvent.change(reminderInput, { target: { value: '2022/01/01' } })
+		fireEvent.change(categoryInput, { target: { value: 'learn' } })
+		fireEvent.click(saveButton);
+		expect(goalsService.insertGoal).toHaveBeenCalled()
 	})
 });

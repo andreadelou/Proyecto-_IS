@@ -130,7 +130,7 @@ function Goals() {
    * @param {*} title
    * @param {*} category
    */
-  const createNewGoal = async (title, category, reminder, description = '') => {
+	const createNewGoal = async (title, category, reminder, description) => {
     await insertGoal(title, category, reminder, description);
     fetchGoals();
   };
@@ -236,7 +236,7 @@ function Goals() {
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
-        onSave={(title, category, reminder, description = '') => {
+				onSave={(title, category, reminder, description) => {
           createNewGoal(title, category, reminder, description);
         }}
       />
