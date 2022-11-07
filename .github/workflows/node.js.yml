@@ -27,7 +27,7 @@ jobs:
         cache: 'npm'
         cache-dependency-path: "**/package-lock.json"
     - run: npm ci
-    - run: CI=true npm test
+    - run: CI=true npm test -- --forceExit
   integration:
     runs-on: ubuntu-latest
     defaults:
