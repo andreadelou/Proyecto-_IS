@@ -8,7 +8,7 @@ const {
     waitFor,
 } = require("@testing-library/react");
 const { act } = require("react-dom/test-utils");
-const { BrowserRouter } = require("react-router-dom");
+const { BrowserRouter, MemoryRouter } = require("react-router-dom");
 const { default: Calendar } = require("../pages/Calendar");
 import * as goalsService from "../services/goals.service";
 import NuevasMetas from "../pages/Calendar";
@@ -65,4 +65,20 @@ test('Fetch goals when there is a current user', async () => {
 	await act(async () => {
         render(<NuevasMetas date1='2022-05-05' date2='2022-06-06' />, { wrapper: BrowserRouter });
     });
+})
+
+test("Calendar", async () => {
+	jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
+		[{ uid: '123', email: 'foo@bar.com' }, false]);
+	jest.spyOn(goalsService, 'fetchAllGoals').mockResolvedValue([{title: 'GOAL TITLE', reminder: {seconds: 123323}}])
+
+	await act(async() => {
+			render(
+			<MemoryRouter>
+				<Calendar/>
+			</MemoryRouter>
+		)
+	})
+			
+	screen.debug();
 })

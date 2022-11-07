@@ -8,7 +8,7 @@ const { BrowserRouter } = require("react-router-dom")
 import * as firebase from '../firebase';
 
 describe('Header tests', () => {
-	xit('Should call logout method', async () => {
+	it('Should call logout method', async () => {
 		// Arrange
 		await act(async () => {
 			render(

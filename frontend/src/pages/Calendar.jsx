@@ -45,10 +45,10 @@ function NuevasMetas({ startDate, endDate }) {
 
 	</div>);
 
+
 	//fetch categorias
 	const fetchCategoria = async () => {
 		const metas = await fetchAllGoals();
-
 		setCategoria(metas);
 	};
 	
