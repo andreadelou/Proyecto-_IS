@@ -8,6 +8,7 @@ const { default: TodoForm } = require("../components/TodoForm")
 const { default: Goals } = require("../pages/Goals")
 import * as firebaseHooks from 'react-firebase-hooks/auth';
 import Todo from '../components/Todo'
+import TodoList from '../components/TodoList'
 import * as goalsService from '../services/goals.service';
 import * as usersService from '../services/users.service';
 
@@ -44,11 +45,13 @@ describe("Tests for the goals logic", () => {
 			)
 		})
 		const titleInput = screen.getByTestId('title')
+		const descriptionInput = screen.getByTestId('description')
 		const categoryInput = screen.getByTestId('category')
 		const reminderInput = screen.getByTestId('reminder')
 		const saveButton = screen.getByTestId('save')
 		// Act
 		fireEvent.change(titleInput, { target: { value: 'Goal Title' } })
+		fireEvent.change(descriptionInput, { target: { value: 'Goal Title' } })
 		fireEvent.change(categoryInput, { target: { value: 'health' } })
 		fireEvent.change(reminderInput, { target: { value: '2022/09/27' } })
 		// Assert
@@ -303,5 +306,12 @@ describe("Tests for the goals logic", () => {
 		const todoInput = screen.getByPlaceholderText('Escribe la sub tarea')
 		fireEvent.change(todoInput, { target: { value: 'mafer@gmail.com' } })
 		expect(onTodoChange).toHaveBeenCalled()
+	})
+	test("Can edit a todo", () => {
+		const changed = jest.fn();
+		render(<TodoList todos={[{ value: '123', completed: false }]} onTodoChange={changed} removeTodo={jest.fn()} toggleComplete={jest.fn()} />)
+		const todoInput = screen.getByPlaceholderText('Escribe la sub tarea');
+		fireEvent.change(todoInput, {target: {value: "Esta es una tarea"}})
+		expect(changed).toHaveBeenCalled();
 	})
 });
