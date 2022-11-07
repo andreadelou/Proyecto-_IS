@@ -47,7 +47,6 @@ function Login() {
 
 	// Check for page changes
 	useEffect(() => {
-		let isMounted = true;
 		if (loading) return;
 		// const signOut = async () => {
 		//   await logout();
@@ -55,13 +54,11 @@ function Login() {
 		// signOut();
 		if (user) return navigate("/home");
 		if (localStorage.getItem('email')) {
-			if (isMounted) {
-				setEmail(localStorage.getItem('email'))
-				setRemindUser(true);
-			}
+			setEmail(localStorage.getItem('email'))
+			setRemindUser(true);
 		}
 		setFinishChekRemindUser(true);
-		return () => { isMounted = false }
+		return () => { }
 	}, [user, loading]);
 
 

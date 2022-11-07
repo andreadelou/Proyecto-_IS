@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import * as firebase from '../firebase.js';
-
+import * as firebaseHooks from 'react-firebase-hooks/auth';
 
 const { default: Login } = require("../pages/Login")
 
@@ -66,10 +66,11 @@ describe('Tests for <Login/>', () => {
 	test('Fills the email when it is set on the local storage', async () => {
 		await act(async() => {
 			localStorage.setItem('email', 'test@example.com')
-			render(
+			const { unmount } = render(
 				<Login />,
 				{ wrapper: BrowserRouter }
-			)  
+			);
+			unmount();
 		})
 	})
 	test('Sends a reset password email', async() => {
@@ -86,5 +87,21 @@ describe('Tests for <Login/>', () => {
 		fireEvent.change(screen.getAllByTestId('email')[1], {target: {value: 'guillermo@gmail.com'}})
 		fireEvent.click(sendEmailButton)
 	
+	})
+	test('Does not send a reset password email', async () => {
+			jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
+			[{ uid: '123', email: 'foo@bar.com' }, false]);
+		await act(async() => {
+			render(
+				<Login />,
+				{ wrapper: BrowserRouter }
+			)  
+		})
+		jest.spyOn(firebase, 'sendResetPasswordEmail').mockReturnValue(false)
+		const forgetEmailButton = screen.getByTestId('forgetPassword');
+		fireEvent.click(forgetEmailButton)
+		const sendEmailButton = screen.getByTestId('sendButton');
+		fireEvent.change(screen.getAllByTestId('email')[1], {target: {value: 'guillermo@gmail.com'}})
+		fireEvent.click(sendEmailButton)
 	})
 })
