@@ -33,17 +33,10 @@ function PieCharts({
 
 
 	const createGoalsChart = async () => {
-		//setEjercicioT(goals[goals.category == 'exercise'].length)
-		/*setApredizajeT(goals.learn.length)
-		setSaludT(goals.health.length)
-		setSaludMentalT(goals.mental_health.length)*/
-
-
 		setEjercicioT(goals.exercise?.length);
 		setApredizajeT(goals.learn?.length);
 		setSaludT(goals.health?.length);
 		setsaludMental(goals.mentalhealth?.length);
-
 	};
 
 
