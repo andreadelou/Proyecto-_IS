@@ -93,7 +93,7 @@ function Login() {
 	const sendEmail = async (email) => {
 		const success = await sendResetPasswordEmail(email);
 		if (success) {
-
+			onSuccessReset();
 			onClose();
 		}
 	}
@@ -144,7 +144,9 @@ function Login() {
 						</InputGroup>
 
 						: ''}
-					<Link color={"primary"} onClick={onOpen} data-testid="forgetPassword">¿Olvidaste tu contraseña?</Link>
+					<Link color={"primary"} onClick={(event) => {
+						onOpen(event);
+					}} data-testid="forgetPassword">¿Olvidaste tu contraseña?</Link>
 					<HStack spacing={"24px"}>
 						<Button
 							display={"inline-block"}

@@ -104,4 +104,27 @@ describe('Tests for <Login/>', () => {
 		fireEvent.change(screen.getAllByTestId('email')[1], {target: {value: 'guillermo@gmail.com'}})
 		fireEvent.click(sendEmailButton)
 	})
+
+	test('Can reset the user password', async () => {
+		await act(async () => {
+			jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
+				[{ uid: '123', email: 'foo@bar.com' }, false]);
+			jest.spyOn(firebase, 'sendResetPasswordEmail').mockReturnValue(true)
+			render(
+				<Login />,
+				{ wrapper: BrowserRouter }
+			)  
+			const forgetPassButton = screen.getByTestId('forgetPassword');
+			await act(async () => {
+				fireEvent.click(forgetPassButton);
+			})
+			const email = screen.getByPlaceholderText('Tu Correo')
+			fireEvent.change(email, { target: { value: 'test@test.com' } });
+			const resetButton = screen.getByTestId('sendButton');
+			await act(async () => {
+				fireEvent.click(resetButton);
+			})
+		})
+		expect(firebase.sendResetPasswordEmail).toHaveBeenCalled();
+	})
 })

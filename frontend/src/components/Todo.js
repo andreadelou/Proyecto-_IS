@@ -13,6 +13,7 @@ function Todo({ todo, toggleComplete, removeTodo, onTodoChange }) {
 				type="text"
 				className="todo__input"
 				name="todo-input"
+				data-testid="todo-input"
 				placeholder="Escribe la sub tarea"
 				defaultValue={todo.value}
 				onChange={(e) => { onTodoChange(e.target.value) }}

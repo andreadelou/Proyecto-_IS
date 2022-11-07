@@ -278,8 +278,6 @@ describe("Tests for the goals logic", () => {
 			fireEvent.click(toggleComplete)
 		})
 	})
-	
-
 
     test("Fetch goals when there is a current user", async () => {
         jest.spyOn(firebaseHooks, "useAuthState").mockReturnValue([
