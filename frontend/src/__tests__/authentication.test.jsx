@@ -14,7 +14,7 @@ import ForgetPasswordModal from '../components/ForgetPasswordModal'
 
 
 
-describe("Authentication tests", () => {
+xdescribe("Authentication tests", () => {
 	it('allows login when the two inputs are filled', async () => {
 		// Arrange
 		await act(async() => {
