@@ -73,7 +73,7 @@ describe("Authentication tests", () => {
 		// Assert
 		expect(registerButton.closest('button')).toBeDisabled()
 	})
-	it('Button is enabled when an email is typed', async () => {
+	xit('Button is enabled when an email is typed', async () => {
 		// Arrange
 		const onOpenMock = jest
 			.fn()
