@@ -5,6 +5,7 @@ function Todo({ todo, toggleComplete, removeTodo, onTodoChange }) {
 	return (
 		<div className="todo">
 			<input type="checkbox"
+				data-testid="toggleComplete"
 				onChange={() => { toggleComplete(!todo.completed) }}
 				defaultChecked={todo.completed}
 			/>

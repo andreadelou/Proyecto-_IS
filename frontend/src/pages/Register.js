@@ -21,7 +21,7 @@ import blob from "../assets/blob01.png";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import Header from "../components/Header.js";
+import Header from "../components/Header.jsx";
 import { createUserInCollection } from "../services/users.service.js";
 
 

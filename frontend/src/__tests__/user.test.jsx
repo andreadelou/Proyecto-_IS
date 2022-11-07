@@ -1,6 +1,16 @@
 import { User } from "../models/user"
+import { addPointsToUser, createUserInCollection, getUserInfo, setNewPet, updateUserInfo } from "../services/users.service";
+import firebase from 'firebase/app'
+import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
+jest.mock('firebase/firestore');
+jest.mock('firebase/auth');
+describe("Users tests", () => {
 
-describe("Buy pet", () => {
+	beforeEach(() => {
+			console.log(firebase)		
+        
+  })
 	it('User buys a pet.', () => {
 		// Arrange
 		const sut = new User('abcd', 100, true, true, 'example@email.com', 'Guillermo', 'frog', []);
@@ -34,4 +44,72 @@ describe("Buy pet", () => {
 		expect(result).toBeFalsy();
 	})
 
+	xit('Can create an user on a collection', async () => {
+		await createUserInCollection({
+			uid: '1232',
+			email: 'test@example.com'
+		})
+	})
+
+	it('update user information', async () => { 
+		// Arrange
+		const uid = '1icT46W2zDhm2azgnMp4BzhmCei12'
+		createUserInCollection({uid: uid, email: 'test@example.com'})
+		// Act
+		const result = await updateUserInfo(uid, { email: 'tes2@example.com' })
+		// Assert
+		expect(result).toBeTruthy()
+		// Clean
+		const docRef = doc(db, 'users', uid);    // Get the document reference from firebase
+		await deleteDoc(docRef)
+	})
+	
+
+	xit('get user information', async () => {
+		await getUserInfo({uid: '1icT46W2zDhm2azgnMp4BzhmCei1'})
+	})
+
+	it('cannot add a pet if there is no price and pet', () => {
+		const sut = new User('abcd', 100, true, true, 'example@email.com', 'Guillermo', 'frog');
+		sut.addPet(null, null)
+		expect(sut.points).toEqual(100)
+		
+	})
+
+
+	test('Can addPointsToUser', async() => {
+		getDoc.mockResolvedValue(
+			{
+				exists: jest.fn().mockReturnValue(true),
+				data: jest.fn().mockReturnValue({uid: 123})
+			}
+			)
+		await addPointsToUser(10, { uid: '123' });
+		expect(getDoc).toHaveBeenCalled();
+	})
+
+	test('Creates a new user if it does note exists', async () => {
+		getDoc.mockResolvedValue(
+			{
+				exists: jest.fn().mockReturnValue(false),
+				data: jest.fn().mockReturnValue({})
+			}
+			)
+		await getUserInfo({ uid: '123' })
+		expect(setDoc).toHaveBeenCalled();
+	})
+
+	test('Can set new pet', async () => {
+		getDoc.mockResolvedValue(
+			{
+				exists: jest.fn().mockReturnValue(true),
+				data: jest.fn().mockReturnValue({uid: '123', pet:'s'})
+			}
+		)
+		await setNewPet('frog', {uid: '123', pet: ''})
+		expect(getDoc).toHaveBeenCalled();
+	})
+
 })
+
+ 

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests para <ProgressBar/> Renders a progress bar 1`] = `
+<div>
+  <div
+    class="sc-bczRLJ ePzFnv"
+    color="blue"
+    width="680px"
+  >
+    <progress
+      max="100"
+      value="0"
+    />
+  </div>
+</div>
+`;

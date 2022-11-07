@@ -17,7 +17,7 @@ import {
     ModalCloseButton,
 } from "@chakra-ui/react";
 import "../CSS/Home.css";
-import Header from "../components/Header.js";
+import Header from "../components/Header.jsx";
 import blob from "../assets/blob01.png";
 import { fetchExpiredTasks } from "../services/goals.service.js";
 import { proximatarea } from "../services/goals.service";
@@ -76,26 +76,23 @@ function Home() {
 
     useEffect(() => {
         if (loading) return;
-        if (!user) return navigate("/");
-        const getUserData = async () => {
-            const data = await getUserInfo(user); // Get the current user information
-            setPoints(data.points ?? 0);
-            setPet(data.pet);
-            //setPet("plant");
-        };
-        
+        if (!user) return navigate("/");      
         const getGoalData = async () => {
             const data = await fetchExpiredTasks(); // Fetch the expired goals
             if (data.length > 0) {
                 const d = new Date();
                 const currentDays = d.getTime() / 1000 / (60 * 60 * 24);
-                const goalDays = data[0].reminder.seconds / (60 * 60 * 24);
-
-                if (Math.floor(currentDays - goalDays) === 1) {
-                    setPetState(1);
-                } else if (Math.floor(currentDays - goalDays) >= 2) {
+							const goalDays = data[0].reminder.seconds / (60 * 60 * 24);
+							
+							console.log('Subtract',currentDays - goalDays);
+								
+							if (Math.floor(currentDays - goalDays) === 1) {
+								setPetState(1);
+							} else if (Math.floor(currentDays - goalDays) >= 2) {
+								
                     setPetState(2);
-                } else {
+							} else {
+								
                     setPetState(0);
                 }
             }
@@ -108,11 +105,11 @@ function Home() {
             const goalDays = proximameta[0].reminder.seconds / (60 * 60 * 24);
             setReminder(Math.ceil(goalDays - currentDays));
         };
-        if (user) {
-            getUserData();
-            getGoalData();
-            getultimameta();
-        }
+  
+        getUserData();
+        getGoalData();
+        getultimameta();
+        
 
 
         
@@ -123,7 +120,6 @@ function Home() {
         //funcion que verifica si puede comprar a la mascota que desea
         // comprar la mascota
         const puntos =  await getUserData(); // obitene los puntos del usuario
-        console.log(puntos);
 				const userInfo = await getUserInfo(user)
 				if (againstNullOrUndefined(userInfo)) {
 					// Create the user instance
@@ -160,21 +156,6 @@ function Home() {
      * Renders a pet
      */
     const renderPet = () => {
-        //if (pet !== "frog" && pet !== "plant") return; // Do not render if pet is not present
-        /*const petArray =
-            pet === "frog"
-                ? [happyfrog, mehfrog, sadfrog]
-                : [happyplant, mehplant, sadplant];
-        return (
-           <Image
-                src={petArray[petState]}
-                alt="Rana feliz"
-                width="200px"
-                height="200px"
-            />
-        );
-                : [happyplant, mehplant, sadplant];*/
-        //const [petArray, setPetArray] = useState([happyfrog, mehfrog, sadfrog]);
         
         if(pet == "frog"){
             const petArray = [happyfrog, mehfrog, sadfrog];

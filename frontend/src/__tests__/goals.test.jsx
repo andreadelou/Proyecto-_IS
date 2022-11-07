@@ -5,9 +5,26 @@ const { act } = require("react-dom/test-utils")
 const { BrowserRouter } = require("react-router-dom")
 const { default: GoalModal } = require("../components/GoalModal")
 const { default: TodoForm } = require("../components/TodoForm")
-
+const { default: Goals } = require("../pages/Goals")
+import * as firebaseHooks from 'react-firebase-hooks/auth';
+import Todo from '../components/Todo'
+import * as goalsService from '../services/goals.service';
+import * as usersService from '../services/users.service';
 
 describe("Tests for the goals logic", () => {
+	
+	beforeEach(() => {
+		// mockFirebase({currentUser: {email: 'Guillermo@gmail.com'}})
+	})
+	test('Fetch all goals when the user logs in', async () => {
+		
+		await act(async () => {
+			render(
+				<Goals />,
+				{ wrapper: BrowserRouter }
+			)
+		})
+	})
 	
 	test('Allows to save a goal if the fields are filled', async () => {
 		// Arrange
@@ -18,13 +35,13 @@ describe("Tests for the goals logic", () => {
 			.fn()
 			.mockName('onClose')
 		
-		await act(async() => {
+		await act(async () => {
 			render(
 				<GoalModal
-				isOpen={true} onOpen={onOpenMock}
-				onClose={onCloseMock} />,
+					isOpen={true} onOpen={onOpenMock}
+					onClose={onCloseMock} />,
 				{ wrapper: BrowserRouter }
-			)  
+			)
 		})
 		const titleInput = screen.getByTestId('title')
 		const categoryInput = screen.getByTestId('category')
@@ -51,14 +68,14 @@ describe("Tests for the goals logic", () => {
 			.fn()
 			.mockName('onSave')
 		
-		await act(async() => {
+		await act(async () => {
 			render(
 				<GoalModal
 					isOpen={true} onOpen={onOpenMock}
-					onSave ={onSaveMock}
+					onSave={onSaveMock}
 					onClose={onCloseMock} />,
 				{ wrapper: BrowserRouter }
-			)  
+			)
 		})
 		const titleInput = screen.getByTestId('title')
 		const categoryInput = screen.getByTestId('category')
@@ -79,7 +96,7 @@ describe("Tests for the goals logic", () => {
 			.fn()
 			.mockName('onAdd')
 		
-			await act(async() => {
+		await act(async () => {
 			render(
 				<TodoForm
 					isOpen={true} onAdd={onAddMock}
@@ -87,8 +104,8 @@ describe("Tests for the goals logic", () => {
 					title="test goal"
 				/>,
 				{ wrapper: BrowserRouter }
-			)  
-			})
+			)
+		})
 		const addButton = screen.getByTestId('onaddButton')
 		// Act
 		fireEvent.click(addButton)
@@ -102,7 +119,7 @@ describe("Tests for the goals logic", () => {
 			.fn()
 			.mockName('onEdit')
 		
-			await act(async() => {
+		await act(async () => {
 			render(
 				<TodoForm
 					isOpen={true}
@@ -111,8 +128,8 @@ describe("Tests for the goals logic", () => {
 					title="test goal"
 				/>,
 				{ wrapper: BrowserRouter }
-			)  
-			})
+			)
+		})
 		const editButton = screen.getByTestId('oneditButton')
 		// Act
 		fireEvent.click(editButton)
@@ -121,5 +138,170 @@ describe("Tests for the goals logic", () => {
 		expect(goalSaveButton).toBeDefined()
 	})
 
+	test('Fetch all goals when there is an user', async () => {
+		jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
+			[{ uid: '123', email: 'foo@bar.com' }, false]);
+		jest.spyOn(goalsService, 'fetchAllGoals').mockReturnValue([]);
+		jest.spyOn(goalsService, 'fetchAllGoalsAndGroupByCategory').mockReturnValue({
+			'exercise': [{
+				title: 'goal1',
+				id: '123',
+				todos: [{completed: true}, {completed: false}]
+			}],
+			'learn': [{
+				title: 'goal1',
+				id: '1233',
+				todos: [{completed: true}]
+			}],
+			'mentalhealth': [{
+				title: 'goal1',
+				id: '12334',
+				todos: [{completed: true}]
+			}],
+			'health': [{
+				title: 'goal1',
+				id: '123345',
+				todos: [{completed: true}]
+			}]
+		});
+		await act(async() => {
+			render(
+				<Goals />,
+				{ wrapper: BrowserRouter }
+			)  
+		})
+		const addButton = screen.getAllByTestId('onaddButton')[0]
+		fireEvent.click(addButton)
+	})
+	test('Toggle a goal completed state', async () => {
+		jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
+			[{ uid: '123', email: 'foo@bar.com' }, false]);
+		jest.spyOn(goalsService, 'fetchAllGoals').mockReturnValue([]);
+		jest.spyOn(goalsService,'updateGoalTodo').mockReturnValue([]);
+		jest.spyOn(goalsService, 'fetchAllGoalsAndGroupByCategory').mockReturnValue({
+			'exercise': [{
+				title: 'goal1',
+				completed: true,
+				id: '123',
+				todos: [{completed: false}, {completed: false}]
+			}],
+			'learn': [{
+				title: 'goal1',
+				completed: true,
+				id: '1233',
+				todos: [{completed: false}]
+			}],
+			'mentalhealth': [{
+				title: 'goal1',
+				completed: true,
+				id: '12334',
+				todos: [{completed: false}]
+			}],
+			'health': [{
+				title: 'goal1',
+				completed: true,
+				id: '123345',
+				todos: [{completed: false}]
+			}],
+			'noc': [{
+				title: 'goal1',
+				completed: true,
+				id: '123345',
+				todos: [{completed: false}]
+			}]
+		});
+		await act(async() => {
+			render(
+				<Goals />,
+				{ wrapper: BrowserRouter }
+			)  
+		})
+		await act(async () => {
+			const toggleComplete = screen.getAllByTestId('toggleComplete')[0]
+			const toggleComplete2 = screen.getAllByTestId('completedGoal')[0]
+			fireEvent.click(toggleComplete)
+			fireEvent.click(toggleComplete2)
+		})
+	})
+	test('Toggle a goal completed state', async () => {
+		jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
+			[{ uid: '123', email: 'foo@bar.com' }, false]);
+		jest.spyOn(goalsService, 'fetchAllGoals').mockReturnValue([]);
+		jest.spyOn(goalsService,'updateGoalTodo').mockReturnValue([]);
+		jest.spyOn(goalsService,'updateGoal').mockReturnValue([]);
+		jest.spyOn(usersService,'addPointsToUser').mockReturnValue([]);
+		jest.spyOn(goalsService, 'fetchAllGoalsAndGroupByCategory').mockReturnValue({
+			'exercise': [{
+				title: 'goal1',
+				id: '123',
+				completed: false,
+				todos: [{completed: true}, {completed: false}]
+			}],
+		});
+		await act(async() => {
+			render(
+				<Goals />,
+				{ wrapper: BrowserRouter }
+			)  
+		})
+		await act(async () => {
+			const toggleComplete = screen.getAllByTestId('completedGoal')[0]
+			fireEvent.click(toggleComplete)
+		})
+	})
+	test('Toggle a goal completed state', async () => {
+		jest.spyOn(firebaseHooks, 'useAuthState').mockReturnValue(
+			[{ uid: '123', email: 'foo@bar.com' }, false]);
+		jest.spyOn(goalsService, 'fetchAllGoals').mockReturnValue([]);
+		jest.spyOn(goalsService,'updateGoalTodo').mockReturnValue([]);
+		jest.spyOn(goalsService,'updateGoal').mockReturnValue([]);
+		jest.spyOn(usersService,'addPointsToUser').mockReturnValue([]);
+		jest.spyOn(goalsService, 'fetchAllGoalsAndGroupByCategory').mockReturnValue({
+			'mentalhealth': [{
+				title: 'goal1',
+				id: '123',
+				completed: true,
+				todos: [{completed: true}, {completed: false}]
+			}],
+		});
+		await act(async() => {
+			render(
+				<Goals />,
+				{ wrapper: BrowserRouter }
+			)  
+		})
+		await act(async () => {
+			const toggleComplete = screen.getAllByTestId('completedGoal')[0]
+			fireEvent.click(toggleComplete)
+		})
+	})
+	
 
-})
+
+    test("Fetch goals when there is a current user", async () => {
+        jest.spyOn(firebaseHooks, "useAuthState").mockReturnValue([
+            { uid: "123", email: "foo@bar.com" },
+            false,
+        ]);
+        jest.spyOn(
+            goalsService,
+            "fetchAllGoalsAndGroupByCategory"
+        ).mockReturnValue([]);
+        jest.spyOn(goalsService, "fetchAllGoals").mockReturnValue([]);
+        await act(async () => {
+            render(<Goals date1="2022-05-05" date2="2022-06-06" />, {
+                wrapper: BrowserRouter,
+            });
+        });
+		});
+	
+	test("Can Render a Todo", () => {
+		const toggleComplete = jest.fn()
+		const removeTodo = jest.fn()
+		const onTodoChange = jest.fn()
+		render(<Todo todo={{ value: '123', completed: false }} toggleComplete={toggleComplete} removeTodo={removeTodo} onTodoChange={onTodoChange} />)
+		const todoInput = screen.getByPlaceholderText('Escribe la sub tarea')
+		fireEvent.change(todoInput, { target: { value: 'mafer@gmail.com' } })
+		expect(onTodoChange).toHaveBeenCalled()
+	})
+});

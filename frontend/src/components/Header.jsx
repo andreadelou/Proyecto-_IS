@@ -5,13 +5,16 @@ import "../CSS/navbar.css";
 import { logout } from '../firebase';
 
 
+export let util = {
+	logOut: null
+}
 
-function Header({ title, subtitle, Bandera = false }) {
 
-    async function LogOut() {
-        await logout()
-    }
+export function Header({ title, subtitle, Bandera = false }) {
+	util.logOut = async function logOut() {
 
+			await logout()
+		}
     return (
         <div style={{
             display: "flex",
@@ -34,7 +37,7 @@ function Header({ title, subtitle, Bandera = false }) {
                             <li><Link to="/goals">Metas</Link></li>
                             <li><Link to="/health">Bienestar</Link></li>
                             <li><Link to="/calendar">Calendario</Link></li>
-                            <li><a onClick={LogOut} href="#">Log Out</a></li>
+                            <li  ><a onClick={util.logOut} data-testid="logoutButton">Log Out</a></li>
                         </ul>
                     </nav>
                     : ''

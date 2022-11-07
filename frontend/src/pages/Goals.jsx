@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/Goals.css";
-import Header from "../components/Header.js";
+import Header from "../components/Header.jsx";
 import TodoForm from "../components/TodoForm.jsx";
 import TodoList from "../components/TodoList.jsx";
 import blob2 from "../assets/blob02.png";
@@ -25,8 +25,8 @@ function Goals() {
   const [user,,] = useAuthState(auth);
   const [goalsProgress, setGoalsProgress] = useState({});
 
-  useEffect(() => {
-    if (auth.currentUser) {
+	useEffect(() => {
+		if (user) {
       fetchGoals();
       fetchAll();
     }
@@ -52,7 +52,8 @@ function Goals() {
    * Add a todo
    * @param {*} goalId
    */
-  const addTodo = async (goalId) => {
+	const addTodo = async (goalId) => {
+		console.log('adding todo!!!')
     let updatedGoal = {};
     const newGoals = goals.map((entries) => {
       entries[1].map((goal) => {
