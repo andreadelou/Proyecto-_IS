@@ -85,6 +85,21 @@ describe('Logging In - Basic Auth', function () {
 
     
     })
+
+    context('Check', () => {
+      // https://on.cypress.io/visit
+      it('go to goals', () => {
+        cy.visit('https://mind-app-b0b0f.web.app/#/goals')
+        // cy.contains('Nueva Meta').click()
+        cy.get('[type="checkbox"]').first().check()
+        
+      })
+      
+
+      
+  
+      
+      })
   })
 
 
