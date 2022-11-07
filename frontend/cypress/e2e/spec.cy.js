@@ -88,18 +88,24 @@ describe('Logging In - Basic Auth', function () {
 
     context('Check', () => {
       // https://on.cypress.io/visit
-      it('go to goals', () => {
+      it('check goal', () => {
         cy.visit('https://mind-app-b0b0f.web.app/#/goals')
         // cy.contains('Nueva Meta').click()
         cy.get('[type="checkbox"]').first().check()
         
       })
-      
-
-      
-  
-      
+          
       })
+
+      context('Assertion checkbox', () => {
+        // https://on.cypress.io/visit
+        it('assertion', () => {
+          cy.get('[type="checkbox"]').first().check().should('be.checked'); 
+          // .and('have.value','Automation Tester');
+          
+        })
+            
+        })
   })
 
 
