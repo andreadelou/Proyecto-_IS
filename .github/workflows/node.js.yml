@@ -28,3 +28,14 @@ jobs:
         cache-dependency-path: "**/package-lock.json"
     - run: npm ci
     - run: npm test
+  integration:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+    - uses: actions/checkout@master
+    - uses: matt-ball/newman-action@master
+      with:
+        collection: postman_collection.json
+        environment: postman_environment.json
