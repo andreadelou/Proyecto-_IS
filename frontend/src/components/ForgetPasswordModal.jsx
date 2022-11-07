@@ -21,7 +21,7 @@ function ForgetPasswordModal({
 				<ModalBody>
 					<InputGroup>
 						<InputLeftElement pointerEvents={"none"} children={<EmailIcon />} />
-						<Input data-testid="email" variant={'input'} onChange={($event) => { setEmail($event.target.value) }} placeholder="Correo" type={"emails"} />
+						<Input data-testid="email" id='reset-input' variant={'input'} onChange={($event) => { setEmail($event.target.value) }} placeholder="Tu Correo" type={"emails"} />
 					</InputGroup>
 				</ModalBody>
 
@@ -31,7 +31,9 @@ function ForgetPasswordModal({
 					</Button>
 					<Button data-testid="sendButton" backgroundColor="primary" textColor="textLight" _hover={{
 						backgroundColor: "primary"
-					}} disabled={email.length <= 0} onClick={() => {sendEmail(email)}}>Enviar Correo</Button>
+					}} onClick={() => {
+						sendEmail(email)
+					}}>Enviar Correo</Button>
 				</ModalFooter>
 			</ModalContent>
 		</Modal>

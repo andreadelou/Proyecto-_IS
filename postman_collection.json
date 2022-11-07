@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "31df13d5-a48f-485b-ab7e-3ccb8bff69fe",
+		"name": "Iris",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19335131"
+	},
+	"item": [
+		{
+			"name": "Goal Tests",
+			"item": [
+				{
+					"name": "Create Gioal",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Should have 200 status\", () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test(\"Should have fields on the json payload\", () => {",
+									"     pm.response.to.have.jsonBody(\"fields\")",
+									"})",
+									"",
+									"pm.test(\"Should have the name on the response\", ()=> {",
+									"    pm.response.to.have.jsonBody(\"name\")",
+									"    const responseJson = pm.response.json();",
+									"    const splittedName = responseJson.name.split(\"/\");",
+									"    pm.collectionVariables.set('goalId', splittedName[splittedName.length - 1]);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fields\": {\n        \"category\": {\n            \"stringValue\": \"meditar\"\n        },\n        \"title\": {\n            \"stringValue\": \"Nueva Meta\"\n        }\n    }\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/documents/goals",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents",
+								"goals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Goal",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Should have a 200 status', () => {",
+									"    pm.response.to.have.status(200)",
+									"});",
+									"",
+									"pm.test('Should have fields on the response', () => {",
+									"    pm.response.to.have.jsonBody(\"fields\")",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/documents/goals/{{goalId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents",
+								"goals",
+								"{{goalId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Goal",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Should have a 200 status', () => {",
+									"    pm.response.to.have.status(200)",
+									"});",
+									"",
+									"pm.test('Should have fields on the response', () => {",
+									"    pm.response.to.have.jsonBody(\"fields\")",
+									"})",
+									"",
+									"pm.test(\"Should have new name on the response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.fields.title.stringValue).to.eq(\"Otro titlulo\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fields\": {\n        \"category\": {\n            \"stringValue\": \"meditar\"\n        },\n        \"title\": {\n            \"stringValue\": \"Otro titlulo\"\n        }\n    }\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/documents/goals/{{goalId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents",
+								"goals",
+								"{{goalId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Goal",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Should have a 200 status', () => {",
+									"    pm.response.to.have.status(200)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/documents/goals/{{goalId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents",
+								"goals",
+								"{{goalId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users Tests",
+			"item": [
+				{
+					"name": "Create an User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Should have 200 status\", () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test(\"Should have fields on the json payload\", () => {",
+									"     pm.response.to.have.jsonBody(\"fields\")",
+									"})",
+									"",
+									"pm.test(\"Should have the name on the response\", ()=> {",
+									"    pm.response.to.have.jsonBody(\"name\")",
+									"    const responseJson = pm.response.json();",
+									"    const splittedName = responseJson.name.split(\"/\");",
+									"    pm.collectionVariables.set('userId', splittedName[splittedName.length - 1]);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fields\": {\n        \"name\": {\n            \"stringValue\": \"Guillermo\"\n        },\n        \"email\": {\n            \"stringValue\": \"guillermo@test.com\"\n        }\n    }\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/documents/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Should have 200 status\", () => {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test(\"Should have fields on the json payload\", () => {",
+									"     pm.response.to.have.jsonBody(\"fields\")",
+									"})",
+									"",
+									"pm.test(\"Should have the name on the response\", ()=> {",
+									"    pm.response.to.have.jsonBody(\"name\")",
+									"    const responseJson = pm.response.json();",
+									"})",
+									"pm.test(\"Should have the email on the response\", ()=> {",
+									"    pm.response.to.have.jsonBody(\"name\")",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.fields.email.stringValue).to.eql(\"guillermo@test.com\")",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/documents/users/{{userId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updates an user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Should have a 200 status', () => {",
+									"    pm.response.to.have.status(200)",
+									"});",
+									"",
+									"pm.test('Should have fields on the response', () => {",
+									"    pm.response.to.have.jsonBody(\"fields\")",
+									"})",
+									"",
+									"pm.test(\"Should have new name on the response\", () => {",
+									"    const responseJson = pm.response.json();",
+									"    console.log(responseJson)",
+									"    pm.expect(responseJson.fields.name.stringValue).to.eq(\"Juan\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fields\": {\n        \"name\": {\n            \"stringValue\": \"Juan\"\n        }\n    }\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/documents/users/{{userId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Should have a 200 status', () => {",
+									"    pm.response.to.have.status(200)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/documents/users/{{userId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"documents",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Obtain Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Should have 200 status\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Should have idToken on the response\", () => {",
+							"    pm.response.to.have.jsonBody(\"idToken\")",
+							"})",
+							"",
+							"pm.test(\"Should not have error on the response\", () => {",
+							"    pm.response.to.not.have.jsonBody(\"error\")",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"guillermo.santosba@gmail.com\",\n    \"password\": \"123456\",\n    \"returnSecureTokenas\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={{api_key}}",
+					"protocol": "https",
+					"host": [
+						"identitytoolkit",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1",
+						"accounts:signInWithPassword"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "goalId",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		}
+	]
+}

@@ -52,7 +52,7 @@ describe("Authentication tests", () => {
 		expect(registerButton.closest('button')).not.toBeDisabled()
 	})
 
-	it("Does not allows to register if the two passwords do not match", async () => {
+	xit("Does not allows to register if the two passwords do not match", async () => {
 		// Arrange
 		await act(async() => {
 		 render(<Register />, {wrapper: BrowserRouter})  
@@ -73,7 +73,7 @@ describe("Authentication tests", () => {
 		// Assert
 		expect(registerButton.closest('button')).toBeDisabled()
 	})
-	it('Button is enabled when an email is typed', async () => {
+	xit('Button is enabled when an email is typed', async () => {
 		// Arrange
 		const onOpenMock = jest
 			.fn()
