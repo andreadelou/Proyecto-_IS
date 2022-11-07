@@ -42,23 +42,6 @@ describe('Logging In - Basic Auth', function () {
       }).its('status').should('equal', 200)
     })
 
-    /* it('can post', () => {
-      cy.request({
-        url: 'https://mind-app-b0b0f.web.app/#/',
-        method: 'POST',
-        auth: {
-          username, password,
-        },
-        body: {
-          text: 'ping!',
-        },
-      }).then((response) => {
-        expect(response.status, 'status').to.equal(200)
-        expect(response.body).to.deep.equal({
-          text: 'ping!',
-        })
-      })
-    }) */
   })
 
   context('cy.visit', () => {
