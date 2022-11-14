@@ -37,9 +37,10 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "react-scripts test --detectOpenHandles",
-		"test:coverage": "npm test -- --coverage --watchAll=false --collectCoverageFrom=!src/*.js",
-		"eject": "react-scripts eject"
+		"test": "react-scripts test",
+		"test:coverage": "npm test -- --coverage --watchAll=false",
+		"eject": "react-scripts eject",
+		"cypress:open": "cypress open"
 	},
 	"browserslist": {
 		"production": [
@@ -54,6 +55,9 @@
 		]
 	},
 	"devDependencies": {
-		"@types/jest": "^29.0.0"
+		"@types/jest": "^29.0.0",
+		"cypress": "^10.11.0",
+		"eslint": "^8.22.0",
+		"eslint-plugin-react": "^7.30.1"
 	}
 }
