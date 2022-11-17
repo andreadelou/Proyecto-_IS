@@ -75,7 +75,7 @@ describe('Logging In - Basic Auth', function () {
 
         cy.contains('Personalizar').click()
         cy.contains('Tienda').click()
-        cy.get('[alt="cuadro1"]').click()
+        // cy.get('[alt="cuadro1"]').click()
         
       })
 
@@ -83,4 +83,19 @@ describe('Logging In - Basic Auth', function () {
   
       
       })
+
+      context('Cambiar mascota', () => {
+        // https://on.cypress.io/visit
+        
+        it('successfully logs in ', () => {
+  
+          cy.contains('Personajes').click()
+          cy.get('[class="c1"]').click()
+          
+        })
+  
+        // cy.contains('Welcome').click()
+    
+        
+        })
   })
