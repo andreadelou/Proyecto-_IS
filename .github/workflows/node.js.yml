@@ -40,6 +40,9 @@ jobs:
         collection: postman_collection.json
         environment: postman_environment.json
   e2e:
+    defaults:
+      run:
+        working-directory: ./frontend
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
