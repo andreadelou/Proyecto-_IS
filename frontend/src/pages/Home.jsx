@@ -314,7 +314,7 @@ function Home() {
                                     
                                     <img
                                         src={cuadrofondo}
-                                        alt="cuadro1"
+                                        alt="CuadroFondo1"
                                         style={{
                                             width: "300px",
                                             height: "200px",
@@ -482,7 +482,7 @@ function Home() {
 
                                         <img
                                             src={plus}
-                                            alt="cuadro1"
+                                            alt="CuadroPlus1"
                                             style={{
                                                 width: "100px",
                                                 height: "100px",
@@ -520,7 +520,7 @@ function Home() {
 
                                         <img
                                             src={plus}
-                                            alt="cuadro1"
+                                            alt="cuadroplus1.3"
                                             style={{
                                                 width: "100px",
                                                 height: "100px",
@@ -570,7 +570,7 @@ function Home() {
                                     {/*fondos fila1*/}
                                     <img
                                         src={cuadrofondo}
-                                        alt="cuadro1"
+                                        alt="CuadroFondo2"
                                         style={{
                                             width: "300px",
                                             height: "200px",
@@ -723,7 +723,7 @@ function Home() {
 
                                         <img
                                             src={happybot}
-                                            alt="cuadro1"
+                                            alt="cuadro1.2"
                                             style={{
                                                 width: "215px",
                                                 height: "180px",
@@ -761,7 +761,7 @@ function Home() {
 
                                         <img
                                             src={happyice}
-                                            alt="cuadro1"
+                                            alt="cuadro1.3"
                                             style={{
                                                 width: "170px",
                                                 height: "200px",
@@ -915,7 +915,7 @@ function Home() {
 
                                         <img
                                             src={buybutton}
-                                            alt="cuadro1"
+                                            alt="cuadrobuy1"
                                             style={{
                                                 width: "97px",
                                                 height: "97px",
@@ -956,7 +956,7 @@ function Home() {
 
                                         <img
                                             src={buybutton}
-                                            alt="cuadro1"
+                                            alt="cuadrobuy1.2"
                                             style={{
                                                 width: "97px",
                                                 height: "97px",
@@ -997,7 +997,7 @@ function Home() {
 
                                         <img
                                             src={buybutton}
-                                            alt="cuadro1"
+                                            alt="cuadrobuy1.3"
                                             style={{
                                                 width: "100px",
                                                 height: "100px",
