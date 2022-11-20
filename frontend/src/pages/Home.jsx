@@ -116,41 +116,41 @@ function Home() {
 
     }, [user, loading]);
     
-    // const buy = async (petname) => { 
-    //     //funcion que verifica si puede comprar a la mascota que desea
-    //     // comprar la mascota
-    //     const puntos =  await getUserData(); // obitene los puntos del usuario
-		// 		const userInfo = await getUserInfo(user)
-		// 		if (againstNullOrUndefined(userInfo)) {
-		// 			// Create the user instance
-		// 			const user = new User(userInfo.uid, userInfo.points, userInfo.active,
-		// 			userInfo.configured, userInfo.email, userInfo.name, userInfo.pet, userInfo.pets)
-		// 			const successPurchase = user.addPet(pet, 50);
-		// 			if (successPurchase) {
-		// 				toast({
-		// 						title: 'Se logro comprar la mascota',
-		// 						description: "Siuuu",
-		// 						status: 'success',
-		// 						position: 'top',
-		// 						duration: 9000,
-		// 						isClosable: true,
-		// 					});
+    const buy = async (petname) => { 
+        //funcion que verifica si puede comprar a la mascota que desea
+        // comprar la mascota
+        const puntos =  await getUserData(); // obitene los puntos del usuario
+				const userInfo = await getUserInfo(user)
+				if (againstNullOrUndefined(userInfo)) {
+					// Create the user instance
+					const user = new User(userInfo.uid, userInfo.points, userInfo.active,
+					userInfo.configured, userInfo.email, userInfo.name, userInfo.pet, userInfo.pets)
+					const successPurchase = user.addPet(pet, 50);
+					if (successPurchase) {
+						toast({
+								title: 'Se logro comprar la mascota',
+								description: "Siuuu",
+								status: 'success',
+								position: 'top',
+								duration: 9000,
+								isClosable: true,
+							});
 		
-		// 					addPointsToUser(-50, user); //setea los puntos de la mascota
-		// 			} else {
-		// 				toast({
-    //             title: 'No tienes los puntos suficientes :c',
-    //             description: "Ponte las pilas",
-    //             status: 'error',
-    //             position: 'top',
-    //             duration: 9000,
-    //             isClosable: true,
-    //           });
-		// 				}
+							addPointsToUser(-50, user); //setea los puntos de la mascota
+					} else {
+						toast({
+                title: 'No tienes los puntos suficientes :c',
+                description: "Ponte las pilas",
+                status: 'error',
+                position: 'top',
+                duration: 9000,
+                isClosable: true,
+              });
+						}
 					
 					
-		// 		}        
-    // } 
+				}        
+    } 
     
     /**
      * Renders a pet
@@ -238,7 +238,7 @@ function Home() {
                 {/* ONDA DE LA MASCOTA  */}
                 <VStack className="mascota">
                     {renderPet()}
-                    {/* <Button
+                    <Button
                         backgroundColor="primary"
                         textColor="textLight"
                         _hover={{
@@ -247,12 +247,799 @@ function Home() {
                         onClick={onOpen}
                     >
                         Personalizar
-                    </Button> */}
+                    </Button>
                 </VStack>
                 {/* FIN DE ONDA DE LA MASCOTA */}
             </HStack>
             {/* ==== STORE MODAL ==== */}
-            
+            <Modal isOpen={isOpen} onClose={onClose} size={"6xl"}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Personaliza tu Mascota</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <HStack justifyContent={"space-around"}>
+                            <Button
+                                borderRadius={100}
+                                flex={1}
+                                onClick={() => {
+                                    setCurrentModalPage("store");
+                                }}
+                                backgroundColor={
+                                    currentModalPage !== "store"
+                                        ? "primaryDark"
+                                        : "primary"
+                                }
+                                textColor="textLight"
+                                _hover={{
+                                    backgroundColor: "primaryLight",
+                                }}
+                            >
+                                Tienda
+                            </Button>
+                            <Button
+                                borderRadius={100}
+                                flex={1}
+                                backgroundColor={
+                                    currentModalPage !== "locker"
+                                        ? "primaryDark"
+                                        : "primary"
+                                }
+                                onClick={() => {
+                                    setCurrentModalPage("locker");
+                                }}
+                                textColor="textLight"
+                                _hover={{
+                                    backgroundColor: "primaryLight",
+                                }}
+                            >
+                                Personajes
+                            </Button>
+
+                        </HStack>
+
+                        
+                        {currentModalPage === "locker" ? (
+                            <>
+                                Armario
+                                <div
+                                    className="personajesArmarioFondo"
+                                    style={{
+                                        width: "1100px",
+                                        height: "700px" /*, backgroundColor: "red"*/,
+                                        marginTop: "30px",
+                                    }}
+                                >
+                                    {/*fondos fila1*/}
+                                    
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro1"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "absolute",
+                                            left: "4%",
+                                        }}
+                                    />
+
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro2"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "absolute",
+                                            left: "37%",
+                                        }}
+                                    />
+
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro3"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "relative",
+                                            left: "70%",
+                                            margin: "30px",
+                                        }}
+                                    />
+
+                                    {/*fondos fila2*/}
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro4"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "absolute",
+                                            left: "4%",
+                                        }}
+                                    />
+
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro5"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "absolute",
+                                            left: "37%",
+                                        }}
+                                    />
+
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro6"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "relative",
+                                            left: "70%",
+                                            margin: "30px",
+                                        }}
+                                    />
+
+                                    {/*fondos fila3*/}
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro4"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "absolute",
+                                            left: "4%",
+                                        }}
+                                    />
+
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro5"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "absolute",
+                                            left: "37%",
+                                        }}
+                                    />
+
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro6"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "relative",
+                                            left: "70%",
+                                            margin: "30px",
+                                        }}
+                                    />
+
+                                    <div
+                                        className="personajesArmario"
+                                        style={{
+                                            width: "1100px",
+                                            height: "700px",
+                                            position: "absolute",
+                                            marginTop: "30px",
+                                        }}
+                                    >
+
+                                        {/*imagenes fila1*/}
+
+                                        <button className='c1' onClick={() => {
+                                            setPet('plant');
+                                            setNewPet('plant',user);
+                                        }} 
+                                        >
+                                        <img
+                                        
+                                            src={happyplant}
+                                            alt="cuadro1"
+                                            style={{
+                                                width: "200px",
+                                                height: "160px",
+                                                position: "absolute",
+                                                left: "5%",
+                                                top: "-100%",
+                                            }}
+                                        />
+                                        </button>
+
+
+                                        <button className='c1' onClick={() => {
+                                            setPet('frog');
+                                            setNewPet('frog',user);
+                                        }} 
+                                        >
+                                        <img
+                                            src={happyfrog}
+                                            alt="cuadro2"
+                                            style={{
+                                                width: "200px",
+                                                height: "170px",
+                                                position: "absolute",
+                                                left: "40%",
+                                                top: "-100%",
+                                            }}
+                                        />
+                                        </button>
+
+                                        <img
+                                            src={plus}
+                                            alt="cuadro3"
+                                            style={{
+                                                width: "100px",
+                                                height: "100px",
+                                                position: "absolute",
+                                                left: "82%",
+                                                top: "-97%",
+                                            }}
+                                        />
+
+                                        {/*imagenes fila2*/}
+
+                                        <img
+                                            src={plus}
+                                            alt="cuadro1"
+                                            style={{
+                                                width: "100px",
+                                                height: "100px",
+                                                position: "absolute",
+                                                left: "10%",
+                                                top: "-63%",
+                                            }}
+                                        />
+
+                                        <img
+                                            src={plus}
+                                            alt="cuadro2"
+                                            style={{
+                                                width: "100px",
+                                                height: "100px",
+                                                position: "absolute",
+                                                left: "45%",
+                                                top: "-63%",
+                                            }}
+                                        />
+
+                                        <img
+                                            src={plus}
+                                            alt="cuadro3"
+                                            style={{
+                                                width: "100px",
+                                                height: "100px",
+                                                position: "absolute",
+                                                left: "82%",
+                                                top: "-63%",
+                                            }}
+                                        />
+
+                                        {/*imagenes fila3*/}
+
+                                        <img
+                                            src={plus}
+                                            alt="cuadro1"
+                                            style={{
+                                                width: "100px",
+                                                height: "100px",
+                                                position: "absolute",
+                                                left: "11%",
+                                                top: "-30%",
+                                            }}
+                                        />
+
+                                        <img
+                                            src={plus}
+                                            alt="cuadro2"
+                                            style={{
+                                                width: "100px",
+                                                height: "100px",
+                                                position: "absolute",
+                                                left: "45%",
+                                                top: "-30%",
+                                            }}
+                                        />
+
+                                        <img
+                                            src={plus}
+                                            alt="cuadro3"
+                                            style={{
+                                                width: "100px",
+                                                height: "100px",
+                                                position: "absolute",
+                                                left: "82%",
+                                                top: "-30%",
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                Tienda
+                                <div
+                                    className="personajesArmarioFondo"
+                                    style={{
+                                        width: "1100px",
+                                        height: "700px" /*, backgroundColor: "red"*/,
+                                        marginTop: "30px",
+                                    }}
+                                >
+                                    {/*fondos fila1*/}
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro1"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "absolute",
+                                            left: "4%",
+                                        }}
+                                    />
+
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro2"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "absolute",
+                                            left: "37%",
+                                        }}
+                                    />
+
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro3"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "relative",
+                                            left: "70%",
+                                            margin: "30px",
+                                        }}
+                                    />
+
+                                    {/*fondos fila2*/}
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro4"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "absolute",
+                                            left: "4%",
+                                        }}
+                                    />
+
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro5"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "absolute",
+                                            left: "37%",
+                                        }}
+                                    />
+
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro6"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "relative",
+                                            left: "70%",
+                                            margin: "30px",
+                                        }}
+                                    />
+
+                                    {/*fondos fila3*/}
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro4"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "absolute",
+                                            left: "4%",
+                                        }}
+                                    />
+
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro5"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "absolute",
+                                            left: "37%",
+                                        }}
+                                    />
+
+                                    <img
+                                        src={cuadrofondo}
+                                        alt="cuadro6"
+                                        style={{
+                                            width: "300px",
+                                            height: "200px",
+                                            position: "relative",
+                                            left: "70%",
+                                            margin: "30px",
+                                        }}
+                                    />
+
+                                    <div
+                                        className="personajesArmario"
+                                        style={{
+                                            width: "1100px",
+                                            height: "700px",
+                                            position: "absolute",
+                                            marginTop: "30px",
+                                        }}
+                                    >
+                                        {/*imagenes fila1*/}
+
+                                        <img
+                                            src={happyflower}
+                                            alt="cuadro1"
+                                            style={{
+                                                width: "130px",
+                                                height: "160px",
+                                                position: "absolute",
+                                                left: "9%",
+                                                top: "-100%",
+                                            }}
+                                        />
+
+                                        <img
+                                            src={happyghost}
+                                            alt="cuadro2"
+                                            style={{
+                                                width: "215px",
+                                                height: "260px",
+                                                position: "absolute",
+                                                left: "40%",
+                                                top: "-109%",
+                                            }}
+                                        />
+
+                                        <img
+                                            src={happyteddy}
+                                            alt="cuadro3"
+                                            style={{
+                                                width: "210px",
+                                                height: "150px",
+                                                position: "absolute",
+                                                left: "76%",
+                                                top: "-100%",
+                                            }}
+                                        />
+
+                                        {/*imagenes fila2*/}
+
+                                        <img
+                                            src={happybot}
+                                            alt="cuadro1"
+                                            style={{
+                                                width: "215px",
+                                                height: "180px",
+                                                position: "absolute",
+                                                left: "5%",
+                                                top: "-66%",
+                                            }}
+                                        />
+
+                                        <img
+                                            src={happycloud}
+                                            alt="cuadro2"
+                                            style={{
+                                                width: "220px",
+                                                height: "180px",
+                                                position: "absolute",
+                                                left: "42%",
+                                                top: "-70%",
+                                            }}
+                                        />
+
+                                        <img
+                                            src={happydog}
+                                            alt="cuadro3"
+                                            style={{
+                                                width: "190px",
+                                                height: "220px",
+                                                position: "absolute",
+                                                left: "78%",
+                                                top: "-70%",
+                                            }}
+                                        />
+
+                                        {/*imagenes fila3*/}
+
+                                        <img
+                                            src={happyice}
+                                            alt="cuadro1"
+                                            style={{
+                                                width: "170px",
+                                                height: "200px",
+                                                position: "absolute",
+                                                left: "9%",
+                                                top: "-35%",
+                                            }}
+                                        />
+
+                                        <img
+                                            src={happyblue}
+                                            alt="cuadro2"
+                                            style={{
+                                                width: "220px",
+                                                height: "240px",
+                                                position: "absolute",
+                                                left: "38%",
+                                                top: "-36%",
+                                            }}
+                                        />
+
+                                        <img
+                                            src={happypurple}
+                                            alt="cuadro3"
+                                            style={{
+                                                width: "220px",
+                                                height: "240px",
+                                                position: "absolute",
+                                                left: "74%",
+                                                top: "-36%",
+                                            }}
+                                        />
+                                    </div>
+
+                                    <div
+                                        className="personajesArmarioTexto"
+                                        style={{
+                                            width: "1100px",
+                                            height: "700px",
+                                            position: "absolute",
+                                            marginTop: "30px",
+                                        }}
+                                    >
+                                        {/*texto fila1*/}
+
+                                        <h3
+                                            style={{
+                                                position: "absolute",
+                                                left: "5%",
+                                                top: "-100%",
+                                            }}
+                                        >
+                                            50 puntos
+                                        </h3>
+
+                                        <h3
+                                            style={{
+                                                position: "absolute",
+                                                left: "40%",
+                                                top: "-100%",
+                                            }}
+                                        >
+                                            50 puntos
+                                        </h3>
+
+                                        <h3
+                                            style={{
+                                                position: "absolute",
+                                                left: "76%",
+                                                top: "-100%",
+                                            }}
+                                        >
+                                            50 puntos
+                                        </h3>
+
+                                        {/*texto fila2*/}
+
+                                        <h3
+                                            style={{
+                                                position: "absolute",
+                                                left: "5%",
+                                                top: "-67%",
+                                            }}
+                                        >
+                                            50 puntos
+                                        </h3>
+
+                                        <h3
+                                            style={{
+                                                position: "absolute",
+                                                left: "40%",
+                                                top: "-67%",
+                                            }}
+                                        >
+                                            50 puntos
+                                        </h3>
+
+                                        <h3
+                                            style={{
+                                                position: "absolute",
+                                                left: "77%",
+                                                top: "-67%",
+                                            }}
+                                        >
+                                            50 puntos
+                                        </h3>
+
+                                        {/*texto fila3*/}
+
+                                        <h3
+                                            style={{
+                                                position: "absolute",
+                                                left: " 5%",
+                                                top: "-34%",
+                                            }}
+                                        >
+                                            50 puntos
+                                        </h3>
+
+                                        <h3
+                                            style={{
+                                                position: "absolute",
+                                                left: "40%",
+                                                top: "-34%",
+                                            }}
+                                        >
+                                            50 puntos
+                                        </h3>
+
+                                        <h3
+                                            style={{
+                                                position: "absolute",
+                                                left: "76%",
+                                                top: "-34%",
+                                            }}
+                                        >
+                                            50 puntos
+                                        </h3>
+                                    </div>
+
+                                    <div
+                                        className="botoncompra"
+                                        style={{
+                                            width: "1100px",
+                                            height: "700px",
+                                            position: "absolute",
+                                            marginTop: "30px",
+                                        }}
+                                    >
+                                        {/*boton fila1*/}
+
+                                        <img
+                                            src={buybutton}
+                                            alt="cuadro1"
+                                            style={{
+                                                width: "97px",
+                                                height: "97px",
+                                                position: "absolute",
+                                                left: "18%",
+                                                top: "-87%",
+                                            }}
+                                            onClick={() => buy("flower")}
+                                        />
+
+                                        <img
+                                            src={buybutton}
+                                            alt="cuadro2"
+                                            style={{
+                                                width: "97px",
+                                                height: "97px",
+                                                position: "absolute",
+                                                left: "54%",
+                                                top: "-87%",
+                                            }}
+                                            onClick={() => buy("ghost")}
+                                        />
+
+                                        <img
+                                            src={buybutton}
+                                            alt="cuadro3"
+                                            style={{
+                                                width: "97px",
+                                                height: "97px",
+                                                position: "absolute",
+                                                left: "89%",
+                                                top: "-87%",
+                                            }}
+                                            onClick={() => buy("teddy")}
+                                        />
+
+                                        {/*boton fila2*/}
+
+                                        <img
+                                            src={buybutton}
+                                            alt="cuadro1"
+                                            style={{
+                                                width: "97px",
+                                                height: "97px",
+                                                position: "absolute",
+                                                left: "18%",
+                                                top: "-54%",
+                                            }}
+                                            onClick={() => buy("bot")}
+                                        />
+
+                                        <img
+                                            src={buybutton}
+                                            alt="cuadro2"
+                                            style={{
+                                                width: "97px",
+                                                height: "97px",
+                                                position: "absolute",
+                                                left: "54%",
+                                                top: "-54%",
+                                            }}
+                                            onClick={() => buy("cloud")}
+                                        />
+
+                                        <img
+                                            src={buybutton}
+                                            alt="cuadro3"
+                                            style={{
+                                                width: "97px",
+                                                height: "97px",
+                                                position: "absolute",
+                                                left: "89%",
+                                                top: "-54%",
+                                            }}
+                                            onClick={() => buy("dog")}    
+                                        />
+
+                                        {/*boton fila3*/}
+
+                                        <img
+                                            src={buybutton}
+                                            alt="cuadro1"
+                                            style={{
+                                                width: "100px",
+                                                height: "100px",
+                                                position: "absolute",
+                                                left: "18%",
+                                                top: "-21%",
+                                            }}
+                                            onClick={() => buy("ice")}
+                                        />
+
+                                        <img
+                                            src={buybutton}
+                                            alt="cuadro2"
+                                            style={{
+                                                width: "100px",
+                                                height: "100px",
+                                                position: "absolute",
+                                                left: "54%",
+                                                top: "-21%",
+                                            }}
+                                            onClick={() => buy("blue")}
+                                        />
+
+                                        <img
+                                            src={buybutton}
+                                            alt="cuadro3"
+                                            style={{
+                                                width: "100px",
+                                                height: "100px",
+                                                position: "absolute",
+                                                left: "89%",
+                                                top: "-21%",
+                                            }}
+                                            onClick={() => buy("purple")}
+                                        />
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
             {/* ==== STORE MODAL ==== */}
         </div>
     );
