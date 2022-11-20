@@ -67,10 +67,16 @@ describe('empty spec', () => {
 
     
     })
+
+
+    //Check box checking
   context('Check', () => {
     // https://on.cypress.io/visit
     it('check metas', () => {
       cy.visit('https://mind-app-b0b0f.web.app/#/health')
+
+      // un delay para esperar a que se cargue la página
+      cy.wait(2000)
       // cy.contains('Nueva Meta').click()
       cy.get('[type="checkbox"]').check({force:true},'chakra-checkbox__input')
       
@@ -87,4 +93,25 @@ describe('empty spec', () => {
       })
           
       })
+
+       //percentage checking
+      context('Goals name and percentage check', () => {
+        // https://on.cypress.io/visit
+        it('checks data', () => {
+          // cy.wait('@getUserModels')
+          cy.contains('h3', 'Ejercicio').should('be.visible')
+          cy.contains('h3', 'Meditar').should('be.visible')
+          cy.contains('h3', 'Salud').should('be.visible')
+          cy.contains('h3', 'Salud Mental').should('be.visible') 
+          cy.contains('p', '%').should('be.visible') 
+          
+          
+        })
+            
+        })
+
+     
+      
+
+      
 })
