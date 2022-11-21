@@ -1,9 +1,13 @@
-describe('Logging In - Basic Auth', function () {
+describe('Comprar mascota en tienda', function () {
   // we can use these values to log in
   const username = 'lam20102@uvg.edu.gt'
   const password = 'princesa71'
 
-  
+  'page display on medium size screen',
+  {
+    viewportHeight: 1920,
+    viewportWidth: 1080,
+  },
 
   context('cy.request', () => {
     // https://on.cypress.io/request
@@ -71,11 +75,11 @@ describe('Logging In - Basic Auth', function () {
     context('Comprar', () => {
       // https://on.cypress.io/visit
       
-      it('successfully logs in ', () => {
+      it('successfully comprar ', () => {
 
         cy.contains('Personalizar').click()
         cy.contains('Tienda').click()
-        // cy.get('[alt="cuadro1"]').click()
+        cy.get('[alt="cuadro1"]').click()
         
       })
 
@@ -84,18 +88,22 @@ describe('Logging In - Basic Auth', function () {
       
       })
 
-      context('Cambiar mascota', () => {
-        // https://on.cypress.io/visit
-        
-        it('successfully logs in ', () => {
-  
-          cy.contains('Personajes').click()
-          cy.get('[class="c1"]').click()
-          
-        })
-  
-        // cy.contains('Welcome').click()
-    
-        
-        })
   })
+  describe('Cambiar mascota', function () {
+
+    context('Seleccionar armario y mascota', () => {
+      // https://on.cypress.io/visit
+     
+      it('Cambiar armario ', () => {
+  
+        cy.contains('Personajes').click()
+        cy.get('[alt="cuadro1"]').click()
+        // cy.get('[class^=chakra-icon css-onkibi]').click({ multiple: true })
+      })
+  
+      // cy.contains('Welcome').click()
+  
+     
+      })
+  })
+ 

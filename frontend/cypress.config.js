@@ -9,8 +9,16 @@ const cypressConfig = defineConfig({
 		setupNodeEvents(on, config) {
 			cypressFirebasePlugin(on, config, admin);
 			// e2e testing node events setup code
+			
 		},
+		
 	},
+
+	
+
+	
 });
+
+
 
 export default cypressConfig;
