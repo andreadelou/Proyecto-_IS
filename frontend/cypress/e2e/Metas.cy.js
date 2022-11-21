@@ -86,7 +86,7 @@ describe('Logging In - Basic Auth', function () {
     
     })
 
-    context('Check', () => {
+    xcontext('Check', () => {
       // https://on.cypress.io/visit
       it('check goal', () => {
         cy.visit('https://mind-app-b0b0f.web.app/#/goals')
@@ -117,7 +117,7 @@ describe('Logging In - Basic Auth', function () {
 
 
          // aqui se crea una nueva submeta pero solo si hay una meta
-context('nueva submeta', () =>{
+xcontext('nueva submeta', () =>{
 
   it('creates a new sub-goal', ()=>{
     cy.visit('https://mind-app-b0b0f.web.app/#/goals')
@@ -131,7 +131,7 @@ context('nueva submeta', () =>{
 
 })
 
-context('verificar', ()=>{
+xcontext('verificar', ()=>{
   it('verifica que sea la meta que es',()=>{
 
     cy.get('[placeholder=\"Nombre de tu meta\"]').then(($btn) => {
