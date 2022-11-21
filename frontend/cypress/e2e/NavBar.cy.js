@@ -72,7 +72,7 @@ describe('Movilidad NavBar', function () {
 
 	})
 
-	context('Mover por la navbar', () => {
+	context('Mover por la navbara', () => {
 		// https://on.cypress.io/visit
 
 		xit('Cambiar a Metas ', () => {
