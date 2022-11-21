@@ -86,7 +86,7 @@ describe('Logging In - Basic Auth', function () {
 
 	})
 
-	context('Check', () => {
+	xcontext('Check', () => {
 		// https://on.cypress.io/visit
 		xit('check goal', () => {
 			cy.visit('https://mind-app-b0b0f.web.app/#/goals')
@@ -105,7 +105,7 @@ describe('Logging In - Basic Auth', function () {
 
 	})
 
-	context('Assertion checkbox', () => {
+	xcontext('Assertion checkbox', () => {
 		// https://on.cypress.io/visit
 		xit('assertion', () => {
 			cy.get('[type="checkbox"]').first().check().should('be.checked');
@@ -117,7 +117,7 @@ describe('Logging In - Basic Auth', function () {
 
 
 	// aqui se crea una nueva submeta pero solo si hay una meta
-	context('nueva submeta', () => {
+	xcontext('nueva submeta', () => {
 
 		xit('creates a new sub-goal', () => {
 			cy.visit('https://mind-app-b0b0f.web.app/#/goals')
@@ -131,7 +131,7 @@ describe('Logging In - Basic Auth', function () {
 
 	})
 
-	context('verificar', () => {
+	xcontext('verificar', () => {
 		xit('verifica que sea la meta que es', () => {
 
 			cy.get('[placeholder=\"Nombre de tu meta\"]').then(($btn) => {
