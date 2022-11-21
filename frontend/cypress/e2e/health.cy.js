@@ -98,7 +98,7 @@ describe('empty spec', () => {
       context('Goals name and percentage check', () => {
         // https://on.cypress.io/visit
         it('checks data', () => {
-          // cy.wait(2000)
+          cy.wait(2000)
           // cy.wait('@getUserModels')
           
           cy.contains('h3', 'Ejercicio').should('be.visible')

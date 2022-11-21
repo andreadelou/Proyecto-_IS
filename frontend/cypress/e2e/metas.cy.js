@@ -114,6 +114,39 @@ describe('Logging In - Basic Auth', function () {
          })
             
          })
+
+
+         // aqui se crea una nueva submeta pero solo si hay una meta
+context('nueva submeta', () =>{
+
+  it('creates a new sub-goal', ()=>{
+    cy.visit('https://mind-app-b0b0f.web.app/#/goals')
+    // cy.contains('h2', 'exercise').should('be.visible')
+    cy.get('svg').first().click({ multiple: true },{force: true})
+    cy.get("input[placeholder=\"Escribe la sub tarea\"]").first().type('aqui va la submeta que me invento')
+
+
+  })
+
+
+})
+
+context('verificar', ()=>{
+  it('verifica que sea la meta que es',()=>{
+
+    cy.get('[placeholder=\"Nombre de tu meta\"]').then(($btn) => {
+      //guarda la variable (nombre de meta)
+      const txt = $btn.text()
+      // $btn is the object that the previous command yielded
+      cy.visit('https://mind-app-b0b0f.web.app/#/home')
+
+      //verifica que este la meta
+      cy.contains(txt).should('be.visible')
+    })
+
+
+  })
+})
   })
 
 
