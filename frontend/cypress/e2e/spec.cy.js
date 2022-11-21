@@ -90,22 +90,29 @@ describe('Logging In - Basic Auth', function () {
       // https://on.cypress.io/visit
       it('check goal', () => {
         cy.visit('https://mind-app-b0b0f.web.app/#/goals')
-        // cy.contains('Nueva Meta').click()
-        cy.get('[type="checkbox"]').first().check()
+        cy.get('.chakra-button').click()
+        // cy.get('[type="checkbox"]').first().check()
+        cy.get('[data-testid="title"]').type('Nueva Meta')
+        cy.get('[data-testid="description"]').type('Descripcion de meta')
+        cy.get('[data-testid="category"]').select('health')
+        // cy.get('[data-testid="salud"]')
+        cy.get('[data-testid="reminder"]').click()
+        cy.get('.react-datepicker__day--023').click()
+        cy.get('[data-testid="save"]').click()
         
       })
           
       })
 
-      context('Assertion checkbox', () => {
-        // https://on.cypress.io/visit
-        it('assertion', () => {
-          cy.get('[type="checkbox"]').first().check().should('be.checked'); 
-          // .and('have.value','Automation Tester');
+       context('Assertion checkbox', () => {
+         // https://on.cypress.io/visit
+         it('assertion', () => {
+           cy.get('[type="checkbox"]').first().check().should('be.checked'); 
+           // .and('have.value','Automation Tester');
           
-        })
+         })
             
-        })
+         })
   })
 
 
