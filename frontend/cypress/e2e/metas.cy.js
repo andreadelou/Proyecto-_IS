@@ -86,67 +86,7 @@ describe('Logging In - Basic Auth', function () {
 
 	})
 
-	xcontext('Check', () => {
-		// https://on.cypress.io/visit
-		xit('check goal', () => {
-			cy.visit('https://mind-app-b0b0f.web.app/#/goals')
-			// cy.wait(2000)
-			cy.get('.chakra-button').click()
-			// cy.get('[type="checkbox"]').first().check()
-			cy.get('[data-testid="title"]').type('Nueva Meta')
-			cy.get('[data-testid="description"]').type('Descripcion de meta')
-			cy.get('[data-testid="category"]').select('health')
-			// cy.get('[data-testid="salud"]')
-			cy.get('[data-testid="reminder"]').click()
-			cy.get('.react-datepicker__day--023').click()
-			cy.get('[data-testid="save"]').click()
 
-		})
-
-	})
-
-	xcontext('Assertion checkbox', () => {
-		// https://on.cypress.io/visit
-		xit('assertion', () => {
-			cy.get('[type="checkbox"]').first().check().should('be.checked');
-			// .and('have.value','Automation Tester');
-
-		})
-
-	})
-
-
-	// aqui se crea una nueva submeta pero solo si hay una meta
-	xcontext('nueva submeta', () => {
-
-		xit('creates a new sub-goal', () => {
-			cy.visit('https://mind-app-b0b0f.web.app/#/goals')
-			// cy.contains('h2', 'exercise').should('be.visible')
-			cy.get('svg').first().click({ multiple: true }, { force: true })
-			cy.get("input[placeholder=\"Escribe la sub tarea\"]").first().type('aqui va la submeta que me invento')
-
-
-		})
-
-
-	})
-
-	xcontext('verificar', () => {
-		xit('verifica que sea la meta que es', () => {
-
-			cy.get('[placeholder=\"Nombre de tu meta\"]').then(($btn) => {
-				//guarda la variable (nombre de meta)
-				const txt = $btn.text()
-				// $btn is the object that the previous command yielded
-				cy.visit('https://mind-app-b0b0f.web.app/#/home')
-
-				//verifica que este la meta
-				cy.contains(txt).should('be.visible')
-			})
-
-
-		})
-	})
 })
 
 
