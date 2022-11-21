@@ -105,7 +105,7 @@ describe('Logging In - Basic Auth', function () {
           
       })
 
-       context('Assertion checkbox', () => {
+       xcontext('Assertion checkbox', () => {
          // https://on.cypress.io/visit
          it('assertion', () => {
            cy.get('[type="checkbox"]').first().check().should('be.checked'); 
