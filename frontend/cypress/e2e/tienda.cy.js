@@ -78,7 +78,9 @@ describe('Comprar mascota en tienda', function () {
       it('successfully comprar ', () => {
 
         cy.contains('Personalizar').click()
+        // cy.wait(2000)
         cy.contains('Tienda').click()
+        // cy.wait(2000)
         cy.get('[alt="cuadro1"]').click()
         
       })
@@ -97,6 +99,7 @@ describe('Comprar mascota en tienda', function () {
       it('Cambiar armario ', () => {
   
         cy.contains('Personajes').click()
+        cy.wait(2000)
         cy.get('[alt="cuadro1"]').click()
         cy.get('.chakra-modal__close-btn').click()
       })

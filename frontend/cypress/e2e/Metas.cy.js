@@ -90,6 +90,7 @@ describe('Logging In - Basic Auth', function () {
       // https://on.cypress.io/visit
       it('check goal', () => {
         cy.visit('https://mind-app-b0b0f.web.app/#/goals')
+        // cy.wait(2000)
         cy.get('.chakra-button').click()
         // cy.get('[type="checkbox"]').first().check()
         cy.get('[data-testid="title"]').type('Nueva Meta')
