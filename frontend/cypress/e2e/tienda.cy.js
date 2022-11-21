@@ -98,7 +98,7 @@ describe('Comprar mascota en tienda', function () {
   
         cy.contains('Personajes').click()
         cy.get('[alt="cuadro1"]').click()
-        // cy.get('[class^=chakra-icon css-onkibi]').click({ multiple: true })
+        cy.get('.chakra-modal__close-btn').click()
       })
   
       // cy.contains('Welcome').click()
