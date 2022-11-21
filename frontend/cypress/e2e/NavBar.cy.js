@@ -75,19 +75,19 @@ describe('Movilidad NavBar', function () {
 	context('Mover por la navbara', () => {
 		// https://on.cypress.io/visit
 
-		xit('Cambiar a Metas ', () => {
+		it('Cambiar a Metas ', () => {
 
 			cy.get(':nth-child(2) > a').click()
 
 		})
 
-		xit('Cambiar a Bienestar ', () => {
+		it('Cambiar a Bienestar ', () => {
 
 			cy.get(':nth-child(3) > a').click()
 
 		})
 
-		xit('Cambiar a Calendario ', () => {
+		it('Cambiar a Calendario ', () => {
 
 			cy.get(':nth-child(4) > a').click()
 
