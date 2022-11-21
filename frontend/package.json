@@ -2,7 +2,6 @@
 	"name": "mind-app",
 	"version": "0.1.0",
 	"private": true,
-	"type": "module",
 	"dependencies": {
 		"@chakra-ui/icons": "^1.1.7",
 		"@chakra-ui/react": "^1.8.6",
@@ -60,5 +59,13 @@
 	"devDependencies": {
 		"@types/jest": "^29.0.0",
 		"cypress": "^10.11.0"
+	},
+	"jest": {
+		"coveragePathIgnorePatterns": [
+			"<rootDir>/src/index.js",
+			"<rootDir>/src/reportWebVitals.js",
+			"<rootDir>/src/App.js",
+			"<rootDir>/src/firebase.js"
+		]
 	}
 }
