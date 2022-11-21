@@ -1,27 +1,13 @@
-// log in
-function loginUsingAPI(username, password) {
-  // Send request to the DoltHub API login endpoint
-  cy.request({
-    url: "https://mind-app-b0b0f.web.app/#/",
-    body: { username, password },
-  }).then((res) => {
-    // If successful, check to make sure usernames match
-    expect(res.body.username).to.eq(username);
-    // Set the cookie value for dolthubToken
-    cy.setCookie("dolthubToken", res.body.cookie_value);
-  });
-
-  // Assert login successful by checking for existence of cookie
-  cy.getCookie("dolthubToken").should("exist");
-}
-
-
-describe('Logging In - Basic Auth', function () {
+describe('Movilidad NavBar', function () {
   // we can use these values to log in
   const username = 'lam20102@uvg.edu.gt'
   const password = 'princesa71'
 
-  
+  'page display on medium size screen',
+  {
+    viewportHeight: 1920,
+    viewportWidth: 1080,
+  },
 
   context('cy.request', () => {
     // https://on.cypress.io/request
@@ -86,27 +72,40 @@ describe('Logging In - Basic Auth', function () {
     
     })
 
-    context('Check', () => {
+    context('Mover por la navbar', () => {
       // https://on.cypress.io/visit
-      it('check goal', () => {
-        cy.visit('https://mind-app-b0b0f.web.app/#/goals')
-        // cy.contains('Nueva Meta').click()
-        cy.get('[type="checkbox"]').first().check()
+      
+      it('Cambiar a Metas ', () => {
+
+        cy.get(':nth-child(2) > a').click()
         
       })
-          
+      
+      it('Cambiar a Bienestar ', () => {
+
+        cy.get(':nth-child(3) > a').click()
+        
       })
 
-      context('Assertion checkbox', () => {
-        // https://on.cypress.io/visit
-        it('assertion', () => {
-          cy.get('[type="checkbox"]').first().check().should('be.checked'); 
-          // .and('have.value','Automation Tester');
-          
-        })
-            
-        })
+      it('Cambiar a Calendario ', () => {
+
+        cy.get(':nth-child(4) > a').click()
+        
+      })
+
+      it('Cambiar a Home ', () => {
+
+        cy.get(':nth-child(1) > a').click()
+        
+      })
+
+      // it('Cambiar a Log Out ', () => {
+
+      //   cy.get(':nth-child(5) > a').click()
+        
+      // })
+      
+      })
+
   })
-
-
-
+  
